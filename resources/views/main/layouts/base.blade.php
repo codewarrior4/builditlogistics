@@ -101,7 +101,7 @@
 
 	<div class="newsletter-popup mfp-hide bg-img" id="newsletter-popup-form" style="background: #f1f1f1 no-repeat center/cover url({{URL::asset('assets/images/newsletter_popup_bg.jpg')}})">
 		<div class="newsletter-popup-content">
-			<img src="{{URL::asset('assets/images/logo-black.png')}}" alt="Logo" class="logo-newsletter">
+			<img src="{{URL::asset('assets/images/logo-black.png')}}" width="100" height="100" alt="Logo" class="logo-newsletter">
 			<h2>BE THE FIRST TO KNOW</h2>
 			<p class="mb-2">Subscribe to the Build It Logistics newsletter to receive timely updates from your favorite products.</p>
 			<form action="#">

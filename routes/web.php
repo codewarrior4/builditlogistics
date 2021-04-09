@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Email;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,6 +32,7 @@ Route::group(['prefix'=>'/user'],function()
 
 
 Route::group(['prefix'=>'/admin'], function(){
+    Route::view('/','admin.index');
     Route::view('/index','admin.index');
     // customer
     Route::view('/customers','admin.customers');
@@ -77,6 +78,8 @@ Route::group(['prefix'=>'/admin'], function(){
 
 });
 
+
+Route::get('/email',[Email::class,'index']);
 Route::view('/','main.index');
 Route::view('/about','main.about');
 Route::view('/tac','main.tac');
@@ -96,3 +99,7 @@ Route::view('/categories/{type}','main.categories');
 Route::view('/categories/{cat}/{query}','main.categories');
 
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
