@@ -25,25 +25,24 @@
                     <div class="white_box mb_30">
                         <div class="box_header ">
                             <div class="main-title">
-                                <h3 class="mb-0" >Add Blog</h3>
+                                <h3 class="mb-0" > Blog Details</h3>
                             </div>
                         </div>
-                        <form enctype="multipart/form-data" method="post">
+                        <form enctype="multipart/form-data" action="/admin/blog/update" method="post">
+                        @csrf
                             <div class="form-group">
                               <label for="exampleFormControlInput1">Title</label>
-                              <input type="text" class="form-control" id="exampleFormControlInput1">
-                            </div>
-                            <div class="form-group">
-                              <label for="exampleFormControlSelect1">Image</label>
-                              <input type="file" class="form-control" name="image" id="">
+                              <input type="text" value="{{$blog->title}}" name="title" class="form-control" id="exampleFormControlInput1">
                             </div>
                             <div class="form-group">
                               <label for="exampleFormControlSelect2">Description</label>
-                             <textarea name="" id="summernote" cols="30" rows="10"></textarea>
+                             <textarea name="description" id="summernote" cols="30" rows="10">
+                             {!! $blog->description !!}</textarea>
                             </div>
+                            <input type="hidden" name="id" value="{{$blog->id}}">
                             <div class="form-group">
                                 <input type="submit" value="Update" class="btn btn-outline-primary">
-                                <input type="submit" value="Delete" class="btn btn-outline-danger">
+                                <a href="/admin/blog/delete/{{$blog->id}}"  class="btn btn-outline-danger">Delete</a>
                             </div>
                           </form>
                     </div>

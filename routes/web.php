@@ -2,16 +2,18 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Email;
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+use App\Http\Controllers\Faq;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Slider;
+use App\Http\Controllers\Blog;
+use App\Http\Controllers\Category;
+use App\Http\Controllers\Subcategory;
+use App\Http\Controllers\About;
+use App\Http\Controllers\Social;
+use App\Http\Controllers\Tacs;
+use App\Http\Controllers\store;
+
+
 
 
 Route::group(['prefix'=>'/user'],function()
@@ -38,27 +40,48 @@ Route::group(['prefix'=>'/admin'], function(){
     Route::view('/customers','admin.customers');
 
     // faq
-    Route::view('/faq','admin.faq');
+    Route::get('/faq',[faq::class,'create']);
+    Route::post('/faq',[faq::class,'store']);
+    Route::get('/faq/delete/{id}',[faq::class,'destroy']);
 
     //blog
     Route::view('/blog','admin.blog');
-    Route::view('/blogs','admin.blogs');
-    Route::view('/blog/{id}','admin.blogdetails');
+    Route::post('/blog',[Blog::class,'store']);
+    Route::get('/blogs',[Blog::class,'index']);
+    Route::get('/blog/{id}',[Blog::class,'show']);
+    Route::get('/blog/delete/{id}',[Blog::class,'destroy']);
+    Route::post('/blog/update',[Blog::class,'update']);
 
     //stores
-    Route::view('/store','admin.store');
-    Route::view('/stores','admin.stores');
+    Route::get('/store',[store::class,'index']);
+    Route::get('/store/delete/{id}',[store::class,'destroy']);
+    Route::get('/stores',[store::class,'show']);
+    Route::post('/store',[store::class,'store']);
 
     // shop settings
-    Route::view('/slider','admin.slider');
-    Route::view('/social','admin.social');
-    Route::view('/about','admin.about');
-    Route::view('/tac','admin.tac');
+    Route::get('/slider',[slider::class,'index']);
+    Route::get('/slider/delete/{id}',[slider::class,'destroy']);
+    Route::post('/slider',[slider::class,'store']);
+    Route::get('/about',[About::class,'index']);
+    Route::post('/about',[About::class,'store']);
+    Route::get('/tac',[Tacs::class,'index']);
+    Route::post('/tac',[Tacs::class,'store']);
+    Route::get('/social',[Social::class,'index']);
+    Route::post('/social',[Social::class,'create']);
+    
+    //end shop
 
 
     //category
-    Route::view('/category','admin.category');
-    Route::view('/category_sub','admin.category_sub');
+    Route::get('/category',[Category::class,'index']);
+    Route::post('/category',[Category::class,'store']);
+    Route::get('/category/delete/{id}',[Category::class,'destroy']);
+    Route::get('/category_sub',[Subcategory::class,'index']);
+    Route::post('/category_sub',[Subcategory::class,'create']);
+    Route::get('/category_sub/delete/{id}',[Subcategory::class,'destroy']);
+
+    // end category
+
     
     //products
     Route::view('/product','admin.product');

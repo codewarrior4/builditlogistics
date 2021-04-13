@@ -28,14 +28,19 @@
                                 <h3 class="mb-0" >Add Store</h3>
                             </div>
                         </div>
-                        <form enctype="multipart/form-data" method="post">
+                        <form enctype="multipart/form-data" action="/admin/store" method="post">
                             <div class="form-group">
-                              <label for="exampleFormControlInput1">Name</label>
-                              <input type="text" class="form-control" id="exampleFormControlInput1">
+                            @csrf
+                              <label for="exampleFormControlInput1">Number</label>
+                              <input type="text" name="number" class="form-control" id="exampleFormControlInput1">
+                            </div>
+                            <div class="form-group">
+                              <label for="exampleFormControlInput1">Location</label>
+                              <input type="text" name="location" class="form-control" id="exampleFormControlInput1">
                             </div>
                             <div class="form-group">
                               <label for="exampleFormControlSelect2">Details</label>
-                             <textarea name="" id="summernote" cols="30" rows="10"></textarea>
+                             <textarea name="details" id="summernote" cols="30" rows="10"></textarea>
                             </div>
                             <div class="form-group">
                                 <input type="submit" value="Submit" class="btn btn-outline-primary">

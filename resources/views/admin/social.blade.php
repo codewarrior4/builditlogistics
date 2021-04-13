@@ -12,7 +12,15 @@
                     <div class="sidebar_icon d-lg-none">
                         <i class="ti-menu"></i>
                     </div>
-                    
+                    @if (session('msg'))
+                        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            <span class="sr-only">Close</span>
+                        </button>
+                        <strong>{{session('msg')}}!</strong>
+                    </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -28,24 +36,25 @@
                                 <h3 class="mb-0" >Update Social Media Handles</h3>
                             </div>
                         </div>
-                        <form enctype="multipart/form-data" method="post">
+                        <form enctype="multipart/form-data" action="/admin/social" method="post">
+                        @csrf
                             <div class="form-group">
                               <label for="exampleFormControlInput1">Facebook</label>
-                              <input type="text" class="form-control" id="exampleFormControlInput1">
+                              <input type="url" required value="{{$social->facebook}}" name="facebook" class="form-control" id="exampleFormControlInput1">
                             </div>
                             <div class="form-group">
                               <label for="exampleFormControlSelect1">Linkedin</label>
-                              <input type="text" class="form-control" name="image" id="">
+                              <input type="url" required value="{{$social->linkedin}}" class="form-control" name="linkedin" id="">
                             </div>
                             <div class="form-group">
                               <label for="exampleFormControlSelect1">Twitter</label>
-                              <input type="text" class="form-control" name="image" id="">
+                              <input type="url" required value="{{$social->twitter}}" class="form-control" name="twitter" id="">
                             </div>
                             <div class="form-group">
                               <label for="exampleFormControlSelect1">Instagram</label>
-                              <input type="text" class="form-control" name="image" id="">
+                              <input type="url" required value="{{$social->instagram}}" class="form-control" name="instagram" id="">
                             </div>
-                            
+                            <input type="hidden" name="id" value="{{$social->id}}">
                             <div class="form-group">
                                 <input type="submit" value="Update" class="btn btn-outline-primary">
                             </div>

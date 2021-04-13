@@ -12,7 +12,15 @@
                     <div class="sidebar_icon d-lg-none">
                         <i class="ti-menu"></i>
                     </div>
-                    
+                    @if (session('msg'))
+                        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            <span class="sr-only">Close</span>
+                        </button>
+                        <strong>{{session('msg')}}!</strong>
+                    </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -28,18 +36,16 @@
                                 <h3 class="mb-0" >Design Terms And Condition page</h3>
                             </div>
                         </div>
-                        <form enctype="multipart/form-data" method="post">
-                           
-                            <div class="form-group">
-                              <label for="exampleFormControlSelect1">Banner</label>
-                              <input type="file" class="form-control" name="image" id="">
-                            </div>
+                        <form enctype="multipart/form-data" action="/admin/tac" method="post">
+                           @csrf    
+                            
                             <div class="form-group">
                               <label for="exampleFormControlSelect2">Page Builder</label>
-                             <textarea name="" id="summernote" cols="30" rows="10"></textarea>
+                             <textarea name="description" id="summernote" cols="30" rows="10"> {{$tac->description}}</textarea>
+                             <input type="hidden" name="id" value="{{$tac->id}}">
                             </div>
                             <div class="form-group">
-                                <input type="submit" value="Submit" class="btn btn-outline-primary">
+                                <input type="submit" value="Update" class="btn btn-outline-primary">
                             </div>
                           </form>
                     </div>

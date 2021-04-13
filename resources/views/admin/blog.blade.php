@@ -28,18 +28,19 @@
                                 <h3 class="mb-0" >Add Blog</h3>
                             </div>
                         </div>
-                        <form enctype="multipart/form-data" method="post">
+                        <form enctype="multipart/form-data" action="/admin/blog" method="post">
+                        @csrf
                             <div class="form-group">
                               <label for="exampleFormControlInput1">Title</label>
-                              <input type="text" class="form-control" id="exampleFormControlInput1">
+                              <input type="text" name="title" class="form-control" id="exampleFormControlInput1">
                             </div>
                             <div class="form-group">
                               <label for="exampleFormControlSelect1">Image</label>
-                              <input type="file" class="form-control" name="image" id="">
+                              <input type="file" name="photo" class="form-control"  id="">
                             </div>
                             <div class="form-group">
                               <label for="exampleFormControlSelect2">Description</label>
-                             <textarea name="" id="summernote" cols="30" rows="10"></textarea>
+                             <textarea name="description" id="summernote" cols="30" rows="10"></textarea>
                             </div>
                             <div class="form-group">
                                 <input type="submit" value="Submit" class="btn btn-outline-primary">

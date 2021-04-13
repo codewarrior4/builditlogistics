@@ -12,7 +12,15 @@
                     <div class="sidebar_icon d-lg-none">
                         <i class="ti-menu"></i>
                     </div>
-                    
+                    @if (session('msg'))
+                        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            <span class="sr-only">Close</span>
+                        </button>
+                        <strong>{{session('msg')}}!</strong>
+                    </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -32,8 +40,13 @@
                         </div>
                         <form enctype="multipart/form-data" method="post">
                             <div class="form-group">
+                                @csrf
                               <label for="exampleFormControlInput1">Name</label>
-                              <input type="text" class="form-control" id="exampleFormControlInput1">
+                              <input type="text" name="name" class="form-control" id="exampleFormControlInput1">
+                            </div>
+                            <div class="form-group">
+                              <label for="exampleFormControlInput1">Display</label>
+                              <input type="file" name="photo" class="form-control" id="exampleFormControlInput1">
                             </div>
                             <div class="form-group">
                                 <input type="submit" value="Submit" class="btn btn-outline-primary">
@@ -52,49 +65,27 @@
                                     <tr>
                                         <th scope="col">#</th>
                                         <th scope="col">Name</th>
+                                        <th scope="col">Image</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                    @foreach ($category as $cat)
+                                        <tr>
                                         <th scope="row">1</th>
-                                        <td>Mayowa</td>
-                                        <td><a href="#" class="btn btn-danger">Delete</a></td>
+                                        <td>{{$cat->title}}</td>
+                                        <td><img src="/uploads/{{$cat->image}}" width="70" height="70" alt=""></td>
+                                        <td><a href="/admin/category/delete/{{$cat->id}}" class="btn btn-danger">Delete</a></td>
                                     </tr>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mayowa</td>
-                                        <td><a href="#" class="btn btn-danger">Delete</a></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mayowa</td>
-                                        <td><a href="#" class="btn btn-danger">Delete</a></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mayowa</td>
-                                        <td><a href="#" class="btn btn-danger">Delete</a></td>
-                                    </tr>
+                                    @endforeach
+                                    
+                                   
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
-                <script>
-                    $(document).ready(function() {
-                        
-                            $('#summernote').summernote({
-                                height: 400,                 // set editor height
-                                minHeight: null,             // set minimum height of editor
-                                maxHeight: null,             // set maximum height of editor
-                                focus: true                  // set focus to editable area after initializing summernote
-                            });
-
-                    });
-                        
-                
-                </script>
+               
         </div>
     </div>
 

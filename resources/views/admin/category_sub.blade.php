@@ -12,7 +12,15 @@
                     <div class="sidebar_icon d-lg-none">
                         <i class="ti-menu"></i>
                     </div>
-                    
+                    @if (session('msg'))
+                        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            <span class="sr-only">Close</span>
+                        </button>
+                        <strong>{{session('msg')}}!</strong>
+                    </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -27,22 +35,22 @@
                     <div class="white_box mb_30">
                         <div class="box_header ">
                             <div class="main-title">
-                                <h3 class="mb-0" >Add Category</h3>
+                                <h3 class="mb-0" >Add Sub Category</h3>
                             </div>
                         </div>
                         <form enctype="multipart/form-data" method="post">
                             <div class="form-group">
+                                @csrf
                               <label for="exampleFormControlInput1">Name</label>
-                              <input type="text" class="form-control" id="exampleFormControlInput1">
+                              <input type="text" required name="name" class="form-control" id="exampleFormControlInput1">
                             </div>
                             <div class="form-group">
                                 <label for="my-input">Category</label>
-                                <select class="default_sel mb_30 w-100" style="display: none;">
-                                    <option data-display="Select">Nothing</option>
-                                    <option value="1">Some option</option>
-                                    <option value="2">Another option</option>
-                                    <option value="3" disabled="">A disabled option</option>
-                                    <option value="4">Potato</option>
+                                <select required name="catid" class="default_sel mb_30 w-100" style="display: none;">
+                                    @foreach ($subs as $sub)
+                                        <option value="{{$sub->id}}">{{$sub->title}}</option>
+                                        
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
@@ -67,30 +75,14 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach ($cats as $cat)
                                     <tr>
                                         <th scope="row">1</th>
-                                        <td>Mayowa</td>
-                                        <td>Mayowa</td>
-                                        <td><a href="#" class="btn btn-danger">Delete</a></td>
+                                        <td>{{$cat->name}}</td>
+                                        <td>{{$cat->title}}</td>
+                                        <td><a href="/admin/category_sub/delete/{{$cat->id}}" class="btn btn-danger">Delete</a></td>
                                     </tr>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mayowa</td>
-                                        <td>Mayowa</td>
-                                        <td><a href="#" class="btn btn-danger">Delete</a></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mayowa</td>
-                                        <td>Mayowa</td>
-                                        <td><a href="#" class="btn btn-danger">Delete</a></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mayowa</td>
-                                        <td>Mayowa</td>
-                                        <td><a href="#" class="btn btn-danger">Delete</a></td>
-                                    </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

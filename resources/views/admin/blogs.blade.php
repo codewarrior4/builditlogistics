@@ -12,7 +12,15 @@
                     <div class="sidebar_icon d-lg-none">
                         <i class="ti-menu"></i>
                     </div>
-                    
+                    @if (session('msg'))
+                        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            <span class="sr-only">Close</span>
+                        </button>
+                        <strong>{{session('msg')}}!</strong>
+                    </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -36,18 +44,17 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach ($blogs as $blog )
+                                    
                                     <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mayowa</td>
-                                        <td><img src="{{URL::asset('img/card2.jpg')}}" width="70" height="70" alt=""></td>
-                                        <td><a href="#" class="status_btn">View</a></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>Mayowa</td>
-                                        <td><img src="{{URL::asset('img/card2.jpg')}}" width="70" height="70" alt=""></td>
-                                        <td><a href="/admin/blog/1" class="status_btn">View</a></td>
-                                    </tr>
+                                        <th scope="row">{{$blog->id}}</th>
+                                        <td>{{$blog->title}}</td>
+                                        <td><img src="/uploads/{{$blog->image}}" width="70" height="70" alt=""></td>
+                                        <td><a href="/admin/blog/{{$blog->id}}" class="status_btn">View</a></td>
+                                    </tr> 
+                                    @endforeach
+                                   
+                                   
                                 </tbody>
                             </table>
                         </div>

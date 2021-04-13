@@ -12,7 +12,15 @@
                     <div class="sidebar_icon d-lg-none">
                         <i class="ti-menu"></i>
                     </div>
-                    
+                    @if (session('msg'))
+                        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            <span class="sr-only">Close</span>
+                        </button>
+                        <strong>{{session('msg')}}!</strong>
+                    </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -21,53 +29,7 @@
         <div class="container-fluid plr_30 body_white_bg pt_30">
             <div class="row justify-content-center">
                 
-            <div class="col-lg-12">
-                    <div class="white_box mb_30">
-                        <div class="box_header ">
-                            <div class="main-title">
-                                <h3 class="mb-0" >Sliders</h3>
-                            </div>
-                        </div>
-                        <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
-                            <ol class="carousel-indicators">
-                              <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
-                              <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
-                              <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
-                            </ol>
-                            <div class="carousel-inner">
-                              <div class="carousel-item active">
-                                <img src="{{URL::asset('img/card2.jpg')}}" class="d-block w-100" style="min-height:300px;max-height:400px" alt="...">
-                                <div class="carousel-caption d-none d-md-block">
-                                  <h5>First slide label</h5>
-                                  <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                                </div>
-                              </div>
-                              <div class="carousel-item">
-                                <img src="{{URL::asset('img/card2.jpg')}}" class="d-block w-100" style="min-height:300px;max-height:400px" alt="...">
-                                <div class="carousel-caption d-none d-md-block">
-                                  <h5>Second slide label</h5>
-                                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                </div>
-                              </div>
-                              <div class="carousel-item">
-                                <img src="{{URL::asset('img/card2.jpg')}}" class="d-block w-100" style="min-height:300px;max-height:400px" alt="...">
-                                <div class="carousel-caption d-none d-md-block">
-                                  <h5>Third slide label</h5>
-                                  <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-                                </div>
-                              </div>
-                            </div>
-                            <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
-                              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                              <span class="sr-only">Previous</span>
-                            </a>
-                            <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
-                              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                              <span class="sr-only">Next</span>
-                            </a>
-                          </div>
-                    </div>
-                </div>
+         
 
                 <div class="col-lg-12">
                     <div class="white_box mb_30">
@@ -76,26 +38,27 @@
                                 <h3 class="mb-0" >Add Slider</h3>
                             </div>
                         </div>
-                        <form enctype="multipart/form-data" method="post">
+                        <form action="/admin/slider" enctype="multipart/form-data" method="post">
                             <div class="form-group">
+                              @csrf
                               <label for="exampleFormControlInput1">Header</label>
-                              <input type="text" class="form-control" id="exampleFormControlInput1">
+                              <input name="header" type="text" class="form-control" required id="exampleFormControlInput1">
                             </div>
                             <div class="form-group">
                               <label for="exampleFormControlInput1">Detail</label>
-                              <input type="text" class="form-control" id="exampleFormControlInput1">
+                              <input name="detail"  type="text" class="form-control" requiredid="exampleFormControlInput1">
                             </div>
                             <div class="form-group">
                               <label for="exampleFormControlInput1">Button text</label>
-                              <input type="text" class="form-control" id="exampleFormControlInput1">
+                              <input name="button"  type="text" class="form-control" requiredid="exampleFormControlInput1">
                             </div>
                             <div class="form-group">
                               <label for="exampleFormControlInput1">Url</label>
-                              <input type="url" class="form-control" id="exampleFormControlInput1">
+                              <input name="url"  type="url" class="form-control" required id="exampleFormControlInput1">
                             </div>
                             <div class="form-group">
                               <label for="exampleFormControlInput1">Photo</label>
-                              <input type="file" class="form-control" id="exampleFormControlInput1">
+                              <input name="photo"  type="file" class="form-control" requiredid="exampleFormControlInput1">
                             </div>
                             <div class="form-group">
                                 <input type="submit" value="Submit" class="btn btn-outline-primary">
@@ -116,38 +79,23 @@
                                         <th scope="col">Header</th>
                                         <th scope="col">Image</th>
                                         <th scope="col">url</th>
+                                        <th scope="col">Button Text</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach ($sliders as $slider)
+                                    
                                     <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mayowa</td>
-                                        <td><img src="{{URL::asset('img/card2.jpg')}}" width="70" height="70" alt=""></td>
-                                        <td>http://www.asaksks.com/asld</td>
-                                        <td><a href="#" class="btn btn-danger">Delete</a></td>
+                                        <th scope="row">{{$slider->id}}</th>
+                                        <td>{{$slider->header}}</td>
+                                        <td><img src="/uploads/{{$slider->photo}}" width="70" height="70" alt=""></td>
+                                        <td>{{$slider->url}}</td>
+                                        <td>{{$slider->button}}</td>
+                                        <td><a href="/admin/slider/delete/{{$slider->id}}" class="btn btn-danger">Delete</a></td>
                                     </tr>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mayowa</td>
-                                        <td><img src="{{URL::asset('img/card2.jpg')}}" width="70" height="70" alt=""></td>
-                                        <td>http://www.asaksks.com/asld</td>
-                                        <td><a href="#" class="btn btn-danger">Delete</a></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mayowa</td>
-                                        <td><img src="{{URL::asset('img/card2.jpg')}}" width="70" height="70" alt=""></td>
-                                        <td>http://www.asaksks.com/asld</td>
-                                        <td><a href="#" class="btn btn-danger">Delete</a></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mayowa</td>
-                                        <td><img src="{{URL::asset('img/card2.jpg')}}" width="70" height="70" alt=""></td>
-                                        <td>http://www.asaksks.com/asld</td>
-                                        <td><a href="#" class="btn btn-danger">Delete</a></td>
-                                    </tr>
+                                      
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

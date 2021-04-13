@@ -12,12 +12,20 @@
                     <div class="sidebar_icon d-lg-none">
                         <i class="ti-menu"></i>
                     </div>
-                    
+                    @if (session('msg'))
+                        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            <span class="sr-only">Close</span>
+                        </button>
+                        <strong>{{session('msg')}}!</strong>
+                    </div>
+                    @endif
                 </div>
             </div>
         </div>
     </div>
-    <div class="main_content_iner ">
+    <div class="main_content_iner">
         <div class="container-fluid plr_30 body_white_bg pt_30">
             <div class="row justify-content-center">
                 
@@ -28,18 +36,17 @@
                                 <h3 class="mb-0" >Design About us page</h3>
                             </div>
                         </div>
-                        <form enctype="multipart/form-data" method="post">
-                           
-                            <div class="form-group">
-                              <label for="exampleFormControlSelect1">Banner</label>
-                              <input type="file" class="form-control" name="image" id="">
-                            </div>
+                        <form action="/admin/about" enctype="multipart/form-data" method="post">
+                           @csrf
                             <div class="form-group">
                               <label for="exampleFormControlSelect2">Page Builder</label>
-                             <textarea name="" id="summernote" cols="30" rows="10"></textarea>
+                             <textarea name="description" id="summernote" cols="30" rows="10">
+                                {{$about->description}}
+                             </textarea>
                             </div>
+                            <input type="hidden" name="id" value="{{$about->id}}">
                             <div class="form-group">
-                                <input type="submit" value="Submit" class="btn btn-outline-primary">
+                                <input type="submit" value="Update" class="btn btn-outline-primary">
                             </div>
                           </form>
                     </div>
