@@ -12,7 +12,15 @@
                     <div class="sidebar_icon d-lg-none">
                         <i class="ti-menu"></i>
                     </div>
-                    
+                    @if (session('msg'))
+                        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            <span class="sr-only">Close</span>
+                        </button>
+                        <strong>{{session('msg')}}!</strong>
+                    </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -49,34 +57,17 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                @foreach ($products as $count => $product)
                                     <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mayowa</td>
-                                        <td><img src="{{URL::asset('img/card2.jpg')}}" width="70" height="70" alt=""></td>
-                                        <td>http://www.asaksks.com/asld</td>
+                                        <th scope="row">{{$count+1}}</th>
+                                        <td>{{$product->name}}</td>
+                                        <td><img src="/uploads/{{$product->banner}}" width="70" height="70" alt=""></td>
+                                        <td>{{$product->title}}</td>
                                         <td><a href="/admin/products/1" class="btn btn-outline-primary">View</a></td>
                                     </tr>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mayowa</td>
-                                        <td><img src="{{URL::asset('img/card2.jpg')}}" width="70" height="70" alt=""></td>
-                                        <td>http://www.asaksks.com/asld</td>
-                                        <td><a href="/admin/products/1" class="btn btn-outline-primary">View</a></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mayowa</td>
-                                        <td><img src="{{URL::asset('img/card2.jpg')}}" width="70" height="70" alt=""></td>
-                                        <td>http://www.asaksks.com/asld</td>
-                                        <td><a href="/admin/products/1" class="btn btn-outline-primary">View</a></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mayowa</td>
-                                        <td><img src="{{URL::asset('img/card2.jpg')}}" width="70" height="70" alt=""></td>
-                                        <td>http://www.asaksks.com/asld</td>
-                                        <td><a href="/admin/products/1" class="btn btn-outline-primary">View</a></td>
-                                    </tr>
+                                @endforeach
+                                    
+                                   
                                 </tbody>
                             </table>
                         </div>

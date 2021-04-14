@@ -12,6 +12,7 @@ use App\Http\Controllers\About;
 use App\Http\Controllers\Social;
 use App\Http\Controllers\Tacs;
 use App\Http\Controllers\store;
+use App\Http\Controllers\Product;
 
 
 
@@ -84,9 +85,10 @@ Route::group(['prefix'=>'/admin'], function(){
 
     
     //products
-    Route::view('/product','admin.product');
-    Route::view('/products','admin.products');
-    Route::view('/products/{id}','admin.productdetails');
+    Route::get('/product',[Product::class,'create']);
+    Route::post('/product',[Product::class,'store']);
+    Route::get('/products',[Product::class,'index']);
+    Route::get('/products/{id}',[Product::class,'show']);
 
     //Subscribers
     Route::view('/subscribers','admin.subscribers');

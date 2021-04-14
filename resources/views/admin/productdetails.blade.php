@@ -30,30 +30,31 @@
                         </div>
                         <form enctype="multipart/form-data" method="post">
                             <div class="form-group">
+                            
                               <label for="exampleFormControlInput1">Name</label>
-                              <input type="text" class="form-control" id="exampleFormControlInput1">
+                              <input type="text" required value="{{$products->pname}}" name="name" class="form-control" id="exampleFormControlInput1">
                             </div>
 
                             <div class="form-group">
                               <label for="exampleFormControlSelect1">Banner</label>
-                              <input type="file" class="form-control" name="image" id="">
+                             <img src="/uploads/{{$products->banner}}" class="img img-responsive" width="400" height="250" alt="">
                             </div>
-
+                            @csrf
                             <div class="form-group">
                               <label for="exampleFormControlSelect2">Description</label>
-                             <textarea name="" id="summernote" cols="30" rows="10"></textarea>
+                             <textarea required name="description" id="summernote" cols="30" rows="10">{!!$products->description!!}</textarea>
                             </div>
                             <div class="row">
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="exampleFormControlSelect1">Price</label>
-                                        <input type="text" class="form-control" name="image" id="">
+                                        <input required type="text" class="form-control" value="{{$products->price}}" id="">
                                     </div> 
                                 </div>
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="exampleFormControlSelect1">Compared Price</label>
-                                        <input type="text" class="form-control" name="image" id="">
+                                        <input required type="text" class="form-control" value="{{$products->compare_price}}" name="compare_price" id="">
                                     </div> 
                                 </div>
 
@@ -62,61 +63,59 @@
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="my-input">Category</label>
-                                        <select class="default_sel mb_30 w-100" style="display: none;">
-                                            <option data-display="Select">Nothing</option>
-                                            <option value="1">Some option</option>
-                                            <option value="2">Another option</option>
-                                            <option value="3" disabled="">A disabled option</option>
-                                            <option value="4">Potato</option>
+                                        <select required name="category" class="default_sel mb_30 w-100" style="display: none;">
+                                            @foreach ($cat as $cats)
+                                                @if($products->category == $cats->id)
+                                                 <option selected value="{{$products->category}}" >{{$products->title}}</option>
+                                                @else
+                                                <option value="{{$cats->id}}" >{{$cats->title}}</option>
+                                                @endif
+
+                                            @endforeach
                                         </select>
                                      </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="my-input">Sub Category</label>
-                                        <select class="default_sel mb_30 w-100" style="display: none;">
-                                            <option data-display="Select">Nothing</option>
-                                            <option value="1">Some option</option>
-                                            <option value="2">Another option</option>
-                                            <option value="3" disabled="">A disabled option</option>
-                                            <option value="4">Potato</option>
+                                        <select required name="sub_category" class="default_sel mb_30 w-100" style="display: none;">
+                                            @foreach ($sub as $subs)
+                                                @if($products->sub_category == $subs->id)
+                                                 <option selected value="{{$products->category}}" >{{$products->name}}</option>
+                                                @else
+                                                <option value="{{$subs->id}}" >{{$subs->name}}</option>
+                                                @endif
+                                            @endforeach
+                                           
                                         </select>
                                      </div>
                                 </div>
                             </div>
+                            <input type="hidden" name="pid" value="{{$products->pid}}">
                             <div class="row">
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="my-input">Image Extra 1</label>
-                                        <input type="file" name="" id="" class="form-control">
+                                        <img src="/uploads/{{$products->image1}}" class="img img-responsive" width="400" height="250" alt="">
                                      </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="my-input">Image Extra 2</label>
-                                        <input type="file" name="" id="" class="form-control">
+                                        <img src="/uploads/{{$products->image2}}" class="img img-responsive" width="400" height="250" alt="">
                                      </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="my-input">Image Extra 3</label>
-                                        <input type="file" name="" id="" class="form-control">
+                                        <img src="/uploads/{{$products->image3}}" class="img img-responsive" width="400" height="250" alt="">
                                      </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-4">
-                                    <div class="form-group">
-                                        <input type="submit" value="Update" class="btn btn-outline-primary">
-                                    </div>
-                                </div>
-                                <div class="col-4">
-                                    <div class="form-group">
-                                        <input type="submit" value="Delete" class="btn btn-outline-danger">
-                                    </div>
-                                </div>
+                            <div class="form-group">
+                                <input type="submit" value="Submit" class="btn btn-outline-primary">
                             </div>
-                          </form>
+                        </form>
                     </div>
                 </div>
                
