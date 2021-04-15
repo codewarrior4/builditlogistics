@@ -21,10 +21,12 @@ use App\Http\Controllers\user;
 Route::group(['prefix'=>'/user'],function()
 {
     Route::view('/login','user.login');
+    Route::post('/login',[user::class,'login']);
     Route::get('/register',[user::class,'index']);
     Route::post('/register',[user::class,'store']);
     Route::get('/verify/{token}',[user::class,'verify']);
-
+    Route::get('/reverify',[user::class,'resendverification']);
+    Route::get('/logout',[user::class,'logout']);
     
     
     Route::view('/forgot','user.forgot');

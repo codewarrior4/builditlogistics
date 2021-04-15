@@ -40,9 +40,7 @@
                            @csrf
                             <div class="form-group">
                               <label for="exampleFormControlSelect2">Page Builder</label>
-                             <textarea name="description" id="summernote" cols="30" rows="10">
-                                {{$about->description}}
-                             </textarea>
+                             <textarea name="description" id="summernote" cols="30" rows="10">{!!$about->description!!}</textarea>
                             </div>
                             <input type="hidden" name="id" value="{{$about->id}}">
                             <div class="form-group">

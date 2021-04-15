@@ -18,6 +18,8 @@ class Blog extends Controller
     {
         $blogs = Blogs::latest()->paginate(5);
         return view('admin.blogs',compact('blogs'));
+        return redirect('/admin/blogs')->with('msg','Blog has been Updated',compact('blogs'));
+
     }
 
  
@@ -74,6 +76,8 @@ class Blog extends Controller
         $blogs = Blogs::latest()->paginate(5);  
         session()->flash('msg',' Blog has been Updated');
         return view('admin.blogs',compact('blogs'));
+        return redirect()->to('/admin/blogs')->with('msg','Blog has been Updated',compact('about'));
+
 
     }
 

@@ -24,9 +24,8 @@ class About extends Controller
         $about = Aboutus::find($request->id);
          $about->description = $request->description;
          $about->save();
-         session()->flash('msg','About us page updated');
          $about = Aboutus::all()->first();
-         return view('admin.about',compact('about'));
+         return redirect()->to('/admin/about')->with('msg','About us page updated',compact('about'));
     }
 
 }

@@ -14,20 +14,18 @@
 					</ol>
 				</div>
 			</nav>
-			<div class="container">
-			<div class="row">
-				@if (session('msg'))
-								<div class="alert alert-primary alert-dismissible fade show" role="alert">
-									<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-										<span aria-hidden="true">&times;</span>
-										<span class="sr-only">Close</span>
-									</button>
-									<strong>{{session('msg')}}</strong>
-								</div>
-							@endif
-				</div>
-			</div>
+			
 			<div class="container mb-5">
+			
+				@if (session('msg'))
+					<div class="alert alert-primary alert-dismissible fade show" role="alert">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+							<span class="sr-only">Close</span>
+						</button>
+						<strong>{{session('msg')}}</strong>
+					</div>
+				@endif
 				
 				<div class="row">
 					<div class="col-lg-9 order-lg-last dashboard-content">
@@ -40,7 +38,7 @@
 										<div class="col-md-6">
 											<div class="form-group required-field">
 												<label for="acc-name">First Name</label>
-												<input type="text" class="form-control" id="acc-name" name="acc-name" required>
+												<input type="text" name="firstname" value="{{session('user')->firstname}}" class="form-control" id="acc-name" name="acc-name" required>
 											</div><!-- End .form-group -->
 										</div><!-- End .col-md-4 -->
 
@@ -48,27 +46,21 @@
 										<div class="col-md-6">
 											<div class="form-group required-field">
 												<label for="acc-lastname">Last Name</label>
-												<input type="text" class="form-control" id="acc-lastname" name="acc-lastname" required>
+												<input type="text" name="lastname" value="{{session('user')->lastname}}"class="form-control" id="acc-lastname" name="acc-lastname" required>
 											</div><!-- End .form-group -->
 										</div><!-- End .col-md-4 -->
                                         <div class="col-md-6">
 											<div class="form-group required-field">
 												<label for="acc-name">Address</label>
-												<input type="text" class="form-control" id="acc-name" name="acc-name" required>
+												<input type="text" name="address" value="{{session('user')->address}}" class="form-control" id="acc-name" name="acc-name" required>
 											</div><!-- End .form-group -->
 										</div><!-- End .col-md-4 -->
 
 
-										<div class="col-md-6">
-											<div class="form-group required-field">
-												<label for="acc-lastname">Country</label>
-												<input type="text" class="form-control" id="acc-lastname" name="acc-lastname" required>
-											</div><!-- End .form-group -->
-										</div><!-- End .col-md-4 -->
                                         <div class="col-md-6">
 											<div class="form-group required-field">
 												<label for="acc-name">Zip Code</label>
-												<input type="text" class="form-control" id="acc-name" name="acc-name" required>
+												<input type="text" name="zip" value="{{session('user')->zip}}"class="form-control" id="acc-name" name="acc-name" required>
 											</div><!-- End .form-group -->
 										</div><!-- End .col-md-4 -->
 
@@ -76,13 +68,13 @@
 										<div class="col-md-6">
 											<div class="form-group required-field">
 												<label for="acc-lastname">City</label>
-												<input type="text" class="form-control" id="acc-lastname" name="acc-lastname" required>
+												<input type="text" class="form-control" name="city" value="{{session('user')->city}}"id="acc-lastname" name="acc-lastname" required>
 											</div><!-- End .form-group -->
 										</div><!-- End .col-md-4 -->
                                         <div class="col-md-6">
 											<div class="form-group required-field">
 												<label for="acc-name">Email</label>
-												<input type="text" class="form-control" disabled id="acc-name" name="acc-name" required>
+												<input type="text" name="email" value="{{session('user')->email}}"class="form-control" disabled id="acc-name" name="acc-name" required>
 											</div><!-- End .form-group -->
 										</div><!-- End .col-md-4 -->
 
@@ -90,7 +82,7 @@
 										<div class="col-md-6">
 											<div class="form-group required-field">
 												<label for="acc-lastname">Phone</label>
-												<input type="text" class="form-control" id="acc-lastname" name="acc-lastname" required>
+												<input type="text" name="phone" value="{{session('user')->phone}}" class="form-control" id="acc-lastname" name="acc-lastname" required>
 											</div><!-- End .form-group -->
 										</div><!-- End .col-md-4 -->
 									</div><!-- End .row -->
@@ -144,6 +136,7 @@
 								<li><a href="orders">My Orders</a></li>
 								<li><a href="wishlist">My Wishlist</a></li>
 								<li><a href="cart">My Cart</a></li>
+								<li><a href="/user/logout">Logout</a></li>
 							</ul>
 						</div><!-- End .widget -->
 					</aside><!-- End .col-lg-3 -->

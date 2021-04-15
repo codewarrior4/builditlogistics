@@ -27,7 +27,7 @@
 				
 
 					<div class="form-footer">
-						<button type="submit" class="btn btn-primary">Resend Email</button>
+						<a href="/user/reverify" class="btn btn-primary">Resend Email</a>
 					</div><!-- End .form-footer -->
 				</form>
 			</div><!-- End .container -->

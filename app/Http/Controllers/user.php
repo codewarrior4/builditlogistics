@@ -18,7 +18,7 @@ class user extends Controller
      */
     public function index()
     {
-        return view('user.register');
+        return redirect('user/register');
     }
 
   
@@ -45,7 +45,7 @@ class user extends Controller
             'zip'=>$request->zip,
             'state'=>$request->state,
             'address'=>$request->address,
-            'status'=>$request->status,
+            'status'=>1,
             'email'=>$request->email,
             'date'=>now(),
             'password'=>Hash::make($request->password),
@@ -66,46 +66,81 @@ class user extends Controller
         return redirect('/user/index')->with('msg','Account Validation Successful');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    public function resendverification(){
+        
+        if(session('user')=='')
+        {
+            return redirect('/user/login')->with('msg','User not logged in');
+        };
+        if(session('user'))
+        {
+            $user= session('user');
+            Mail::to($user->email)->send(new VerifyMail($user));
+            return view('user.verify');
+        }
+
+        if(session('user')->verified==1){
+            return redirect('/user/index')->with('msg','Account Has Been Verified'); 
+        }
+        
+        
+    }
+
+    public function logout(){
+        if(session()->has('user'))
+        {
+            session()->pull('user');
+            session()->forget('user');
+            return redirect('user/login');
+        }
+    }
+
+    public function login (Request $request)
+    {
+        $user= Users::where(['email'=>$request->email])->first();
+        
+        // return $user;
+        if(!$user || !(Hash::check($request->password,$user->password)))
+        {
+            return redirect('user/login')->with('msg','Username or Password not found ');
+        }
+        else{
+            $request->session('user')->put('user',$user);
+            if(session('user')->verified ==0)
+            {
+                Mail::to($user->email)->send(new VerifyMail($user));
+                return view('user.verify');
+            }
+            else
+            {
+                if(session('user')->status ==2)
+                {
+                    return redirect('user/login')->with('msg','Hello '.$user->firstname .' Your Account has been disabled . Kindly reach out to our customer care for activation');
+                }
+                return redirect('user/index')->with('msg','Welcome back '.$user->firstname);
+            }
+        }
+        
+    }
+   
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function edit($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+ 
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
         //
