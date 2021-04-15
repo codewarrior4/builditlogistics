@@ -14,8 +14,21 @@
 					</ol>
 				</div>
 			</nav>
-
+			<div class="container">
+			<div class="row">
+				@if (session('msg'))
+								<div class="alert alert-primary alert-dismissible fade show" role="alert">
+									<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+										<span class="sr-only">Close</span>
+									</button>
+									<strong>{{session('msg')}}</strong>
+								</div>
+							@endif
+				</div>
+			</div>
 			<div class="container mb-5">
+				
 				<div class="row">
 					<div class="col-lg-9 order-lg-last dashboard-content">
 						<h2>Edit Account Information</h2>

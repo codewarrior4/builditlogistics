@@ -84,10 +84,10 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($sliders as $slider)
+                                    @foreach ($sliders as $count=> $slider)
                                     
                                     <tr>
-                                        <th scope="row">{{$slider->id}}</th>
+                                        <th scope="row">{{$count +1}}</th>
                                         <td>{{$slider->header}}</td>
                                         <td><img src="/uploads/{{$slider->photo}}" width="70" height="70" alt=""></td>
                                         <td>{{$slider->url}}</td>

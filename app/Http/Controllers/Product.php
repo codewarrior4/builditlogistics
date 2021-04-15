@@ -99,37 +99,47 @@ class Product extends Controller
         return view('admin.productdetails',compact('products','cat','sub'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+  
+    public function update(Request $request)
     {
         //
+        $product= Products::find($request->pid);
+        $product->pname = $request->name;
+        $product->description = $request->description;
+        $product->price = $request->price;
+        $product->compare_price = $request->compare_price;
+        $product->category = $request->category;
+        $product->sub_category = $request->sub_category;
+
+        $product->save();
+        $cat= Categorys::all();
+        $sub= SubCategorys::all();
+        $products = DB::table('products')
+        ->join('categorys','products.category','=','categorys.id')
+        ->join('subcategory','products.sub_category','=','subcategory.id')
+        ->select('products.*','categorys.title','categorys.id','subcategory.name')
+        ->where('pid','=',$request->pid)
+        ->first();
+
+        
+        return view('admin.productdetails',compact('products','cat','sub'));
+        session()->flash('msg','Product Details has been Updated');
+
+
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+   
     public function destroy($id)
     {
-        //
+   
+        $product = Products::find($id);
+        $product->delete();
+        $products = DB::table('products')
+        ->join('categorys','products.category','=','categorys.id')
+        ->join('subcategory','products.sub_category','=','subcategory.id')
+        ->select('products.*','categorys.title','categorys.id','subcategory.name')
+        ->get();
+        session()->flash('msg','Product has been Deleted');
+        return view('admin.products',compact('products'));
     }
 }

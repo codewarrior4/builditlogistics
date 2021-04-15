@@ -13,6 +13,7 @@ use App\Http\Controllers\Social;
 use App\Http\Controllers\Tacs;
 use App\Http\Controllers\store;
 use App\Http\Controllers\Product;
+use App\Http\Controllers\user;
 
 
 
@@ -20,8 +21,12 @@ use App\Http\Controllers\Product;
 Route::group(['prefix'=>'/user'],function()
 {
     Route::view('/login','user.login');
-    Route::view('/register','user.register');
-    Route::view('/verify','user.verify');
+    Route::get('/register',[user::class,'index']);
+    Route::post('/register',[user::class,'store']);
+    Route::get('/verify/{token}',[user::class,'verify']);
+
+    
+    
     Route::view('/forgot','user.forgot');
     Route::view('/billing','user.billing');
     Route::view('/orders','user.orders');
@@ -34,7 +39,7 @@ Route::group(['prefix'=>'/user'],function()
 });
 
 
-Route::group(['prefix'=>'/admin'], function(){
+Route::group(['prefix'=>'/admin','middleware'=>'admin'], function(){
     Route::view('/','admin.index');
     Route::view('/index','admin.index');
     // customer
@@ -87,8 +92,11 @@ Route::group(['prefix'=>'/admin'], function(){
     //products
     Route::get('/product',[Product::class,'create']);
     Route::post('/product',[Product::class,'store']);
+    Route::post('/product/update',[Product::class,'update']);
     Route::get('/products',[Product::class,'index']);
     Route::get('/products/{id}',[Product::class,'show']);
+    Route::get('/products/delete/{id}',[Product::class,'destroy']);
+
 
     //Subscribers
     Route::view('/subscribers','admin.subscribers');
@@ -125,6 +133,6 @@ Route::view('/categories/{cat}/{query}','main.categories');
 
 
 
-Auth::routes();
+// Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

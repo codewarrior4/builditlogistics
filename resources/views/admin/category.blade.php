@@ -70,9 +70,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($category as $cat)
+                                    @foreach ($category as $count => $cat)
                                         <tr>
-                                        <th scope="row">1</th>
+                                        <th scope="row">{{$count + 1}}</th>
                                         <td>{{$cat->title}}</td>
                                         <td><img src="/uploads/{{$cat->image}}" width="70" height="70" alt=""></td>
                                         <td><a href="/admin/category/delete/{{$cat->id}}" class="btn btn-danger">Delete</a></td>

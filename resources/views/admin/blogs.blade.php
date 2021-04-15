@@ -18,7 +18,7 @@
                             <span aria-hidden="true">&times;</span>
                             <span class="sr-only">Close</span>
                         </button>
-                        <strong>{{session('msg')}}!</strong>
+                        <strong>{{session('msg')}}</strong>
                     </div>
                     @endif
                 </div>
@@ -44,10 +44,10 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($blogs as $blog )
+                                    @foreach ($blogs as $count => $blog )
                                     
                                     <tr>
-                                        <th scope="row">{{$blog->id}}</th>
+                                        <th scope="row">{{$count +1 }}</th>
                                         <td>{{$blog->title}}</td>
                                         <td><img src="/uploads/{{$blog->image}}" width="70" height="70" alt=""></td>
                                         <td><a href="/admin/blog/{{$blog->id}}" class="status_btn">View</a></td>

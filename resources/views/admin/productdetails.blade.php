@@ -28,9 +28,9 @@
                                 <h3 class="mb-0" >Add Product</h3>
                             </div>
                         </div>
-                        <form enctype="multipart/form-data" method="post">
+                        <form enctype="multipart/form-data" action="/admin/product/update" method="post">
                             <div class="form-group">
-                            
+                            @csrf
                               <label for="exampleFormControlInput1">Name</label>
                               <input type="text" required value="{{$products->pname}}" name="name" class="form-control" id="exampleFormControlInput1">
                             </div>
@@ -48,7 +48,7 @@
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="exampleFormControlSelect1">Price</label>
-                                        <input required type="text" class="form-control" value="{{$products->price}}" id="">
+                                        <input required type="text" class="form-control" value="{{$products->price}}" name="price">
                                     </div> 
                                 </div>
                                 <div class="col-6">

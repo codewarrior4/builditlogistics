@@ -75,9 +75,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($cats as $cat)
+                                    @foreach ($cats as $count=> $cat)
                                     <tr>
-                                        <th scope="row">1</th>
+                                        <th scope="row">{{$count +1}}</th>
                                         <td>{{$cat->name}}</td>
                                         <td>{{$cat->title}}</td>
                                         <td><a href="/admin/category_sub/delete/{{$cat->id}}" class="btn btn-danger">Delete</a></td>
