@@ -24,28 +24,30 @@
 
 			<div class="container pt-0 mb-3">
 				<div class="about-section">
-                <div class="accordion accordion_custom mb_50" id="accordion_ex">
-                            <div class="card">
-                                <div class="card-header bg-primary" id="headingOne">
-                                    <h2 class="mb-0">
-                                        <a href="#" class="btn text-white" type="button" data-toggle="collapse"
-                                            data-target="#collapseOne" aria-expanded="true"
-                                            aria-controls="collapseOne">
-                                            Example 0
-                                        </a>
-                                    </h2>
-                                </div>
+                        <div class="accordion accordion_custom mb_50" id="accordion_ex">
+                            @foreach ($faqs as $faq)
+                                <div class="card">
+                                    <div class="card-header bg-primary" id="headingOne">
+                                        <h2 class="mb-0">
+                                            <a href="#" class="btn text-white" type="button" data-toggle="collapse"
+                                                data-target="#collapse{{$faq->id}}" aria-expanded="true"
+                                                aria-controls="collapseOne">
+                                                {{$faq->question}}
+                                            </a>
+                                        </h2>
+                                    </div>
 
-                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
-                                    data-parent="#accordion_ex">
-                                    <div class="card-body">
-                                        <span class="badge badge-primary">Answer</span>
-                                        <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.
-
-                                            Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.</p>
+                                    <div id="collapse{{$faq->id}}" class="collapse" aria-labelledby="headingOne"
+                                        data-parent="#accordion_ex">
+                                        <div class="card-body">
+                                            <span class="badge badge-primary">Answer</span>
+                                            <p>{{$faq->answer}}</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endforeach
+
+                            {{$faqs->links('pagination::bootstrap-4')}}
                         </div>
 				</div><!-- End .about-section -->
 			</div><!-- End .container -->

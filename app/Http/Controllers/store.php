@@ -44,6 +44,11 @@ class store extends Controller
         $stores = Stores::all();
         return view('admin.stores',compact('stores'));
     }
+    public function stores()
+    {
+        $stores = Stores::all();
+        return view('main.stores',compact('stores'));
+    }
 
     public function destroy($id)
     {

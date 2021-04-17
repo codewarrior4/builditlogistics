@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Blogs;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 
@@ -46,12 +47,17 @@ class Blog extends Controller
        
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    public function blog(){
+        $blogs = Blogs::latest()->paginate(10);
+        return view('main.blog',compact('blogs'));
+    }
+
+    public function blogdetails($id){
+        
+        $blog = Blogs::find($id);
+    
+        return view('main.blogdetails',compact('blog'));
+    }
     public function show($id)
     {
         $blog = Blogs::find($id);

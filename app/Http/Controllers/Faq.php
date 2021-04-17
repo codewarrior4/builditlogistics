@@ -11,9 +11,10 @@ class Faq extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function faq()
     {
-        //
+        $faqs= Faqs::latest()->paginate(10);
+        return view('main.faq',['faqs'=>$faqs]);
     }
 
     /**
@@ -23,7 +24,7 @@ class Faq extends Controller
      */
     public function create()
     {
-        $faq= Faqs::latest()->paginate(1);
+        $faq= Faqs::latest()->paginate(10);
         return view('admin.faq',['faq'=>$faq]);
     }
 

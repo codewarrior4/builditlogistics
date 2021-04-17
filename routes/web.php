@@ -116,18 +116,18 @@ Route::group(['prefix'=>'/admin','middleware'=>'admin'], function(){
 
 Route::get('/email',[Email::class,'index']);
 Route::view('/','main.index');
-Route::view('/about','main.about');
-Route::view('/tac','main.tac');
+Route::get('/about',[About::class,'about']);
+Route::get('/tac',[Tacs::class,'tac']);
 Route::view('/contact','main.contact');
-Route::view('/blog','main.blog');
-Route::view('/blog/{id}','main.blogdetails');
+Route::get('/blog',[Blog::class,'blog']);
+Route::get('/blog/{id}',[Blog::class,'blogdetails']);
 Route::view('/products','main.products');
 Route::view('/product/{id}','main.productdetails');
 Route::view('/cart','main.cart');
 Route::view('/checkout','main.checkout');
 Route::view('/wishlist','main.wishlist');
-Route::view('/faq','main.faq');
-Route::view('/stores','main.stores');
+Route::get('/faq',[Faq::class,'faq']);
+Route::get('/stores',[store::class,'stores']);
 Route::view('/category','main.category');
 Route::view('/category/sub','main.categorysub');
 Route::view('/categories/{type}','main.categories');

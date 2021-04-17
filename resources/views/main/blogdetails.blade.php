@@ -9,52 +9,40 @@
 				<div class="container">
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item"><a href="index.html"><i class="icon-home"></i></a></li>
-						<li class="breadcrumb-item active" aria-current="page">Product</li>
+						<li class="breadcrumb-item active" aria-current="page">Blog</li>
 					</ol>
 				</div>
 			</nav>
 
 			<div class="container mb-6">
 				<div class="row">
-					<div class="col-lg-9">
+					<div class="col-lg-12">
 						<article class="post single">
 							<div class="post-media">
 								<div class="post-slider owl-carousel owl-theme">
-									<img src="{{URL::asset('assets/images/blog/post-1.jpg')}}" alt="Post">
-									<img src="{{URL::asset('assets/images/blog/post-2.jpg')}}" alt="Post">
-									<img src="{{URL::asset('assets/images/blog/post-3.jpg')}}" alt="Post">
+									<img src="/uploads/{{$blog->image}}" alt="Post">
 								</div><!-- End .post-slider -->
 							</div><!-- End .post-media -->
 
 							<div class="post-body">
 								<div class="post-date">
-									<span class="day">22</span>
-									<span class="month">Jun</span>
+									<span class="day">{{$blog->created_at->format('d')}}</span>
+									<span class="month">{{$blog->created_at->format('M')}}</span>
 								</div><!-- End .post-date -->
 
 								<h2 class="post-title">
-									Post Format - Image Gallery
+								{{$blog->title}}
 								</h2>
 
 								<div class="post-meta">
-									<span><i class="icon-calendar"></i>June 22, 2018</span>
+									<span><i class="icon-calendar"></i>{{explode(' ',$blog->created_at)[0]}}</span>
 									<span><i class="icon-user"></i>By <a href="#">Admin</a></span>
 									<span><i class="icon-folder-open"></i>
-										<a href="#">Haircuts & hairstyles</a>,
-										<a href="#">Fashion trends</a>,
-										<a href="#">Accessories</a>
 									</span>
 								</div><!-- End .post-meta -->
 
 								<div class="post-content">
-									<p>Euismod atras vulputate iltricies etri elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nunc dui, tristique in semper vel, congue sed ligula.</p>
-									<p>Nam dolor ligula, faucibus id sodales in, auctor fringilla libero. Pellentesque pellentesque tempor tellus eget hendrerit. Morbi id aliquam ligula.
-									Aliquam id dui sem. Proin rhoncus consequat nisl, eu ornare mauris tincidunt vitae. Nulla aliquet turpis eget sodales scelerisque. Ut accumsan rhoncus sapien a dignissim. Sed vel ipsum nunc. Aliquam erat volutpat. Donec et dignissim elit. Etiam condimentum, ante sed rutrum auctor, quam arcu consequat massa, at gravida enim velit id nisl.</p>
-									<p>Nullam non felis odio. Praesent aliquam magna est, nec volutpat quam aliquet non. Cras ut lobortis massa, a fringilla dolor. Quisque ornare est at felis consectetur mollis. Aliquam vitae metus et enim posuere ornare. Praesent sapien erat, pellentesque quis sollicitudin eget, imperdiet bibendum magna. Aenean sit amet odio est.</p>
-									<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris quis est lobortis odio dignissim rutrum. Pellentesque blandit lacinia diam, a tincidunt felis tempus eget.</p>
-									<p>Donec egestas metus non vehicula accumsan. Pellentesque sit amet tempor nibh. Mauris in risus lorem. Cras malesuada gravida massa eget viverra. Suspendisse vitae dolor erat. Morbi id rhoncus enim. In hac habitasse platea dictumst. Aenean lorem diam, venenatis nec venenatis id, adipiscing ac massa. Nam vel dui eget justo dictum pretium a rhoncus ipsum. Donec venenatis erat tincidunt nunc suscipit, sit amet bibendum lacus posuere. Sed scelerisque, dolor a pharetra sodales, mi augue consequat sapien, et interdum tellus leo et nunc. Nunc imperdiet eu libero ut imperdiet.</p>
-									<p>Nunc varius ornare tortor. In dignissim quam eget quam sodales egestas. Nullam imperdiet velit feugiat, egestas risus nec, rhoncus felis. Suspendisse sagittis enim aliquet augue consequat facilisis. Nunc sit amet eleifend tellus. Etiam rhoncus turpis quam. Vestibulum eu lacus mattis, dignissim justo vel, fermentum nulla. Donec pharetra augue eget diam dictum, eu ullamcorper arcu feugiat.</p>
-									<p>Proin ut ante vitae magna cursus porta. Aenean rutrum faucibus augue eu convallis. Phasellus condimentum elit id cursus sodales. Vivamus nec est consectetur, tincidunt augue at, tempor libero.</p> 
+									<p>{!!$blog->description!!}.</p> 
 								</div><!-- End .post-content -->
 
 								<div class="post-share">
@@ -82,23 +70,10 @@
 									</div><!-- End .social-icons -->
 								</div><!-- End .post-share -->
 
-								<div class="post-author">
-									<h3><i class="icon-user"></i>Author</h3>
-
-									<figure>
-										<a href="#">
-											<img src="{{URL::asset('assets/images/blog/author.jpg')}}" alt="author">
-										</a>
-									</figure>
-
-									<div class="author-content">
-										<h4><a href="#">John Doe</a></h4>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab officia culpa corporis, quidem placeat minima unde vel veniam laboriosam et animi, inventore delectus, officiis doloribus ex amet illum ea suscipit!</p>
-									</div><!-- End .author.content -->
-								</div><!-- End .post-author -->
 
 								<div class="comment-respond">
 									<h3>Leave a Reply</h3>
+									<!-- only when logged in  -->
 									<p>Your email address will not be published. Required fields are marked *</p>
 
 									<form action="#">
@@ -137,7 +112,7 @@
 							</div><!-- End .post-body -->
 						</article><!-- End .post -->
 
-						<div class="related-posts">
+						{{-- <div class="related-posts">
 							<h4 class="light-title">Related <strong>Posts</strong></h4>
 
 							<div class="owl-carousel owl-theme related-posts-carousel">
@@ -240,97 +215,12 @@
 										</div><!-- End .post-content -->
 									</div><!-- End .post-body -->
 								</article>
-							</div><!-- End .owl-carousel -->
-						</div><!-- End .related-posts -->
+							</div>
+						</div> --}}
+
 					</div><!-- End .col-lg-9 -->
 
-					<aside class="sidebar col-lg-3">
-						<div class="sidebar-wrapper">
-							<div class="widget widget-search">
-								<form role="search" method="get" class="search-form" action="#">
-									<input type="search" class="form-control" placeholder="Search posts here..." name="s" required>
-									<button type="submit" class="search-submit" title="Search">
-										<i class="icon-search"></i>
-										<span class="sr-only">Search</span>
-									</button>
-								</form>
-							</div><!-- End .widget -->
-
-							<div class="widget widget-categories">
-								<h4 class="widget-title">Blog Categories</h4>
-
-								<ul class="list">
-									<li><a href="#">All about clothing</a></li>
-									<li><a href="#">Make-up &amp; beauty</a></li>
-									<li><a href="#">Accessories</a></li>
-									<li><a href="#">Fashion trends</a></li>
-									<li><a href="#">Haircuts &amp; hairstyles</a></li>
-								</ul>
-							</div><!-- End .widget -->
-
-							<div class="widget">
-								<h4 class="widget-title">Recent Posts</h4>
-
-								<ul class="simple-post-list">
-									<li>
-										<div class="post-media">
-											<a href="single.html">
-												<img src="{{URL::asset('assets/images/blog/widget/post-1.jpg')}}" alt="Post">
-											</a>
-										</div><!-- End .post-media -->
-										<div class="post-info">
-											<a href="single.html">Post Format - Video</a>
-											<div class="post-meta">
-												April 08, 2018
-											</div><!-- End .post-meta -->
-										</div><!-- End .post-info -->
-									</li>
-
-									<li>
-										<div class="post-media">
-											<a href="single.html">
-												<img src="{{URL::asset('assets/images/blog/widget/post-2.jpg')}}" alt="Post">
-											</a>
-										</div><!-- End .post-media -->
-										<div class="post-info">
-											<a href="single.html">Post Format - Image</a>
-											<div class="post-meta">
-												March 23, 2016
-											</div><!-- End .post-meta -->
-										</div><!-- End .post-info -->
-									</li>
-								</ul>
-							</div><!-- End .widget -->
-
-							<div class="widget">
-								<h4 class="widget-title">Tagcloud</h4>
-
-								<div class="tagcloud">
-									<a href="#">Fashion</a>
-									<a href="#">Shoes</a>
-									<a href="#">Skirts</a>
-									<a href="#">Dresses</a>
-									<a href="#">Bags</a>
-								</div><!-- End .tagcloud -->
-							</div><!-- End .widget -->
-
-							<div class="widget">
-								<h4 class="widget-title">Archive</h4>
-
-								<ul class="list">
-									<li><a href="#">April 2018</a></li>
-									<li><a href="#">March 2018</a></li>
-									<li><a href="#">February 2018</a></li>
-								</ul>
-							</div><!-- End .widget -->
-
-							<div class="widget widget_compare">
-								<h4 class="widget-title">Compare Products</h4>
-
-								<p>You have no items to compare.</p>
-							</div><!-- End .widget -->
-						</div><!-- End .sidebar-wrapper -->
-					</aside><!-- End .col-lg-3 -->
+					
 				</div><!-- End .row -->
 			</div><!-- End .container -->
 		</main><!-- End .main -->

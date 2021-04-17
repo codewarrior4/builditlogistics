@@ -28,4 +28,10 @@ class About extends Controller
          return redirect()->to('/admin/about')->with('msg','About us page updated',compact('about'));
     }
 
+    public function about()
+    {
+        $about = Aboutus::all()->first();
+        return view('main.about',compact('about'));
+    }
+
 }
