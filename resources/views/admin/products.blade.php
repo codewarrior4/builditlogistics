@@ -63,7 +63,7 @@
                                         <td>{{$product->name}}</td>
                                         <td><img src="/uploads/{{$product->banner}}" width="70" height="70" alt=""></td>
                                         <td>{{$product->title}}</td>
-                                        <td><a href="/admin/products/1" class="btn btn-outline-primary">View</a></td>
+                                        <td><a href="/admin/products/{{$product->pid}}" class="btn btn-outline-primary">View</a></td>
                                     </tr>
                                 @endforeach
                                     

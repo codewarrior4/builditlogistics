@@ -1,3 +1,11 @@
+<?php
+	use App\Http\Controllers\Main;
+	$details =Main::index();
+	$categories =  $details['categories'];
+	$socials = $details['socials'];
+
+?>
+
 <header class="header">
 			<div class="header-top">
 				<div class="container">
@@ -21,16 +29,14 @@
 							</div><!-- End .header-menu -->
 						</div><!-- End .header-dropown -->
 
-						
-
-
 
 						<span class="separator"></span>
 
 						<div class="social-icons">
-							<a href="#" class="social-icon social-facebook icon-facebook" target="_blank"></a>
-							<a href="#" class="social-icon social-twitter icon-twitter" target="_blank"></a>
-							<a href="#" class="social-icon social-instagram icon-instagram" target="_blank"></a>
+							<a href="{{$socials->facebook}}" target="_blank" class="social-icon social-facebook icon-facebook" ></a>
+							<a href="{{$socials->twitter}}" target="_blank" class="social-icon social-twitter icon-twitter" ></a>
+							<a href="{{$socials->instagram}}" target="_blank" class="social-icon social-instagram icon-instagram" ></a>
+							<a href="{{$socials->linkedin}}" target="_blank" class="social-icon social-facebook"><span class="fab fa-linkedin"></span></a>
 						</div><!-- End .social-icons -->
 					</div><!-- End .header-right -->
 				</div><!-- End .container -->
@@ -42,7 +48,7 @@
 						<button class="mobile-menu-toggler text-primary mr-2" type="button">
 							<i class="icon-menu"></i>
 						</button>
-						<a href="index.html" class="logo">
+						<a href="/" class="logo">
 							<img src="{{URL::asset('assets/images/logo.png')}}" alt="Porto Logo">
 						</a>
 					</div><!-- End .header-left -->
@@ -55,14 +61,11 @@
 									<input type="search" class="form-control" name="q" id="q" placeholder="Search..." required="">
 									<div class="select-custom">
 										<select id="cat" name="cat">
-											<option value="">All Categories</option>
-											<option value="4">Fashion</option>
-											<option value="12">- Women</option>
-											<option value="13">- Men</option>
-											<option value="66">- Jewellery</option>
-											<option value="67">- Kids Fashion</option>
-											<option value="5">Electronics</option>
-											<option value="21">- Smart TVs</option>
+										<option value="">All Categories</option>
+											@foreach ($categories as $category)
+												<option value="{{$category->id}}">{{$category->title}}</option>
+											@endforeach
+											
 										</select>
 									</div><!-- End .select-custom -->
 									<button class="btn icon-search-3 p-0" type="submit"></button>
@@ -206,9 +209,9 @@
 										<div class="col-lg-4">
 											<a href="#" class="nolink"></a>
 											<ul class="submenu">
-												<li><a href="/category/sub">Men</a></li>
-												<li><a href="/category/sub">Women</a></li>
-												<li><a href="/category/sub">Adult</a></li>
+												@foreach ($categories as $category)
+													<li><a style="text-decoration:none" href="/category/{{$category->id}}">{{$category->title}}</a></li>
+												@endforeach
 											</ul>
 										</div>
 									</div>

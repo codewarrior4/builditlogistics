@@ -27,6 +27,7 @@
                             <input type="text" name="firstname" class="form-control" placeholder="Firstname" required>
 							<input type="text" name="lastname" class="form-control" placeholder="Lastname" required>
                             <input type="text" name="phone" class="form-control" maxlength="12" placeholder="Phone number" required>
+							<input type="text" name="state" class="form-control" placeholder="state" required>
 							<input type="text" name="city" class="form-control" placeholder="city" required>
                             <input type="text" maxlength="6" name="zip" class="form-control" placeholder="Zip code" required>
 							<input type="text" name="address" class="form-control" placeholder="Address" required>

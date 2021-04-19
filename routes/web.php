@@ -9,11 +9,13 @@ use App\Http\Controllers\Blog;
 use App\Http\Controllers\Category;
 use App\Http\Controllers\Subcategory;
 use App\Http\Controllers\About;
+use App\Http\Controllers\Main;
 use App\Http\Controllers\Social;
 use App\Http\Controllers\Tacs;
 use App\Http\Controllers\store;
 use App\Http\Controllers\Product;
 use App\Http\Controllers\user;
+use App\Http\Controllers\Subscriber;
 
 
 
@@ -45,7 +47,9 @@ Route::group(['prefix'=>'/admin','middleware'=>'admin'], function(){
     Route::view('/','admin.index');
     Route::view('/index','admin.index');
     // customer
-    Route::view('/customers','admin.customers');
+    Route::get('/customers',[user::class,'customers']);
+    Route::get('/customer/{id}',[user::class,'customer']);
+    Route::post('/customer',[user::class,'customerStatus']);
 
     // faq
     Route::get('/faq',[faq::class,'create']);
@@ -101,7 +105,7 @@ Route::group(['prefix'=>'/admin','middleware'=>'admin'], function(){
 
 
     //Subscribers
-    Route::view('/subscribers','admin.subscribers');
+    Route::get('/subscribers',[Subscriber::class,'index']);
 
     //profile
     Route::view('/login','admin.login');
@@ -110,28 +114,34 @@ Route::group(['prefix'=>'/admin','middleware'=>'admin'], function(){
     Route::view('/order/{id}','admin.orderdetails');
 
    
-
 });
 
+Route::get('/',[Main::class,'homepage']);
 
 Route::get('/email',[Email::class,'index']);
-Route::view('/','main.index');
+Route::get('/category/{id}',[Main::class,'category']);
+Route::get('/category/sub/{id}',[Main::class,'subcategory']);
+Route::view('/categories/{type}','main.categories');
+Route::view('/categories/{cat}/{query}','main.categories');
+
+Route::get('/products',[Product::class,'allproducts']);
+Route::get('/product/{id}',[Product::class,'singleproducts']);
+Route::get('/details',[Main::class,'index']);
 Route::get('/about',[About::class,'about']);
 Route::get('/tac',[Tacs::class,'tac']);
 Route::view('/contact','main.contact');
 Route::get('/blog',[Blog::class,'blog']);
 Route::get('/blog/{id}',[Blog::class,'blogdetails']);
-Route::view('/products','main.products');
-Route::view('/product/{id}','main.productdetails');
+Route::get('/faq',[Faq::class,'faq']);
+Route::get('/stores',[store::class,'stores']);
+
 Route::view('/cart','main.cart');
 Route::view('/checkout','main.checkout');
 Route::view('/wishlist','main.wishlist');
-Route::get('/faq',[Faq::class,'faq']);
-Route::get('/stores',[store::class,'stores']);
-Route::view('/category','main.category');
-Route::view('/category/sub','main.categorysub');
-Route::view('/categories/{type}','main.categories');
-Route::view('/categories/{cat}/{query}','main.categories');
+
+
+
+Route::post('/subscriber',[Subscriber::class,'store'])->name('password');
 
 
 

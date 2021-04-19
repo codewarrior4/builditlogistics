@@ -59,7 +59,7 @@
 
                             </div>
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-4">
                                     <div class="form-group">
                                         <label for="my-input">Category</label>
                                         <select required name="category" class="default_sel mb_30 w-100" style="display: none;">
@@ -69,7 +69,7 @@
                                         </select>
                                      </div>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-4">
                                     <div class="form-group">
                                         <label for="my-input">Sub Category</label>
                                         <select required name="sub_category" class="default_sel mb_30 w-100" style="display: none;">
@@ -78,6 +78,12 @@
                                             @endforeach
                                            
                                         </select>
+                                     </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="my-input">Percentage %</label>
+                                        <input required type="number" min="5" name="percentage" id="" class="form-control">
                                      </div>
                                 </div>
                             </div>

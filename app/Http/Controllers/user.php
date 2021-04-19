@@ -18,10 +18,28 @@ class user extends Controller
      */
     public function index()
     {
-        return redirect('user/register');
+        return view('user.register');
     }
 
-  
+    public function customers()
+    {
+        $customers = Users::latest()->get();
+        return view('admin.customers',compact('customers'));
+    }
+    public function customer($id)
+    {
+        $customer = Users::find($id);
+        return view('admin.customer',compact('customer'));
+    }
+
+    public function customerStatus(Request $request)
+    {
+        $user = Users::find($request->id);
+        $user->status = $request->status;
+        $user->save();
+        return redirect('/admin/customer/'.$request->id )->with('msg','Account Status changed');
+
+    }
 
     /**
      * Store a newly created resource in storage.

@@ -7,13 +7,13 @@
 
 	<title>Build it Logistics - @yield('title')</title>
 
-	<meta name="keywords" content="HTML5 Template" />
-	<meta name="description" content="Porto - Bootstrap eCommerce Template">
-	<meta name="author" content="SW-THEMES">
+	<meta name="keywords" content="Build IT Logistics" />
+	<meta name="description" content="Build IT Logistics">
+	<meta name="author" content="Adebayo Mayowa">
 
 	<!-- Favicon -->
-	<link rel="icon" type="image/x-icon" href="{{URL::asset('assets/images/icons/favicon.ico')}}">
-
+	<link rel="icon" type="image/x-icon" href="{{URL::asset('assets/images/logo-black.png')}}">
+	<script src="{{URL::asset('assets/js/jquery.min.js')}}"></script>
 	<script type="text/javascript">
 		WebFontConfig = {
 			google: { families: [ 'Open+Sans:300,400,600,700,800','Poppins:300,400,500,600,700,800' ] }
@@ -99,7 +99,7 @@
 		</div><!-- End .mobile-menu-wrapper -->
 	</div><!-- End .mobile-menu-container -->
 
-	<div class="newsletter-popup mfp-hide bg-img" id="newsletter-popup-form" style="background: #f1f1f1 no-repeat center/cover url({{URL::asset('assets/images/newsletter_popup_bg.jpg')}})">
+	<!-- <div class="newsletter-popup mfp-hide bg-img" id="newsletter-popup-form" style="background: #f1f1f1 no-repeat center/cover url({{URL::asset('assets/images/newsletter_popup_bg.jpg')}})">
 		<div class="newsletter-popup-content">
 			<img src="{{URL::asset('assets/images/logo-black.png')}}" width="100" height="100" alt="Logo" class="logo-newsletter">
 			<h2>BE THE FIRST TO KNOW</h2>
@@ -108,7 +108,7 @@
 				<div class="input-group">
 					<input type="email" class="form-control" id="newsletter-email" name="newsletter-email" placeholder="Email Address" required>
 					<input type="submit" class="btn" value="Go!">
-				</div><!-- End .from-group -->
+				</div>
 			</form>
 			<div class="newsletter-subscribe">
 				<div class="checkbox">
@@ -118,8 +118,8 @@
 					</label>
 				</div>
 			</div>
-		</div><!-- End .newsletter-popup-content -->
-	</div>
+		</div>
+	</div> -->
 
 	<!-- Add Cart Modal -->
 	<div class="modal fade" id="addCartModal" tabindex="-1" role="dialog" aria-labelledby="addCartModal" aria-hidden="true">
@@ -141,7 +141,7 @@
 	<a id="scroll-top" href="#top" title="Top" role="button"><i class="icon-angle-up"></i></a>
 
 	<!-- Plugins JS File -->
-	<script src="{{URL::asset('assets/js/jquery.min.js')}}"></script>
+	
 	<script src="{{URL::asset('assets/js/bootstrap.bundle.min.js')}}"></script>
 	<script src="{{URL::asset('assets/js/plugins.min.js')}}"></script>
 	<script src="{{URL::asset('assets/js/map.js')}}"></script>

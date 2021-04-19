@@ -52,6 +52,7 @@ class Product extends Controller
         $product->price= $request->price;
         $product->compare_price= $request->compare_price;
         $product->description= $request->description;
+        $product->percentage= $request->percentage;
         $banner = date('Y-m-d-H-i-s').'.'.$request->banner->extension();
         $request->banner->move(public_path('uploads'),$banner);
         $product->banner = $banner;
@@ -74,8 +75,8 @@ class Product extends Controller
         ->select('products.*','categorys.title','categorys.id','subcategory.name')
         ->get();
 
-        session()->flash('msg','New Product has been Added');
-        return view('admin.products',compact('products'));
+        return redirect()->to('admin/products/')->with('msg','New Product has been Added',compact('products'));
+
     }
 
     /**
@@ -107,6 +108,7 @@ class Product extends Controller
         $product->pname = $request->name;
         $product->description = $request->description;
         $product->price = $request->price;
+        $product->percentage = $request->percentage;
         $product->compare_price = $request->compare_price;
         $product->category = $request->category;
         $product->sub_category = $request->sub_category;
@@ -121,9 +123,7 @@ class Product extends Controller
         ->where('pid','=',$request->pid)
         ->first();
 
-        
-        return view('admin.productdetails',compact('products','cat','sub'));
-        session()->flash('msg','Product Details has been Updated');
+        return redirect()->to('admin/products/'.$request->pid)->with('msg','Product Details has been Updated',compact('products','cat','sub'));
 
 
     }
@@ -141,5 +141,21 @@ class Product extends Controller
         ->get();
         session()->flash('msg','Product has been Deleted');
         return view('admin.products',compact('products'));
+    }
+
+    public function singleproducts($id)
+    {
+        $product = Products::find($id);
+        $views= $product->views;
+        $product->views =$views +1;
+        $product->save();
+        $product = Products::find($id);
+        return view('main.productdetails',compact('product'));
+    }
+
+    public function allproducts()
+    {
+        $products= Products::orderBy('pid','desc')->paginate(15);
+        return view('main.products',compact('products'));
     }
 }

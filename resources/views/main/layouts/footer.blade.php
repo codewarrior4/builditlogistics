@@ -1,3 +1,10 @@
+<?php
+	use App\Http\Controllers\Main;
+	$details =Main::index();
+
+	$socials = $details['socials'];
+
+?>
 <footer class="footer">
 			<div class="footer-middle">
 				<div class="container">
@@ -21,9 +28,10 @@
 									</li>
 								</ul>
 								<div class="social-icons">
-									<a href="#" class="social-icon social-facebook icon-facebook" target="_blank" title="Facebook"></a>
-									<a href="#" class="social-icon social-twitter icon-twitter" target="_blank" title="Twitter"></a>
-									<a href="#" class="social-icon social-instagram icon-instagram" target="_blank" title="Instagram"></a>
+									<a href="{{$socials->facebook}}" target="_blank" class="social-icon social-facebook icon-facebook" ></a>
+									<a href="{{$socials->twitter}}" target="_blank" class="social-icon social-twitter icon-twitter" ></a>
+									<a href="{{$socials->instagram}}" target="_blank" class="social-icon social-instagram icon-instagram" ></a>
+									<a href="{{$socials->linkedin}}" target="_blank" class="social-icon social-facebook"><span class="fab fa-linkedin"></span></a>
 								</div><!-- End .social-icons -->
 							</div><!-- End .widget -->
 						</div><!-- End .col-lg-3 -->
@@ -37,11 +45,20 @@
 									</div><!-- End .col-lg-6 -->
 
 									<div class="col-lg-6">
-										<form action="#" class="d-flex mb-0 w-100">
-											<input type="email" class="form-control mb-0" placeholder="Email address" required="">
-
-											<input type="submit" class="btn btn-primary shadow-none ls-10" value="Subscribe">
+										<form id="form" class="d-flex mb-0 w-100">
+											<input type="email" class="form-control mb-0" name="email" placeholder="Email address" required="">
+											@csrf
+											<input type="submit" name="submit" class="btn btn-primary shadow-none ls-10" value="Subscribe">
 										</form>
+										<div class="row">
+                                        <div class="alert alert-primary alert-dismissible fade show print-error-msg" style="display:none">
+                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                                <span class="sr-only">Close</span>
+                                            </button>
+                                            <ul></ul>
+                                        </div>
+                                    
 									</div><!-- End .col-lg-6 -->
 								</div><!-- End .row -->
 							</div><!-- End .widget -->
@@ -97,3 +114,41 @@
 				</div><!-- End .container -->
 			</div><!-- End .footer-bottom -->
 		</footer>
+		
+		<script type="text/javascript">
+            $(document).ready(function() {
+                $("#form").submit(function(e){
+                    e.preventDefault();
+					$("input[name='submit']").attr("disabled","disabled")
+					$("input[name='submit']").prop("value","Subscribing")
+                    var _token = $("input[name='_token']").val();
+                    var email = $("input[name='email']").val();
+                    $.ajax({
+                        url: "/subscriber",
+                        type:'POST',
+                        data: {'_token':_token,'email': email},
+                        success: function(data) {
+        
+                            if($.isEmptyObject(data.error)){
+                                printErrorMsg(data.success);
+                            }else{
+                                printErrorMsg(data.error);
+                            }
+                            $("input[name='email']").val("");
+							$("input[name='submit']").removeAttr("disabled")
+							$("input[name='submit']").prop("value","Subscribe")
+                        }
+
+                    })   
+                    function printErrorMsg (msg) {
+                        $(".print-error-msg").find("ul").html('');
+                        $(".print-error-msg").css('display','block');
+                        $.each( msg, function( key, value ) {
+                            $(".print-error-msg").find("ul").append('<li><b>'+value+'</b></li>');
+                        });
+                    }
+
+                
+                });
+            })
+        </script>

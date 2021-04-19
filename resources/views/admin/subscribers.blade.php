@@ -47,29 +47,14 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mayowa</td>
-                                        <td>Mayowa</td>
+                                   @foreach ($subscribers as $count => $subscriber)
+                                   <tr>
+                                        <th scope="row">{{$count +1}}</th>
+                                        <td>{{$subscriber->email}}</td>
+                                        <td>{{$subscriber->created_at}}</td>
                                     </tr>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mayowa</td>
-                                        <td>Mayowa</td>
-                                        
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mayowa</td>
-                                        <td>Mayowa</td>
-                                        
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mayowa</td>
-                                        <td>Mayowa</td>
-                                        
-                                    </tr>
+                                   @endforeach
+                                    
                                 </tbody>
                             </table>
                         </div>

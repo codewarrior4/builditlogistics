@@ -12,7 +12,15 @@
                     <div class="sidebar_icon d-lg-none">
                         <i class="ti-menu"></i>
                     </div>
-                    
+                    @if (session('msg'))
+                        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            <span class="sr-only">Close</span>
+                        </button>
+                        <strong>{{session('msg')}}</strong>
+                    </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -25,7 +33,7 @@
                     <div class="white_box mb_30">
                         <div class="box_header ">
                             <div class="main-title">
-                                <h3 class="mb-0" >Add Product</h3>
+                                <h3 class="mb-0" >Update Product</h3>
                             </div>
                         </div>
                         <form enctype="multipart/form-data" action="/admin/product/update" method="post">
@@ -60,7 +68,7 @@
 
                             </div>
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-4">
                                     <div class="form-group">
                                         <label for="my-input">Category</label>
                                         <select required name="category" class="default_sel mb_30 w-100" style="display: none;">
@@ -75,13 +83,13 @@
                                         </select>
                                      </div>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-4">
                                     <div class="form-group">
                                         <label for="my-input">Sub Category</label>
                                         <select required name="sub_category" class="default_sel mb_30 w-100" style="display: none;">
                                             @foreach ($sub as $subs)
                                                 @if($products->sub_category == $subs->id)
-                                                 <option selected value="{{$products->category}}" >{{$products->name}}</option>
+                                                 <option selected value="{{$products->sub_category}}" >{{$products->name}}</option>
                                                 @else
                                                 <option value="{{$subs->id}}" >{{$subs->name}}</option>
                                                 @endif
@@ -89,6 +97,12 @@
                                            
                                         </select>
                                      </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="exampleFormControlSelect1">Percentage</label>
+                                        <input required type="number" min="5" class="form-control" value="{{$products->percentage}}" name="percentage" id="">
+                                    </div> 
                                 </div>
                             </div>
                             <input type="hidden" name="pid" value="{{$products->pid}}">
