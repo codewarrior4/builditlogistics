@@ -27,15 +27,15 @@
 										<div class="col-md-6">
 											<div class="form-group required-field">
 												<label for="acc-name">Address 1</label>
-												<input type="text" class="form-control" id="acc-name" name="acc-name" required>
+												<input type="text" class="form-control" id="acc-name" name="address1" required>
 											</div><!-- End .form-group -->
 										</div><!-- End .col-md-4 -->
 
 
 										<div class="col-md-6">
-											<div class="form-group required-field">
-												<label for="acc-lastname">Address 2</label>
-												<input type="text" class="form-control" id="acc-lastname" name="acc-lastname" required>
+											<div class="form-group ">
+												<label for="acc-lastname">Address 2 <em>(optional)</em></label>
+												<input type="text" class="form-control" id="acc-lastname" name="address2" >
 											</div><!-- End .form-group -->
 										</div><!-- End .col-md-4 -->
 
@@ -43,13 +43,7 @@
 										<div class="col-md-6">
 											<div class="form-group required-field">
 												<label for="acc-lastname">Country</label>
-												<input type="text" class="form-control" id="acc-lastname" name="acc-lastname" required>
-											</div><!-- End .form-group -->
-										</div><!-- End .col-md-4 -->
-                                        <div class="col-md-6">
-											<div class="form-group required-field">
-												<label for="acc-name">Zip Code</label>
-												<input type="text" class="form-control" id="acc-name" name="acc-name" required>
+												<input type="text" class="form-control" id="acc-lastname" name="country" required>
 											</div><!-- End .form-group -->
 										</div><!-- End .col-md-4 -->
 
@@ -57,13 +51,13 @@
 										<div class="col-md-6">
 											<div class="form-group required-field">
 												<label for="acc-lastname">City</label>
-												<input type="text" class="form-control" id="acc-lastname" name="acc-lastname" required>
+												<input type="text" class="form-control" id="acc-lastname" name="city" required>
 											</div><!-- End .form-group -->
 										</div><!-- End .col-md-4 -->
                                         <div class="col-md-6">
 											<div class="form-group required-field">
 												<label for="acc-name">Email</label>
-												<input type="text" class="form-control"  id="acc-name" name="acc-name" required>
+												<input type="text" class="form-control"  id="acc-name" name="email" required>
 											</div><!-- End .form-group -->
 										</div><!-- End .col-md-4 -->
 
@@ -71,7 +65,7 @@
 										<div class="col-md-6">
 											<div class="form-group required-field">
 												<label for="acc-lastname">Phone</label>
-												<input type="text" class="form-control" id="acc-lastname" name="acc-lastname" required>
+												<input type="text" class="form-control" id="acc-lastname" name="phone" required>
 											</div><!-- End .form-group -->
 										</div><!-- End .col-md-4 -->
 									</div><!-- End .row -->
@@ -80,14 +74,8 @@
 
 							<div class="mb-2"></div><!-- margin -->
 
-							<div class="custom-control custom-checkbox">
-								<input type="checkbox" class="custom-control-input" id="change-pass-checkbox" value="1">
-								<label class="custom-control-label" for="change-pass-checkbox">Change Password</label>
-							</div><!-- End .custom-checkbox -->
-
 							
 							<div class="form-footer">
-								<a href="#"><i class="icon-angle-double-left"></i>Back</a>
 
 								<div class="form-footer-right">
 									<button type="submit" class="btn btn-primary">Save</button>
@@ -104,15 +92,15 @@
 										<div class="col-md-6">
 											<div class="form-group required-field">
 												<label for="acc-name">Address 1</label>
-												<input type="text" class="form-control" id="acc-name" name="acc-name" required>
+												<input type="text" class="form-control" id="acc-name" name="address1" required>
 											</div><!-- End .form-group -->
 										</div><!-- End .col-md-4 -->
 
 
 										<div class="col-md-6">
-											<div class="form-group required-field">
-												<label for="acc-lastname">Address 2</label>
-												<input type="text" class="form-control" id="acc-lastname" name="acc-lastname" required>
+											<div class="form-group ">
+												<label for="acc-lastname">Address 2 <em>(optional)</em></label>
+												<input type="text" class="form-control" id="acc-lastname" name="address2" >
 											</div><!-- End .form-group -->
 										</div><!-- End .col-md-4 -->
 
@@ -120,13 +108,7 @@
 										<div class="col-md-6">
 											<div class="form-group required-field">
 												<label for="acc-lastname">Country</label>
-												<input type="text" class="form-control" id="acc-lastname" name="acc-lastname" required>
-											</div><!-- End .form-group -->
-										</div><!-- End .col-md-4 -->
-                                        <div class="col-md-6">
-											<div class="form-group required-field">
-												<label for="acc-name">Zip Code</label>
-												<input type="text" class="form-control" id="acc-name" name="acc-name" required>
+												<input type="text" class="form-control" id="acc-lastname" name="country" required>
 											</div><!-- End .form-group -->
 										</div><!-- End .col-md-4 -->
 
@@ -134,13 +116,13 @@
 										<div class="col-md-6">
 											<div class="form-group required-field">
 												<label for="acc-lastname">City</label>
-												<input type="text" class="form-control" id="acc-lastname" name="acc-lastname" required>
+												<input type="text" class="form-control" id="acc-lastname" name="city" required>
 											</div><!-- End .form-group -->
 										</div><!-- End .col-md-4 -->
                                         <div class="col-md-6">
 											<div class="form-group required-field">
 												<label for="acc-name">Email</label>
-												<input type="text" class="form-control"  id="acc-name" name="acc-name" required>
+												<input type="text" class="form-control"  id="acc-name" name="email" required>
 											</div><!-- End .form-group -->
 										</div><!-- End .col-md-4 -->
 
@@ -148,7 +130,7 @@
 										<div class="col-md-6">
 											<div class="form-group required-field">
 												<label for="acc-lastname">Phone</label>
-												<input type="text" class="form-control" id="acc-lastname" name="acc-lastname" required>
+												<input type="text" class="form-control" id="acc-lastname" name="phone" required>
 											</div><!-- End .form-group -->
 										</div><!-- End .col-md-4 -->
 									</div><!-- End .row -->
@@ -157,14 +139,8 @@
 
 							<div class="mb-2"></div><!-- margin -->
 
-							<div class="custom-control custom-checkbox">
-								<input type="checkbox" class="custom-control-input" id="change-pass-checkbox" value="1">
-								<label class="custom-control-label" for="change-pass-checkbox">Change Password</label>
-							</div><!-- End .custom-checkbox -->
-
 							
 							<div class="form-footer">
-								<a href="#"><i class="icon-angle-double-left"></i>Back</a>
 
 								<div class="form-footer-right">
 									<button type="submit" class="btn btn-primary">Save</button>
@@ -178,11 +154,9 @@
 							<h3 class="widget-title">My Account</h3>
 
 							<ul class="list">
-								<li class="active"><a href="index">Account Dashboard</a></li>
-								<li><a href="billing">Billing And Shipping</a></li> 
+								<li ><a href="index">Account Dashboard</a></li>
+								<li class="active"><a href="billing">Billing And Shipping</a></li> 
 								<li><a href="orders">My Orders</a></li>
-								<li><a href="wishlist">My Wishlist</a></li>
-								<li><a href="cart">My Cart</a></li>
 							</ul>
 						</div><!-- End .widget -->
 					</aside><!-- End .col-lg-3 -->

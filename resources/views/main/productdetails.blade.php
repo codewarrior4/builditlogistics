@@ -4,6 +4,28 @@
 @endsection
 
 @section('content')
+@if (session('success'))
+<script>
+	Swal.fire({
+		icon: 'success',
+		title: 'Done',
+		text: '{{session("success")}}',
+		footer: '<a href="/cart">View Cart</a>'
+		})
+</script>	
+
+@endif
+
+@if(session('error'))
+<script>
+	Swal.fire({
+		icon: 'info',
+		title: 'Oops!',
+		text: '{{session("error")}}',
+		footer: '<a href="/cart">View Cart</a>'
+		})
+</script>	
+@endif
 <main class="main">
 			<nav aria-label="breadcrumb" class="breadcrumb-nav">
 				<div class="container">
@@ -80,13 +102,17 @@
 
 							<hr class="divider">
 
-							<div class="product-action">
-								<div class="product-single-qty">
-									<input class="horizontal-quantity form-control" type="text">
-								</div><!-- End .product-single-qty -->
-
-								<a href="cart.html" class="btn btn-dark add-cart icon-shopping-cart" title="Add to Cart">Add to Cart</a>
-							</div><!-- End .product-action -->
+							<form method="post" action="/cart">
+								<div class="product-action">
+									<div class="product-single-qty">
+										<input class="horizontal-quantity form-control" name="quantity" type="text">
+									</div><!-- End .product-single-qty -->
+									@csrf
+									<input type="hidden" name="pid" value="{{$product->pid}}">
+									<input type="hidden" name="price" value="{{$product->price}}">
+									<button type="submit" class="btn btn-dark add-cart icon-shopping-cart" title="Add to Cart">Add to Cart</button>
+								</div><!-- End .product-action -->
+							</form>
 
 							<hr class="divider mb-1">
 
@@ -101,7 +127,7 @@
 									<a href="#" class="social-icon social-mail icon-mail-alt" target="_blank" title="Mail"></a>
 								</div><!-- End .social-icons -->
 
-								<a href="#" class="add-wishlist" title="Add to Wishlist">Add to Wishlist</a>
+								<a href="/wishlist/{{$product->pid}}/{{$product->price}}" class="add-wishlist" title="Add to Wishlist">Add to Wishlist</a>
 							</div><!-- End .product single-share -->
 						</div><!-- End .product-single-details -->
 					</div><!-- End .row -->

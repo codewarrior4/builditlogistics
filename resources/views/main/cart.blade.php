@@ -4,7 +4,36 @@
 @endsection
 
 @section('content')
+@if (session('success'))
+<script>
+	Swal.fire({
+		icon: 'success',
+		title: 'Done',
+		text: '{{session("success")}}',
+		})
+</script>	
 
+@endif
+@if (session('info'))
+<script>
+	Swal.fire({
+		icon: 'info',
+		title: 'Removed',
+		text: '{{session("info")}}',
+		})
+</script>	
+
+@endif
+@if (session('error'))
+<script>
+	Swal.fire({
+		icon: 'error',
+		title: 'Oops',
+		text: '{{session("error")}}',
+		})
+</script>	
+
+@endif
 <main class="main">
 			<nav aria-label="breadcrumb" class="breadcrumb-nav">
 				<div class="container">
@@ -19,87 +48,60 @@
 				<div class="row">
 					<div class="col-lg-8">
 						<div class="cart-table-container">
-							<table class="table table-cart">
+							<table class="table table-responsive table-cart table-inverse">
 								<thead>
 									<tr>
-										<th class="product-col">Product</th>
-										<th class="price-col">Price</th>
-										<th class="qty-col">Qty</th>
+
+										<th class="col">Name</th>
+										<th class="col">Product</th>
+										<th class="col">Price</th>
+										<th class="col">Qty</th>
 										<th>Subtotal</th>
+										<th></th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr class="product-row">
-										<td class="product-col">
+								@foreach ($carts as $count => $cart)
+									<tr>
+										<td>{{$cart->pname}}</td>
+
+										<td >
 											<figure class="product-image-container">
-												<a href="product.html" class="product-image">
-													<img src="assets/images/products/product-4.jpg" alt="product">
+												<a href="/products/{{$cart->pid}}" class="product-image">
+													<img src="/uploads/{{$cart->banner}}" alt="product">
 												</a>
 											</figure>
-											<h2 class="product-title">
-												<a href="product.html">Men Watch</a>
-											</h2>
+											
 										</td>
-										<td>$17.90</td>
-										<td>
-											<input class="vertical-quantity form-control" type="text">
-										</td>
-										<td>$17.90</td>
+											<td>&#8358;{{$cart->price}}</td>
+											<td>
+												<form action="/cart/update" method="post">
+												<div class="product-single-qty">
+													<input name="quantity" value="{{$cart->quantity}}" class="horizontal-quantity form-control" type="text">
+												</div>
+												<input value="{{$cart->pid}}" name="pid" type="hidden">
+											</td>
+												@csrf
+											<td>&#8358;{{number_format($cart->price * $cart->quantity,2)}}</td>
+											<td><div class="float-left">
+												<a title="Move to Product Wishlist" href="/wishlist/{{$cart->pid}}/{{$cart->price}}" class="btn-move"><i class="fa fa-heart"></i></a>
+												<button type="submit" title="Edit product" style="background: transparent !important; " class="btn btn-move"><span class="sr-only">Edit</span><i class="fa fa-edit"></i></button>
+												</form>
+												<a href="/cart/delete/{{$cart->pid}}" title="Remove product" class="btn btn-remove"><span class="fa fa-trash"></span></a>
+											</div></td>
 									</tr>
-									<tr class="product-action-row">
-										<td colspan="4" class="clearfix">
-											<div class="float-left">
-												<a href="#" class="btn-move">Move to Wishlist</a>
-											</div><!-- End .float-left -->
-
-											<div class="float-right">
-												<a href="#" title="Edit product" class="btn-edit"><span class="sr-only">Edit</span><i class="icon-pencil"></i></a>
-												<a href="#" title="Remove product" class="btn-remove"><span class="sr-only">Remove</span></a>
-											</div><!-- End .float-right -->
-										</td>
-									</tr>
-
-									<tr class="product-row">
-										<td class="product-col">
-											<figure class="product-image-container">
-												<a href="product.html" class="product-image">
-													<img src="assets/images/products/product-3.jpg" alt="product">
-												</a>
-											</figure>
-											<h2 class="product-title">
-												<a href="product.html">Computer Mouse</a>
-											</h2>
-										</td>
-										<td>$8.90</td>
-										<td>
-											<input class="vertical-quantity form-control" type="text">
-										</td>
-										<td>$8.90</td>
-									</tr>
-									<tr class="product-action-row">
-										<td colspan="4" class="clearfix">
-											<div class="float-left">
-												<a href="#" class="btn-move">Move to Wishlist</a>
-											</div><!-- End .float-left -->
-
-											<div class="float-right">
-												<a href="#" title="Edit product" class="btn-edit"><span class="sr-only">Edit</span><i class="icon-pencil"></i></a>
-												<a href="#" title="Remove product" class="btn-remove"><span class="sr-only">Remove</span></a>
-											</div><!-- End .float-right -->
-										</td>
-									</tr>
+									@endforeach
 								</tbody>
 
 								<tfoot>
 									<tr>
 										<td colspan="4" class="clearfix">
 											<div class="float-left">
-												<a href="category.html" class="btn btn-outline-secondary">Continue Shopping</a>
+												<a href="/products" class="btn btn-outline-secondary">Continue Shopping</a>
 											</div><!-- End .float-left -->
 
 											<div class="float-right">
-												<a href="#" class="btn btn-outline-secondary btn-clear-cart">Clear Shopping Cart</a>
-												<a href="#" class="btn btn-outline-secondary btn-update-cart">Update Shopping Cart</a>
+												<a href="/cart/clear" class="btn btn-outline-secondary btn-clear-cart">Clear Shopping Cart</a>
 											</div><!-- End .float-right -->
 										</td>
 									</tr>

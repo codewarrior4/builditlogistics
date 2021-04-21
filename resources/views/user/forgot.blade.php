@@ -21,16 +21,27 @@
 					<p>Please enter your email address below to receive a password reset link.</p>
 				</div><!-- End .heading -->
 
-				<form action="#">
+				<form action="/user/forgot" method="post">
+					@csrf
 					<div class="form-group required-field">
 						<label for="reset-email">Email</label>
-						<input type="email" class="form-control" id="reset-email" name="reset-email" required>
+						<input type="email" class="form-control" id="reset-email" name="email" required>
 					</div><!-- End .form-group -->
 
 					<div class="form-footer">
 						<button type="submit" class="btn btn-primary">Reset My Password</button>
 					</div><!-- End .form-footer -->
+					@if (session('msg'))
+								<div class="alert alert-primary alert-dismissible fade show" role="alert">
+									<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+										<span class="sr-only">Close</span>
+									</button>
+									<strong>{{session('msg')}}</strong>
+								</div>
+							@endif
 				</form>
+
 			</div><!-- End .container -->
 		</main><!-- End .main -->
 @endsection

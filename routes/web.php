@@ -16,6 +16,8 @@ use App\Http\Controllers\store;
 use App\Http\Controllers\Product;
 use App\Http\Controllers\user;
 use App\Http\Controllers\Subscriber;
+use App\Http\Controllers\Cart;
+use App\Http\Controllers\Wishlist;
 
 
 
@@ -24,23 +26,40 @@ Route::group(['prefix'=>'/user'],function()
 {
     Route::view('/login','user.login');
     Route::post('/login',[user::class,'login']);
+    Route::post('/update',[user::class,'update']);
     Route::get('/register',[user::class,'index']);
     Route::post('/register',[user::class,'store']);
     Route::get('/verify/{token}',[user::class,'verify']);
     Route::get('/reverify',[user::class,'resendverification']);
     Route::get('/logout',[user::class,'logout']);
-    
-    
     Route::view('/forgot','user.forgot');
+    Route::get('/forget',function(){ return view('user.forget'); });
+    Route::post('/forgot',[user::class,'forgot']);
+    Route::get('/password/{token}',[user::class,'passview']);
+    Route::post('/changepassword',[user::class,'changepassword']);
+    
+ 
+
     Route::view('/billing','user.billing');
     Route::view('/orders','user.orders');
     Route::view('/index','user.index');
     Route::view('/order/{id}','user.orderdetails');
-    Route::view('/cart','user.cart');
     Route::view('/wishlist','user.wishlist');
 
     // Route::view('/account','user.index');
 });
+
+Route::get('/cart/{pid}/{quantity}/{price}',[Cart::class,'addtocart']);
+Route::post('/cart',[Cart::class,'addCart']);
+Route::get('/cart',[Cart::class,'cartList']);
+Route::get('/cart/delete/{id}',[Cart::class,'remove']);
+Route::get('/cart/clear',[Cart::class,'clearCart']);
+Route::get('/wishlist/{pid}/{price}',[Cart::class,'moveToWishlist']);
+Route::post('/cart/update',[Cart::class,'update']);
+
+Route::get('/wishlist',[wishlist::class,'wishList']);
+Route::get('/wishlist/{pid}/{quantity}/{price}',[Wishlist::class,'moveToCart']);
+
 
 
 Route::group(['prefix'=>'/admin','middleware'=>'admin'], function(){
@@ -116,28 +135,26 @@ Route::group(['prefix'=>'/admin','middleware'=>'admin'], function(){
    
 });
 
-Route::get('/',[Main::class,'homepage']);
+    Route::get('/',[Main::class,'homepage']);
 
-Route::get('/email',[Email::class,'index']);
-Route::get('/category/{id}',[Main::class,'category']);
-Route::get('/category/sub/{id}',[Main::class,'subcategory']);
-Route::view('/categories/{type}','main.categories');
-Route::view('/categories/{cat}/{query}','main.categories');
+    Route::get('/email',[Email::class,'index']);
+    Route::get('/category/{id}',[Main::class,'category']);
+    Route::get('/category/sub/{id}',[Main::class,'subcategory']);
+    Route::view('/categories/{type}','main.categories');
+    Route::view('/categories/{cat}/{query}','main.categories');
 
-Route::get('/products',[Product::class,'allproducts']);
-Route::get('/product/{id}',[Product::class,'singleproducts']);
-Route::get('/details',[Main::class,'index']);
-Route::get('/about',[About::class,'about']);
-Route::get('/tac',[Tacs::class,'tac']);
-Route::view('/contact','main.contact');
-Route::get('/blog',[Blog::class,'blog']);
-Route::get('/blog/{id}',[Blog::class,'blogdetails']);
-Route::get('/faq',[Faq::class,'faq']);
-Route::get('/stores',[store::class,'stores']);
+    Route::get('/products',[Product::class,'allproducts']);
+    Route::get('/product/{id}',[Product::class,'singleproducts']);
+    Route::get('/details',[Main::class,'index']);
+    Route::get('/about',[About::class,'about']);
+    Route::get('/tac',[Tacs::class,'tac']);
+    Route::view('/contact','main.contact');
+    Route::get('/blog',[Blog::class,'blog']);
+    Route::get('/blog/{id}',[Blog::class,'blogdetails']);
+    Route::get('/faq',[Faq::class,'faq']);
+    Route::get('/stores',[store::class,'stores']);
 
-Route::view('/cart','main.cart');
-Route::view('/checkout','main.checkout');
-Route::view('/wishlist','main.wishlist');
+    Route::view('/checkout','main.checkout');
 
 
 

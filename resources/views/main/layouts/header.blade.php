@@ -1,8 +1,14 @@
 <?php
 	use App\Http\Controllers\Main;
+	use App\Http\Controllers\Cart;
 	$details =Main::index();
 	$categories =  $details['categories'];
 	$socials = $details['socials'];
+
+	$cart =Cart::cart();
+	$count =$cart['count'];
+	$sum =$cart['sum'];
+	
 
 ?>
 
@@ -10,7 +16,7 @@
 			<div class="header-top">
 				<div class="container">
 					<div class="header-left d-none d-sm-block">
-						<p class="top-message text-uppercase">FREE Returns. Standard Shipping Orders $99+</p>
+						<p class="top-message text-uppercase">FREE Returns. Standard Shipping Orders &#8358;999+</p>
 					</div><!-- End .header-left -->
 
 					<div class="header-right header-dropdowns ml-0 ml-sm-auto w-sm-100">
@@ -78,79 +84,83 @@
 							<h6 class="pt-1">Call us now<a href="tel:+123 5678 890" class="text-dark font1">+123 5678 890</a></h6>
 						</div>
 
-						<a href="/user/index" class="header-icon pb-md-1  pl-1"><i class="icon-user-2"></i></a>
+						@if (session('user'))
+							<a href="/user/index" class="header-icon pb-md-1  pl-1"><i class="icon-user-2"></i></a>
 
-						<a href="/wishlist" class="header-icon pb-md-1"><i class="icon-wishlist-2"></i></a>
+							<a href="/wishlist" class="header-icon pb-md-1"><i class="icon-wishlist-2"></i></a>
 
-                        <!--  cart details -->
-						<div class="dropdown cart-dropdown">
-							<a href="#" class="dropdown-toggle dropdown-arrow" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
-								<i class="icon-shopping-cart"></i>
-								<span class="cart-count badge-circle">2</span>
-							</a>
+							<!--  cart details -->
+							<div class="dropdown cart-dropdown">
+								<a href="#" class="dropdown-toggle dropdown-arrow" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
+									<i class="icon-shopping-cart"></i>
+									<span class="cart-count badge-circle">{{$count}}</span>
+								</a>
 
-							<div class="dropdown-menu">
-								<div class="dropdownmenu-wrapper">
-									<div class="dropdown-cart-header">
-										<span>2 Items</span>
+								<div class="dropdown-menu">
+									<div class="dropdownmenu-wrapper">
+										<div class="dropdown-cart-header">
+											<span>{{$count}} Items</span>
 
-										<a href="/cart" class="float-right">View Cart</a>
-									</div><!-- End .dropdown-cart-header -->
+											<a href="/cart" class="float-right">View Cart</a>
+										</div><!-- End .dropdown-cart-header -->
 
-									<div class="dropdown-cart-products">
-										<div class="product">
-											<div class="product-details">
-												<h4 class="product-title">
-													<a href="product.html">Woman Ring</a>
-												</h4>
+										{{-- <div class="dropdown-cart-products">
+											<div class="product">
+												<div class="product-details">
+													<h4 class="product-title">
+														<a href="product.html">Woman Ring</a>
+													</h4>
 
-												<span class="cart-product-info">
-													<span class="cart-product-qty">1</span>
-													x $99.00
-												</span>
-											</div><!-- End .product-details -->
+													<span class="cart-product-info">
+														<span class="cart-product-qty">1</span>
+														x $99.00
+													</span>
+												</div><!-- End .product-details -->
 
-											<figure class="product-image-container">
-												<a href="product.html" class="product-image">
-													<img src="{{URL::asset('assets/images/products/cart/product-1.jpg')}}" alt="product" width="80" height="80">
-												</a>
-												<a href="#" class="btn-remove icon-cancel" title="Remove Product"></a>
-											</figure>
-										</div><!-- End .product -->
+												<figure class="product-image-container">
+													<a href="product.html" class="product-image">
+														<img src="{{URL::asset('assets/images/products/cart/product-1.jpg')}}" alt="product" width="80" height="80">
+													</a>
+													<a href="#" class="btn-remove icon-cancel" title="Remove Product"></a>
+												</figure>
+											</div><!-- End .product -->
 
-										<div class="product">
-											<div class="product-details">
-												<h4 class="product-title">
-													<a href="product.html">Woman Necklace</a>
-												</h4>
+											<div class="product">
+												<div class="product-details">
+													<h4 class="product-title">
+														<a href="product.html">Woman Necklace</a>
+													</h4>
 
-												<span class="cart-product-info">
-													<span class="cart-product-qty">1</span>
-													x $35.00
-												</span>
-											</div><!-- End .product-details -->
+													<span class="cart-product-info">
+														<span class="cart-product-qty">1</span>
+														x $35.00
+													</span>
+												</div><!-- End .product-details -->
 
-											<figure class="product-image-container">
-												<a href="product.html" class="product-image">
-													<img src="{{URL::asset('assets/images/products/cart/product-2.jpg')}}" alt="product" width="80" height="80">
-												</a>
-												<a href="#" class="btn-remove icon-cancel" title="Remove Product"></a>
-											</figure>
-										</div><!-- End .product -->
-									</div><!-- End .cart-product -->
+												<figure class="product-image-container">
+													<a href="product.html" class="product-image">
+														<img src="{{URL::asset('assets/images/products/cart/product-2.jpg')}}" alt="product" width="80" height="80">
+													</a>
+													<a href="#" class="btn-remove icon-cancel" title="Remove Product"></a>
+												</figure>
+											</div><!-- End .product -->
+										</div>End .cart-product --}}
 
-									<div class="dropdown-cart-total">
-										<span>Total</span>
+										<div class="dropdown-cart-total">
+											<span>Total</span>
 
-										<span class="cart-total-price float-right">$134.00</span>
-									</div><!-- End .dropdown-cart-total -->
+											<span class="cart-total-price float-right">&#8358; {{number_format($sum,2)}}</span>
+										</div><!-- End .dropdown-cart-total -->
 
-									<div class="dropdown-cart-action">
-										<a href="/checkout" class="btn btn-dark btn-block">Checkout</a>
-									</div><!-- End .dropdown-cart-total -->
-								</div><!-- End .dropdownmenu-wrapper -->
-							</div><!-- End .dropdown-menu -->
-						</div><!-- End .dropdown -->
+										<div class="dropdown-cart-action">
+											<a href="/checkout" class="btn btn-dark btn-block">Checkout</a>
+										</div><!-- End .dropdown-cart-total -->
+									</div><!-- End .dropdownmenu-wrapper -->
+								</div><!-- End .dropdown-menu -->
+							</div><!-- End .dropdown -->
+						@else
+						<a href="/user/register" class="header-icon pb-md-1  pl-1"><i class="fa fa-user-plus"></i><span class="pl-4 font-weight-bold ">Signup/Login</span></a>
+						@endif
                         <!-- end cart details -->
 					</div><!-- End .header-right -->
 				</div><!-- End .container -->
@@ -203,7 +213,7 @@
 						<ul class="menu">
 							<li><a href="/">Home</a></li>
 							<li>
-								<a href="/category">Categories</a>
+								<a href="#">Categories</a>
 								<div class="megamenu megamenu-fixed-width megamenu-3cols">
 									<div class="row">
 										<div class="col-lg-4">

@@ -72,8 +72,6 @@
 								<li><a href="index">Account Dashboard</a></li>
 								<li><a href="billing">Billing And Shipping</a></li> 
 								<li class="active"><a href="orders">My Orders</a></li>
-								<li><a href="wishlist">My Wishlist</a></li>
-								<li><a href="cart">My Cart</a></li>
 							</ul>
 						</div><!-- End .widget -->
 					</aside><!-- End .col-lg-3 -->

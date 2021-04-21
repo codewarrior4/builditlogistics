@@ -5,25 +5,28 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Users;
 use App\Mail\VerifyMail;
+use App\Mail\passwordReset;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
 
 class user extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function index()
     {
         return view('user.register');
     }
 
+    public function billing (Request $request)
+    {
+
+    }
+
     public function customers()
     {
         $customers = Users::latest()->get();
+        
         return view('admin.customers',compact('customers'));
     }
     public function customer($id)
@@ -32,21 +35,55 @@ class user extends Controller
         return view('admin.customer',compact('customer'));
     }
 
+    public function update(Request $request)
+    {
+        $user = Users::find($request->id);
+        $user->remember_token = csrf_token();
+        $user->firstname= $request->firstname;
+        $user->lastname= $request->lastname;
+        $user->address= $request->address;
+        $user->state= $request->state;
+        $user->city= $request->firstname;
+        $user->zip= $request->zip;
+        $user->phone= $request->phone;
+        $user->save();
+        $newuser=Users::find($request->id);
+        $request->session()->put('user',$newuser);
+        return redirect('/user/index/')->with('msg','Profile Update Successful');
+
+    }
+
     public function customerStatus(Request $request)
     {
         $user = Users::find($request->id);
         $user->status = $request->status;
         $user->save();
         return redirect('/admin/customer/'.$request->id )->with('msg','Account Status changed');
-
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    public function changepassword(Request $request)
+    {
+        if($request->new == $request->cnew)
+        {
+            $user = Users::where(['id'=>$request->id])->first();
+            $user->password =Hash::make($request->cnew);
+            $user->save();
+            return redirect('/user/login')->with('msg','Passwords changed successfully');
+        }
+        else
+        {
+            $request->session()->flash('msg','Passswords do match');
+            return back();
+        }
+    }
+
+    public function passview($token)
+    {
+        $user = Users::where(['remember_token'=>$token])->first();
+        return view('user.changePassword',compact('user'));
+    }
+
+
     public function store(Request $request)
     {
         $check = Users::find($request->email);
@@ -76,7 +113,8 @@ class user extends Controller
             return view('user.verify');
     }
 
-    public function verify(Request $request,$token){
+    public function verify(Request $request,$token)
+    {
         $token = $request->token;
         $user = Users::firstWhere('remember_token',$token);
         $user->verified=1;
@@ -84,7 +122,8 @@ class user extends Controller
         return redirect('/user/index')->with('msg','Account Validation Successful');
     }
 
-    public function resendverification(){
+    public function resendverification()
+    {
         
         if(session('user')=='')
         {
@@ -102,6 +141,21 @@ class user extends Controller
         }
         
         
+    }
+
+    public function forgot (Request $request)
+    {
+         $user = Users::where('email',$request->email)->get();
+            if(count($user) ==0)
+            {
+                return redirect('user/forgot')->with('msg','This Email Doesn not exist');
+            }
+            
+            Mail::to($request->email)->send(new passwordReset($user[0]));
+            $user=$user[0];
+            return view('user.forget',compact('user'));
+        
+       
     }
 
     public function logout(){
@@ -140,27 +194,5 @@ class user extends Controller
         }
         
     }
-   
-    public function show($id)
-    {
-        //
-    }
 
-    
-    public function edit($id)
-    {
-        //
-    }
-
- 
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-
-    public function destroy($id)
-    {
-        //
-    }
 }

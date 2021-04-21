@@ -3,7 +3,28 @@
 @section('title') Home page @endsection
 
 @section('content')
-<main class="main">
+@if (session('success'))
+<script>
+	Swal.fire({
+		icon: 'success',
+		title: 'Done',
+		text: '{{session("success")}}',
+		footer: '<a href="/cart">View Cart</a>'
+		})
+</script>	
+
+@endif
+
+@if(session('error'))
+<script>
+	Swal.fire({
+		icon: 'info',
+		title: 'Oops!',
+		text: '{{session("error")}}',
+		footer: '<a href="/cart">View Cart</a>'
+		})
+</script>	
+@endif
 			<main class="main">
 				<div class="container container-not-boxed">
 					<div class="info-boxes-slider owl-carousel owl-theme" data-owl-options="{
@@ -221,7 +242,9 @@
 												<span class="product-label label-sale">{{$product->percentage}}%</span>
 											</div>
 											<div class="btn-icon-group">
-												<button class="btn-icon btn-add-cart" data-toggle="modal" data-target="#addCartModal"><i class="icon-shopping-cart"></i></button>
+												
+													<a href="/cart/{{$product->pid}}/1/{{$product->price}}" class="btn-icon btn-add-cart" ><i class="icon-shopping-cart"></i></a>
+											
 											</div>
 											<a href="/product/{{$product->pid}}" onclick="window.location('/product/{{$product->pid}}')" class="btn-quickview" title="Quick View">Quick View</a>
 										</figure>
@@ -230,7 +253,7 @@
 												<div class="category-list">
 													<a href="/category/{{$product->catgeory}}" class="product-category">category</a>
 												</div>
-												<a href="#" class="btn-icon-wish"><i class="icon-heart"></i></a>
+												<a href="/wishlist/{{$product->pid}}/{{$product->price}}" class="btn-icon-wish"><i class="icon-heart"></i></a>
 											</div>
 											<h3 class="product-title">
 												<a href="/product/{{$product->pid}}">{{$product->pname}}</a>
@@ -254,7 +277,7 @@
 						<a href="/products" class="btn btn-dark btn-md font1 mb-2">View more</a>
 					</div><!-- End .container-box -->
 				</div><!-- End .container -->
-
+				
 				<div class="container container-not-boxed">
 					<div class="banner banner-big-sale mb-5" data-parallax="{'speed': 3.2, 'enableOnMobile': true}" data-image-src="assets/images/banners/banner-4.jpg">
 						<div class="banner-content row align-items-center py-3 mx-0">
@@ -325,6 +348,6 @@
 
 					<!-- <hr class="mt-4 mb-0">  -->
 				</div><!-- End .container-not-boxed -->
-			</main><!-- End .main -->	
-		</main><!-- End .main -->
+			</main><!-- End .main -->
+				
 @endsection

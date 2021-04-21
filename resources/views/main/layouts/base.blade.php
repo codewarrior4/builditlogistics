@@ -14,6 +14,36 @@
 	<!-- Favicon -->
 	<link rel="icon" type="image/x-icon" href="{{URL::asset('assets/images/logo-black.png')}}">
 	<script src="{{URL::asset('assets/js/jquery.min.js')}}"></script>
+	<script src="{{URL::asset('assets/js/sweetalert.js')}}"></script>
+	<style>
+	.table ::-webkit-scrollbar {
+    	width: 8px;
+	}
+	.table::-webkit-scrollbar, body::-webkit-scrollbar {
+    width: 6px;
+	height:4px;
+    background-color: #ddd;
+	
+	}
+	.table::-webkit-scrollbar-thumb, body::-webkit-scrollbar-thumb {
+		background-color: #f8dbdd;
+	}
+
+
+</style>
+<?php
+	use App\Http\Controllers\Main;
+	use App\Http\Controllers\Cart;
+	$details =Main::index();
+	$categories =  $details['categories'];
+	$socials = $details['socials'];
+
+	$cart =Cart::cart();
+	$count =$cart['count'];
+	$sum =$cart['sum'];
+	
+
+?>
 	<script type="text/javascript">
 		WebFontConfig = {
 			google: { families: [ 'Open+Sans:300,400,600,700,800','Poppins:300,400,500,600,700,800' ] }
@@ -35,15 +65,7 @@
 </head>
 
 <div class="page-wrapper">
-  {{--  <div class="top-notice text-white bg-dark">
-        <div class="container text-center">
-            <h5 class="d-inline-block mb-0 mr-1">Get Up to <b>40% OFF</b> New-Season Styles</h5>
-            <a href="category.html" class="category">MEN</a>
-            <a href="category.html" class="category ml-2 mr-2">WOMEN</a>
-            <small class="ml-1">* Limited time only.</small>
-            <button title="Close (Esc)" type="button" class="mfp-close">×</button>
-        </div><!-- End .container -->
-    </div> --}}
+
 
     {{View::make('main.layouts.header')}}
 
@@ -71,9 +93,9 @@
 										<div class="col-lg-4">
 											<a href="#" class="nolink"></a>
 											<ul class="submenu">
-												<li><a href="/category/sub">Men</a></li>
-												<li><a href="/category/sub">Women</a></li>
-												<li><a href="/category/sub">Adult</a></li>
+											@foreach ($categories as $category)
+													<li><a style="text-decoration:none" href="/category/{{$category->id}}">{{$category->title}}</a></li>
+											@endforeach
 											</ul>
 										</div>
 									</div>
@@ -121,28 +143,14 @@
 		</div>
 	</div> -->
 
-	<!-- Add Cart Modal -->
-	<div class="modal fade" id="addCartModal" tabindex="-1" role="dialog" aria-labelledby="addCartModal" aria-hidden="true">
-	  <div class="modal-dialog" role="document">
-		<div class="modal-content">
-		  <div class="modal-body add-cart-box text-center">
-			<p>You've just added this product to the<br>cart:</p>
-			<h4 id="productTitle"></h4>
-			<img src="#" id="productImage" width="100" height="100" alt="adding cart image">
-			<div class="btn-actions">
-				<a href="cart.html"><button class="btn-primary">Go to cart page</button></a>
-				<a href="#"><button class="btn-primary" data-dismiss="modal">Continue</button></a>
-			</div>
-		  </div>
-		</div>
-	  </div>
-	</div>
+
 
 	<a id="scroll-top" href="#top" title="Top" role="button"><i class="icon-angle-up"></i></a>
 
 	<!-- Plugins JS File -->
 	
 	<script src="{{URL::asset('assets/js/bootstrap.bundle.min.js')}}"></script>
+
 	<script src="{{URL::asset('assets/js/plugins.min.js')}}"></script>
 	<script src="{{URL::asset('assets/js/map.js')}}"></script>
 	<script src="{{URL::asset('assets/js/webfont.js')}}"></script>
