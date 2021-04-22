@@ -18,6 +18,7 @@ use App\Http\Controllers\user;
 use App\Http\Controllers\Subscriber;
 use App\Http\Controllers\Cart;
 use App\Http\Controllers\Wishlist;
+use App\Http\Controllers\Information;
 
 
 
@@ -37,10 +38,13 @@ Route::group(['prefix'=>'/user'],function()
     Route::post('/forgot',[user::class,'forgot']);
     Route::get('/password/{token}',[user::class,'passview']);
     Route::post('/changepassword',[user::class,'changepassword']);
-    
+    Route::post('/userpassword',[user::class,'userpassword']);
+    Route::get('/billing',[Information::class,'index']);
+    Route::post('/billing',[Information::class,'billing']);
+    Route::post('/shipping',[Information::class,'shipping']);
  
 
-    Route::view('/billing','user.billing');
+
     Route::view('/orders','user.orders');
     Route::view('/index','user.index');
     Route::view('/order/{id}','user.orderdetails');

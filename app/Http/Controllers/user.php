@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Users;
+use App\Models\Informations;
 use App\Mail\VerifyMail;
 use App\Mail\passwordReset;
 use Illuminate\Support\Facades\Hash;
@@ -18,10 +19,7 @@ class user extends Controller
         return view('user.register');
     }
 
-    public function billing (Request $request)
-    {
-
-    }
+ 
 
     public function customers()
     {
@@ -68,7 +66,27 @@ class user extends Controller
             $user = Users::where(['id'=>$request->id])->first();
             $user->password =Hash::make($request->cnew);
             $user->save();
+            $newuser=Users::find($request->id);
+            $request->session()->put('user',$newuser);
             return redirect('/user/login')->with('msg','Passwords changed successfully');
+        }
+        else
+        {
+            $request->session()->flash('msg','Passswords do match');
+            return back();
+        }
+    }
+    public function userpassword(Request $request)
+    {
+        if($request->new == $request->cnew)
+        {
+            $user = Users::find(session('user')->id)->first();
+            $user->password =Hash::make($request->cnew);
+            $user->save();
+            $newuser=Users::find(session('user')->id);
+            $request->session()->put('user',$newuser);
+            $request->session()->flash('msg','Passswords changed successfully');
+            return back();
         }
         else
         {

@@ -63,7 +63,7 @@
 	<link rel="stylesheet" href="{{URL::asset('assets/css/style.min.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{URL::asset('assets/vendor/fontawesome-free/css/all.min.css')}}">
 </head>
-
+<body oncontextmenu="return true">
 <div class="page-wrapper">
 
 
