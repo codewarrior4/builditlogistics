@@ -64,6 +64,16 @@
 	<link rel="stylesheet" type="text/css" href="{{URL::asset('assets/vendor/fontawesome-free/css/all.min.css')}}">
 </head>
 <body oncontextmenu="return true">
+@if (session('product'))
+<script>
+	Swal.fire({
+		icon: 'error',
+		title: 'Oops',
+		text: '{{session("product")}}',
+		})
+</script>	
+
+@endif
 <div class="page-wrapper">
 
 
@@ -83,11 +93,11 @@
 			<span class="mobile-menu-close"><i class="icon-cancel"></i></span>
 			<nav class="mobile-nav">
 				<ul class="mobile-menu">
-                <li class="active">
+                <li>
 								<a href="/">Home</a>
 							</li>
 							<li>
-								<a href="/category">Categories</a>
+								<a href="#">Categories</a>
 								<div class="megamenu megamenu-fixed-width megamenu-3cols">
 									<div class="row">
 										<div class="col-lg-4">
@@ -106,10 +116,17 @@
 							<li><a href="/blog">Blog</a></li>
 							<li><a href="/about">About Us</a></li>
 							<li><a href="/contact">Contact Us</a></li>
-							<li><a href="/user/index">Account</a></li>
-							<li><a href="/cart">Cart</a></li>
-							<li><a href="/wishlist">wishlist</a></li>
 							<li><a class="px-4" href="#">Special Offer!</a></li>
+							@if (session('user'))
+								<li><a href="/user/index">Account</a></li>
+								<li><a href="/cart">Cart</a></li>
+								<li><a href="/wishlist">wishlist</a></li>
+							@else
+								<li><a href="/user/login">Login</a></li>
+								<li><a href="/user/register">Register</a></li>
+								
+							@endif
+
 				</ul>
 			</nav><!-- End .mobile-nav -->
 
@@ -154,8 +171,6 @@
 	<script src="{{URL::asset('assets/js/plugins.min.js')}}"></script>
 	<script src="{{URL::asset('assets/js/map.js')}}"></script>
 	<script src="{{URL::asset('assets/js/webfont.js')}}"></script>
-
-	<!-- Main JS File -->
 	<script src="{{URL::asset('assets/js/main.min.js')}}"></script>
 </body>
 </html>

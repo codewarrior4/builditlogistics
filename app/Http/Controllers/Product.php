@@ -146,13 +146,23 @@ class Product extends Controller
     public function singleproducts($id)
     {
         $product = Products::find($id);
-        $views= $product->views;
-        $product->views =$views +1;
-        $product->save();
-        $product = Products::find($id);
-        return view('main.productdetails',compact('product'));
-    }
+        if($product ==0)
+        {
+            session()->flash('product','Product Does not exist');
+            $products= Products::orderBy('pid','desc')->paginate(15);
+            return view('main.products',compact('products'));
+        }
+        else
+        {
+            $views= $product->views;
+            $product->views =$views +1;
+            $product->save();
+            $product = Products::find($id);
+            return view('main.productdetails',compact('product'));
+        }
 
+    }
+    
     public function allproducts()
     {
         $products= Products::orderBy('pid','desc')->paginate(15);

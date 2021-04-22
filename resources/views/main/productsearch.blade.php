@@ -1,10 +1,9 @@
 @extends('main.layouts.base')
 @section('title')
-   Sub Category
+    Products Search Result
 @endsection
 
 @section('content')
-
 <main class="main">
 			<div class="container container-not-boxed">
 				<div class="info-boxes-slider owl-carousel owl-theme" data-owl-options="{
@@ -67,79 +66,57 @@
 				<div class="container">
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item"><a href="/"><i class="icon-home"></i></a></li>
-						@if (count($products)==0)
-							
-						@else
-						<li class="breadcrumb-item"><a href="/category/{{$products[0]->category}}">{{$products[0]->title}}</a></li>
-						<li class="breadcrumb-item active" aria-current="page">{{$products[0]->name}}</li>
-						@endif
+						<li class="breadcrumb-item"><a href="#">Product Search</a></li>
 					</ol>
 				</div>
 			</nav>
 
 			<div class="container pb-3">
+				
+
 				<div class="row">
+
 					@if (count($products) == 0)
-					<div class="col-lg-12 main-content">
-						
-						<div class="row">
-						
-								<div class="col-sm-12">
-									<div class="jumbotron jumbotron-fluid">
-										<h1 class="display-4 text-center">No Products Available in this Category</h1>
-										
-										<hr class="my-4">
-										<a  class="d-flex justify-content-center btn btn-primary " href="/products">Continue Shopping</a>
-									</div>
-								</div>
+						<div class="col-sm-12">
+								<div class="jumbotron jumbotron-fluid">
+									<h1 class="display-4 text-center">No Products Available in this Category</h1>
 									
-						</div><!-- End .row -->
-
-					</div><!-- End .col-lg-9 -->
+									<hr class="my-4">
+									<a  class="d-flex justify-content-center btn btn-primary " href="/products">Continue Shopping</a>
+								</div>
+							</div>
+							
 					@else
-					<div class="col-lg-12 main-content">
-						
-						<div class="row">
-						
-							@foreach ($products as $product)
-								<div class="col-sm-12 col-sm-4 col-md-3 col-xl-3">
-									<div class="product-default inner-quickview inner-icon">
-										<figure>
-											<a href="/product/{{$product->pid}}">
-												<img src="/uploads/{{$product->banner}}" style="min-height:170px !important;max-height:170px !important">
-											</a>
-											<a href="/product/{{$product->pid}}" class="btn-quickview" title="View">View</a> 
-										</figure>
-										<div class="product-details">
-											<div class="category-wrap">
-												<div class="category-list">
-													<a href="/category/{{$product->category}}" class="product-category">category</a>
-												</div>
+						@foreach ($products as $product)
+							<div class="col-sm-12 col-sm-4 col-md-3 col-xl-3">
+								<div class="product-default inner-quickview inner-icon">
+									<figure>
+										<a href="/product/{{$product->pid}}">
+											<img src="/uploads/{{$product->banner}}" style="min-height:170px !important;max-height:170px !important">
+										</a>
+										<a href="/product/{{$product->pid}}" class="btn-quickview" title="View">View</a> 
+									</figure>
+									<div class="product-details">
+										<div class="category-wrap">
+											<div class="category-list">
+												<a href="/category/{{$product->category}}" class="product-category">category</a>
 											</div>
-											<h2 class="product-title">
-												<a href="/product/{{$product->pid}}">{{$product->pname}}</a>
-											</h2>
-											<div class="price-box">
-												<span class="old-price">&#8358; {{number_format($product->compare_price,2)}}</span>
-												<span class="product-price">&#8358; {{number_format($product->price,2)}}</span>
-											</div><!-- End .price-box -->
-										</div><!-- End .product-details -->
-									</div>
+										</div>
+										<h2 class="product-title">
+											<a href="/product/{{$product->pid}}">{{$product->pname}}</a>
+										</h2>
+										<div class="price-box">
+											<span class="old-price">&#8358; {{number_format($product->compare_price,2)}}</span>
+											<span class="product-price">&#8358; {{number_format($product->price,2)}}</span>
+										</div><!-- End .price-box -->
+									</div><!-- End .product-details -->
 								</div>
-							@endforeach
-									
-						</div><!-- End .row -->
-
-						{{$products->links('pagination::bootstrap-4')}}
-					</div><!-- End .col-lg-9 -->
+							</div>
+						@endforeach
 					@endif
 
-					<div class="sidebar-overlay"></div>
-					<div class="sidebar-toggle"><i class="fas fa-sliders-h"></i></div>
+
 					
-				</div><!-- End .row -->
-			</div><!-- End .container -->
+				</div>
 		</main><!-- End .main -->
-
-
 @endsection

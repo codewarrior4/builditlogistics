@@ -62,12 +62,13 @@
 					<div class="header-right w-lg-max">
 						<div class="header-icon header-icon header-search header-search-inline header-search-category w-lg-max ml-3 pl-1 pr-xl-5 mr-xl-4">
 							<a href="#" class="search-toggle" role="button"><i class="icon-search-3"></i></a>
-							<form action="/categories/" method="get">
+							<form action="/search" method="post">
 								<div class="header-search-wrapper">
-									<input type="search" class="form-control" name="q" id="q" placeholder="Search..." required="">
+									<input type="text" class="form-control" name="text" id="q" placeholder="Search..." required="">
 									<div class="select-custom">
-										<select id="cat" name="cat">
-										<option value="">All Categories</option>
+									@csrf
+										<select id="cat" name="catid" required>
+										<option value="" disabled selected>All Categories</option>
 											@foreach ($categories as $category)
 												<option value="{{$category->id}}">{{$category->title}}</option>
 											@endforeach
@@ -159,7 +160,8 @@
 								</div><!-- End .dropdown-menu -->
 							</div><!-- End .dropdown -->
 						@else
-						<a href="/user/register" class="header-icon pb-md-1  pl-1"><i class="fa fa-user-plus"></i><span class="pl-4 font-weight-bold ">Signup/Login</span></a>
+						<a href="/user/login" class="header-icon pb-md-1  pl-1"><span class="pl-4 font-weight-bold" style="color:#777">Login</span></a>
+						<a href="/user/register" class="header-icon pb-md-1  pl-1"><span class="pl-4 font-weight-bold"  style="color:#777">Signup</span></a>
 						@endif
                         <!-- end cart details -->
 					</div><!-- End .header-right -->

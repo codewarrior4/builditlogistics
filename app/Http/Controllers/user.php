@@ -177,12 +177,10 @@ class user extends Controller
     }
 
     public function logout(){
-        if(session()->has('user'))
-        {
+        
             session()->pull('user');
             session()->forget('user');
             return redirect('user/login');
-        }
     }
 
     public function login (Request $request)

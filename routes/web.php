@@ -27,26 +27,31 @@ Route::group(['prefix'=>'/user'],function()
 {
     Route::view('/login','user.login');
     Route::post('/login',[user::class,'login']);
-    Route::post('/update',[user::class,'update']);
+    Route::get('/forget',function(){ return view('user.forget'); });
     Route::get('/register',[user::class,'index']);
     Route::post('/register',[user::class,'store']);
-    Route::get('/verify/{token}',[user::class,'verify']);
-    Route::get('/reverify',[user::class,'resendverification']);
-    Route::get('/logout',[user::class,'logout']);
     Route::view('/forgot','user.forgot');
-    Route::get('/forget',function(){ return view('user.forget'); });
     Route::post('/forgot',[user::class,'forgot']);
     Route::get('/password/{token}',[user::class,'passview']);
     Route::post('/changepassword',[user::class,'changepassword']);
-    Route::post('/userpassword',[user::class,'userpassword']);
-    Route::get('/billing',[Information::class,'index']);
-    Route::post('/billing',[Information::class,'billing']);
-    Route::post('/shipping',[Information::class,'shipping']);
+    Route::get('/logout',[user::class,'logout']);
+
+    Route::group(['middleware'=>'user'],function() 
+    {
+        Route::post('/update',[user::class,'update']);
+        Route::get('/verify/{token}',[user::class,'verify']);
+        Route::get('/reverify',[user::class,'resendverification']);
+        Route::post('/userpassword',[user::class,'userpassword']);
+        Route::get('/billing',[Information::class,'index']);
+        Route::post('/billing',[Information::class,'billing']);
+        Route::post('/shipping',[Information::class,'shipping']);
+        Route::view('/index','user.index');
+    });
+
  
 
-
     Route::view('/orders','user.orders');
-    Route::view('/index','user.index');
+
     Route::view('/order/{id}','user.orderdetails');
     Route::view('/wishlist','user.wishlist');
 
@@ -143,6 +148,7 @@ Route::group(['prefix'=>'/admin','middleware'=>'admin'], function(){
 
     Route::get('/email',[Email::class,'index']);
     Route::get('/category/{id}',[Main::class,'category']);
+    Route::post('/search',[Main::class,'search']);
     Route::get('/category/sub/{id}',[Main::class,'subcategory']);
     Route::view('/categories/{type}','main.categories');
     Route::view('/categories/{cat}/{query}','main.categories');

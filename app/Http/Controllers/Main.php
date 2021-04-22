@@ -54,5 +54,13 @@ class Main extends Controller
         return view('main.index',compact('sliders','latest','random','featured'));
     }
 
-    
+    public function search(Request $request)
+    {
+        $text =$request->text;
+        $products =Products::where('category','=',$request->catid)
+                    ->where('pname','LIKE','%'. $text.'%')
+                    ->get();
+        return view('main.productsearch',compact('products'));
+    }
+
 }
