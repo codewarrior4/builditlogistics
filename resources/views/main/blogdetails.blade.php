@@ -52,20 +52,14 @@
 									</h3>
 
 									<div class="social-icons">
-										<a href="#" class="social-icon social-facebook" target="_blank" title="Facebook">
+										<a href="https://www.facebook.com/sharer/sharer.php?u={{url()->full()}}" class="social-icon social-facebook" target="_blank" title="Facebook">
 											<i class="icon-facebook"></i>
 										</a>
-										<a href="#" class="social-icon social-twitter" target="_blank" title="Twitter">
+										<a href="https://twitter.com/intent/tweet?url={{url()->full()}}" class="social-icon social-twitter" target="_blank" title="Twitter">
 											<i class="icon-twitter"></i>
 										</a>
-										<a href="#" class="social-icon social-linkedin" target="_blank" title="Linkedin">
+										<a href="https://www.linkedin.com/shareArticle?mini=true&url={{url()->full()}}" class="social-icon social-linkedin" target="_blank" title="Linkedin">
 											<i class="fab fa-linkedin-in"></i>
-										</a>
-										<a href="#" class="social-icon social-gplus" target="_blank" title="Google +">
-											<i class="fab fa-google-plus-g"></i>
-										</a>
-										<a href="#" class="social-icon social-mail" target="_blank" title="Email">
-											<i class="icon-mail-alt"></i>
 										</a>
 									</div><!-- End .social-icons -->
 								</div><!-- End .post-share -->
@@ -76,39 +70,43 @@
 									<!-- only when logged in  -->
 									<p>Your email address will not be published. Required fields are marked *</p>
 
-									<form action="#">
+									@if (session('user'))
+									<form action="/blog/comment" method="post">
 										<div class="form-group required-field">
 											<label>Comment</label>
-											<textarea cols="30" rows="1" class="form-control" required></textarea>
+											<textarea cols="30" rows="1" name="comment" class="form-control" required></textarea>
 										</div><!-- End .form-group -->
 
-										<div class="form-group required-field">
-											<label>Name</label>
-											<input type="text" class="form-control" required>
-										</div><!-- End .form-group -->
-
-										<div class="form-group required-field">
-											<label>Email</label>
-											<input type="email" class="form-control" required>
-										</div><!-- End .form-group -->
-
-										<div class="form-group">
-											<label>Website</label>
-											<input type="url" class="form-control">
-										</div><!-- End .form-group -->
-
-										<div class="form-group-custom-control mb-3">
-											<div class="custom-control custom-checkbox">
-												<input type="checkbox" class="custom-control-input" id="save-name">
-												<label class="custom-control-label" for="save-name">Save my name, email, and website in this browser for the next time I comment.</label>
-											</div><!-- End .custom-checkbox -->
-										</div><!-- End .form-group-custom-control -->
-
+                                             @csrf
+											 <input type="hidden" name="blogid" value={{$blog->id}}>
+											 
 										<div class="form-footer">
 											<button type="submit" class="btn btn-primary">Post Comment</button>
 										</div><!-- End .form-footer -->
 									</form>
+									@else
+									<p>Login To be able to comment *</p>
+										
+									@endif
 								</div><!-- End .comment-respond -->
+								<h3>Comments ({{count($comments)}})</h3>
+								@foreach ($comments as $comment)
+								<hr>
+								<div class="row">
+									<div class="media">
+										<a class="d-flex" href="#">
+											<img  width="100" height="100" class="img-rounded rounded-circle" src="/assets/images/avatar/avatar1.jpg" alt="">
+										</a>
+										<div class=" ml-5 media-body">
+											<h5>{{$comment->comment}}</h5>
+											<span class="font-weight-bold">{{$comment->firstname  .' '. $comment->lastname}}</span>
+											<br> <br>
+											<span ><i class="icon-calendar pr-3"></i>{{explode(' ',$comment->created_at)[0]}}</span>
+										</div>
+									</div>
+									
+								</div>
+								@endforeach
 							</div><!-- End .post-body -->
 						</article><!-- End .post -->
 

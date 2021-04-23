@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Blogs;
+use App\Models\Comments;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
@@ -55,8 +56,13 @@ class Blog extends Controller
     public function blogdetails($id){
         
         $blog = Blogs::find($id);
-    
-        return view('main.blogdetails',compact('blog'));
+
+        $comments = Comments::where(['blogid'=>$id])
+                    ->join('users','comments.userid','=','users.id' )
+                    ->select('comments.*','users.firstname','users.lastname')
+                    ->get();
+
+        return view('main.blogdetails',compact('blog','comments'));
     }
     public function show($id)
     {
@@ -106,5 +112,16 @@ class Blog extends Controller
             return view('admin.blogs',compact('blogs'));
         }
 
+    }
+
+    public function comment(Request $request)
+    {
+        $comment = new Comments;
+        $comment->blogid =$request->blogid;
+        $comment->comment =$request->comment;
+        $comment->userid =session('user')->id;
+
+        $comment->save();
+        return back();
     }
 }

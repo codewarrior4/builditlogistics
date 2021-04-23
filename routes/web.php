@@ -163,6 +163,8 @@ Route::group(['prefix'=>'/admin','middleware'=>'admin'], function(){
     Route::get('/blog/{id}',[Blog::class,'blogdetails']);
     Route::get('/faq',[Faq::class,'faq']);
     Route::get('/stores',[store::class,'stores']);
+    Route::post('/blog/comment',[Blog::class,'comment']);
+
 
     Route::view('/checkout','main.checkout');
 

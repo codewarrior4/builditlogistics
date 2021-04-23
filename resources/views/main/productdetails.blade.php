@@ -120,11 +120,9 @@
 								<label class="sr-only">Share:</label>
 
 								<div class="social-icons mr-2">
-									<a href="#" class="social-icon social-facebook icon-facebook" target="_blank" title="Facebook"></a>
-									<a href="#" class="social-icon social-twitter icon-twitter" target="_blank" title="Twitter"></a>
-									<a href="#" class="social-icon social-linkedin fab fa-linkedin-in" target="_blank" title="Linkedin"></a>
-									<a href="#" class="social-icon social-gplus fab fa-google-plus-g" target="_blank" title="Google +"></a>
-									<a href="#" class="social-icon social-mail icon-mail-alt" target="_blank" title="Mail"></a>
+									<a href="https://www.facebook.com/sharer/sharer.php?u={{url()->full()}}" class="social-icon social-facebook icon-facebook" target="_blank" title="Facebook"></a>
+									<a href="https://twitter.com/intent/tweet?url={{url()->full()}}" class="social-icon social-twitter icon-twitter" target="_blank" title="Twitter"></a>
+									<a href="https://www.linkedin.com/shareArticle?mini=true&url={{url()->full()}}" class="social-icon social-linkedin fab fa-linkedin-in" target="_blank" title="Linkedin"></a>
 								</div><!-- End .social-icons -->
 
 								<a href="/wishlist/{{$product->pid}}/{{$product->price}}" class="add-wishlist" title="Add to Wishlist">Add to Wishlist</a>
@@ -135,7 +133,7 @@
 
 
 
-				<div class="products-section pt-0">
+				{{-- <div class="products-section pt-0">
 					<h2 class="section-title">Related Products</h2>
 
 					<div class="products-slider owl-carousel owl-theme dots-top">
@@ -155,7 +153,7 @@
 							<div class="product-details">
 								<div class="category-wrap">
 									<div class="category-list">
-										<a href="category.html" class="product-category">category</a>
+										<a href="/category/{{$product->catgeory}}" class="product-category">category</a>
 									</div>
 								</div>
 								<h3 class="product-title">
@@ -372,7 +370,7 @@
 							</div><!-- End .product-details -->
 						</div>
 					</div><!-- End .products-slider -->
-				</div><!-- End .products-section -->
+				</div><!-- End .products-section --> --}}
 			</div><!-- End .container -->
 		</main><!-- End .main -->
 @endsection

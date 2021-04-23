@@ -4,9 +4,11 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Exception;
 
 class Handler extends ExceptionHandler
 {
+   
     /**
      * A list of the exception types that are not reported.
      *
@@ -38,4 +40,19 @@ class Handler extends ExceptionHandler
             //
         });
     }
+    public function render($request, Throwable $e)
+    {
+        if ($this->isHttpException($e)) {
+    
+            $statusCode = $e->getStatusCode();
+    
+            switch ($statusCode) {
+    
+                case '404':
+                    return response()->view('main.error');
+            }
+        }
+        return parent::render($request, $e);
+    }
+    
 }

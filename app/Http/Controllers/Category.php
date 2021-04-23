@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Categorys;
+use App\Models\SubCategorys;
 use Illuminate\Support\Facades\File;
 
 class Category extends Controller
@@ -76,6 +77,11 @@ class Category extends Controller
     public function destroy($id)
     {
         $category = Categorys::find($id);
+        $subcategory =SubCategorys::where(['catid'=>$id])->get();
+        foreach ($subcategory as $subs)
+        {
+            $subs->delete();
+        }
         $photo = $category->photo;
         if(File::exists(public_path('uploads/'.$photo)))
         {

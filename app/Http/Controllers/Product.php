@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Products;
 use App\Models\Categorys;
 use App\Models\SubCategorys;
+use App\Models\Carts;
 use Illuminate\Support\Facades\DB;
 class Product extends Controller
 {
@@ -133,6 +134,11 @@ class Product extends Controller
     {
    
         $product = Products::find($id);
+        $carts = Carts::where(['pid'=>$id])->get();
+        foreach($carts as $cart)
+        {
+            $cart->delete();
+        }
         $product->delete();
         $products = DB::table('products')
         ->join('categorys','products.category','=','categorys.id')
@@ -145,8 +151,9 @@ class Product extends Controller
 
     public function singleproducts($id)
     {
-        $product = Products::find($id);
-        if($product ==0)
+        $product = Products::where(['pid'=>$id])->get();
+        $count = count($product);
+        if($count <1)
         {
             session()->flash('product','Product Does not exist');
             $products= Products::orderBy('pid','desc')->paginate(15);
@@ -154,10 +161,12 @@ class Product extends Controller
         }
         else
         {
+            $product = Products::where(['pid'=>$id])->first();
             $views= $product->views;
             $product->views =$views +1;
             $product->save();
             $product = Products::find($id);
+            $text = $product->pname;
             return view('main.productdetails',compact('product'));
         }
 

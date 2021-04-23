@@ -98,7 +98,13 @@ class user extends Controller
     public function passview($token)
     {
         $user = Users::where(['remember_token'=>$token])->first();
-        return view('user.changePassword',compact('user'));
+        if($user) {
+            return view('user.changePassword',compact('user'));
+        }
+        else{
+            return view('main.expired');
+        }
+        
     }
 
 
@@ -135,9 +141,18 @@ class user extends Controller
     {
         $token = $request->token;
         $user = Users::firstWhere('remember_token',$token);
-        $user->verified=1;
-        $user->save();
-        return redirect('/user/index')->with('msg','Account Validation Successful');
+        if($user)
+        {       
+            $user->verified=1;
+            $user->save();
+            return redirect('/user/index')->with('msg','Account Validation Successful');
+
+        }
+        else
+        {
+            return view('main.expired');
+        }
+
     }
 
     public function resendverification()
