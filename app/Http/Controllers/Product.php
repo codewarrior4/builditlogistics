@@ -51,6 +51,7 @@ class Product extends Controller
         $product->category= $request->category;
         $product->sub_category= $request->sub_category;
         $product->price= $request->price;
+        $product->tag= $request->tag;
         $product->compare_price= $request->compare_price;
         $product->description= $request->description;
         $product->percentage= $request->percentage;
@@ -109,6 +110,7 @@ class Product extends Controller
         $product->pname = $request->name;
         $product->description = $request->description;
         $product->price = $request->price;
+        $product->tag = $request->tag;
         $product->percentage = $request->percentage;
         $product->compare_price = $request->compare_price;
         $product->category = $request->category;

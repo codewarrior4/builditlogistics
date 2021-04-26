@@ -1,3 +1,7 @@
+<?php
+    use Illuminate\Routing\UrlGenerator;
+?>
+
 @component('mail::message')
  Hello {{session('user')->firstname}}
 
@@ -6,7 +10,7 @@
     <p>Please Click on the link below to verify your account.</p>
 
 
-<a  class="button button-primary" href="http://127.0.0.1:8000/user/verify/{{session('user')->remember_token}}">Verify Email</a>
+<a  class="button button-primary" href="{{URL::to('/')}}/user/verify/{{session('user')->remember_token}}">Verify Email</a>
 
 
 Thanks,<br>

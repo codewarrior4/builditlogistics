@@ -19,25 +19,30 @@ use App\Http\Controllers\Subscriber;
 use App\Http\Controllers\Cart;
 use App\Http\Controllers\Wishlist;
 use App\Http\Controllers\Information;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\AdminMain;
 
 
 
 
 Route::group(['prefix'=>'/user'],function()
-{
-    Route::view('/login','user.login');
-    Route::post('/login',[user::class,'login']);
-    Route::get('/forget',function(){ return view('user.forget'); });
-    Route::get('/register',[user::class,'index']);
-    Route::post('/register',[user::class,'store']);
-    Route::view('/forgot','user.forgot');
-    Route::post('/forgot',[user::class,'forgot']);
-    Route::get('/password/{token}',[user::class,'passview']);
-    Route::post('/changepassword',[user::class,'changepassword']);
-    Route::get('/logout',[user::class,'logout']);
+{     
+        Route::view('/forgot','user.forgot');
+        Route::post('/forgot',[user::class,'forgot']);
+        Route::get('/password/{token}',[user::class,'passview']);
+        Route::get('/forget',function(){ return view('user.forget'); });
 
+        Route::view('/orders','user.orders');
+        Route::view('/order/{id}','user.orderdetails');
+        Route::view('/wishlist','user.wishlist');
+
+        Route::view('/login','user.login');
+        Route::post('/login',[user::class,'login']);
+        Route::get('/register',[user::class,'index']);
+        Route::post('/register',[user::class,'store']);
     Route::group(['middleware'=>'user'],function() 
     {
+      
         Route::post('/update',[user::class,'update']);
         Route::get('/verify/{token}',[user::class,'verify']);
         Route::get('/reverify',[user::class,'resendverification']);
@@ -46,105 +51,95 @@ Route::group(['prefix'=>'/user'],function()
         Route::post('/billing',[Information::class,'billing']);
         Route::post('/shipping',[Information::class,'shipping']);
         Route::view('/index','user.index');
+        Route::get('/logout',[user::class,'logout']);
+        Route::post('/changepassword',[user::class,'changepassword']);
+   
     });
 
- 
 
-    Route::view('/orders','user.orders');
-
-    Route::view('/order/{id}','user.orderdetails');
-    Route::view('/wishlist','user.wishlist');
-
-    // Route::view('/account','user.index');
 });
 
-Route::get('/cart/{pid}/{quantity}/{price}',[Cart::class,'addtocart']);
-Route::post('/cart',[Cart::class,'addCart']);
-Route::get('/cart',[Cart::class,'cartList']);
-Route::get('/cart/delete/{id}',[Cart::class,'remove']);
-Route::get('/cart/clear',[Cart::class,'clearCart']);
-Route::get('/wishlist/{pid}/{price}',[Cart::class,'moveToWishlist']);
-Route::post('/cart/update',[Cart::class,'update']);
-
-Route::get('/wishlist',[wishlist::class,'wishList']);
-Route::get('/wishlist/{pid}/{quantity}/{price}',[Wishlist::class,'moveToCart']);
 
 
+    Route::view('/admin/login','admin.login');
+    Route::post('/admin/login',[AdminMain::class,'login']);
+    Route::get('/admin/logout',[AdminMain::class,'logout']);
 
-Route::group(['prefix'=>'/admin','middleware'=>'admin'], function(){
-    Route::view('/','admin.index');
-    Route::view('/index','admin.index');
-    // customer
-    Route::get('/customers',[user::class,'customers']);
-    Route::get('/customer/{id}',[user::class,'customer']);
-    Route::post('/customer',[user::class,'customerStatus']);
+    Route::group(['prefix'=>'/admin','middleware'=>'admin'], function(){
 
-    // faq
-    Route::get('/faq',[faq::class,'create']);
-    Route::post('/faq',[faq::class,'store']);
-    Route::get('/faq/delete/{id}',[faq::class,'destroy']);
+        Route::view('/','admin.index');
+        Route::view('/index','admin.index');
+        // customer
+        Route::get('/customers',[user::class,'customers']);
+        Route::get('/customer/{id}',[user::class,'customer']);
+        Route::post('/customer',[user::class,'customerStatus']);
 
-    //blog
-    Route::view('/blog','admin.blog');
-    Route::post('/blog',[Blog::class,'store']);
-    Route::get('/blogs',[Blog::class,'index']);
-    Route::get('/blog/{id}',[Blog::class,'show']);
-    Route::get('/blog/delete/{id}',[Blog::class,'destroy']);
-    Route::post('/blog/update',[Blog::class,'update']);
+        // faq
+        Route::get('/faq',[faq::class,'create']);
+        Route::post('/faq',[faq::class,'store']);
+        Route::get('/faq/delete/{id}',[faq::class,'destroy']);
 
-    //stores
-    Route::get('/store',[store::class,'index']);
-    Route::get('/store/delete/{id}',[store::class,'destroy']);
-    Route::get('/stores',[store::class,'show']);
-    Route::post('/store',[store::class,'store']);
+        //blog
+        Route::view('/blog','admin.blog');
+        Route::post('/blog',[Blog::class,'store']);
+        Route::get('/blogs',[Blog::class,'index']);
+        Route::get('/blog/{id}',[Blog::class,'show']);
+        Route::get('/blog/delete/{id}',[Blog::class,'destroy']);
+        Route::post('/blog/update',[Blog::class,'update']);
 
-    // shop settings
-    Route::get('/slider',[slider::class,'index']);
-    Route::get('/slider/delete/{id}',[slider::class,'destroy']);
-    Route::post('/slider',[slider::class,'store']);
-    Route::get('/about',[About::class,'index']);
-    Route::post('/about',[About::class,'store']);
-    Route::get('/tac',[Tacs::class,'index']);
-    Route::post('/tac',[Tacs::class,'store']);
-    Route::get('/social',[Social::class,'index']);
-    Route::post('/social',[Social::class,'create']);
-    
-    //end shop
+        //stores
+        Route::get('/store',[store::class,'index']);
+        Route::get('/store/delete/{id}',[store::class,'destroy']);
+        Route::get('/stores',[store::class,'show']);
+        Route::post('/store',[store::class,'store']);
 
-
-    //category
-    Route::get('/category',[Category::class,'index']);
-    Route::post('/category',[Category::class,'store']);
-    Route::get('/category/delete/{id}',[Category::class,'destroy']);
-    Route::get('/category_sub',[Subcategory::class,'index']);
-    Route::post('/category_sub',[Subcategory::class,'create']);
-    Route::get('/category_sub/delete/{id}',[Subcategory::class,'destroy']);
-
-    // end category
-
-    
-    //products
-    Route::get('/product',[Product::class,'create']);
-    Route::post('/product',[Product::class,'store']);
-    Route::post('/product/update',[Product::class,'update']);
-    Route::get('/products',[Product::class,'index']);
-    Route::get('/products/{id}',[Product::class,'show']);
-    Route::get('/products/delete/{id}',[Product::class,'destroy']);
+        // shop settings
+        Route::get('/slider',[slider::class,'index']);
+        Route::get('/slider/delete/{id}',[slider::class,'destroy']);
+        Route::post('/slider',[slider::class,'store']);
+        Route::get('/about',[About::class,'index']);
+        Route::post('/about',[About::class,'store']);
+        Route::get('/tac',[Tacs::class,'index']);
+        Route::post('/tac',[Tacs::class,'store']);
+        Route::get('/social',[Social::class,'index']);
+        Route::post('/social',[Social::class,'create']);
+        
+        //end shop
 
 
-    //Subscribers
-    Route::get('/subscribers',[Subscriber::class,'index']);
+        //category
+        Route::get('/category',[Category::class,'index']);
+        Route::post('/category',[Category::class,'store']);
+        Route::get('/category/delete/{id}',[Category::class,'destroy']);
+        Route::get('/category_sub',[Subcategory::class,'index']);
+        Route::post('/category_sub',[Subcategory::class,'create']);
+        Route::get('/category_sub/delete/{id}',[Subcategory::class,'destroy']);
 
-    //profile
-    Route::view('/login','admin.login');
+        // end category
 
-    Route::view('/orders','admin.orders');
-    Route::view('/order/{id}','admin.orderdetails');
+        
+        //products
+        Route::get('/product',[Product::class,'create']);
+        Route::post('/product',[Product::class,'store']);
+        Route::post('/product/update',[Product::class,'update']);
+        Route::get('/products',[Product::class,'index']);
+        Route::get('/products/{id}',[Product::class,'show']);
+        Route::get('/products/delete/{id}',[Product::class,'destroy']);
+
+
+        //Subscribers
+        Route::get('/subscribers',[Subscriber::class,'index']);
+
+        //profile
+        Route::view('/login','admin.login');
+
+        Route::view('/orders','admin.orders');
+        Route::view('/order/{id}','admin.orderdetails');
 
    
 });
 
-    Route::get('/',[Main::class,'homepage']);
+Route::get('/',[Main::class,'homepage']);
 
     Route::get('/email',[Email::class,'index']);
     Route::get('/category/{id}',[Main::class,'category']);
@@ -164,7 +159,16 @@ Route::group(['prefix'=>'/admin','middleware'=>'admin'], function(){
     Route::get('/faq',[Faq::class,'faq']);
     Route::get('/stores',[store::class,'stores']);
     Route::post('/blog/comment',[Blog::class,'comment']);
+    Route::get('/cart/{pid}/{quantity}/{price}',[Cart::class,'addtocart']);
+    Route::post('/cart',[Cart::class,'addCart']);
+    Route::get('/cart',[Cart::class,'cartList']);
+    Route::get('/cart/delete/{id}',[Cart::class,'remove']);
+    Route::get('/cart/clear',[Cart::class,'clearCart']);
+    Route::get('/wishlist/{pid}/{price}',[Cart::class,'moveToWishlist']);
+    Route::post('/cart/update',[Cart::class,'update']);
 
+    Route::get('/wishlist',[wishlist::class,'wishList']);
+    Route::get('/wishlist/{pid}/{quantity}/{price}',[Wishlist::class,'moveToCart']);
 
     Route::view('/checkout','main.checkout');
 
@@ -172,8 +176,6 @@ Route::group(['prefix'=>'/admin','middleware'=>'admin'], function(){
 
 Route::post('/subscriber',[Subscriber::class,'store'])->name('password');
 
-
-
-// Auth::routes();
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::post('/pay', [PaymentController::class,'redirectToGateway']);
+Route::get('/payment/callback',  [PaymentController::class,'handleGatewayCallback']);
+Route::view('/pay','main.pay');

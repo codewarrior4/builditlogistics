@@ -72,8 +72,19 @@
 		text: '{{session("product")}}',
 		})
 </script>	
+@endif
+
+@if (session('auth'))
+<script>
+	Swal.fire({
+		icon: 'error',
+		title: 'Error',
+		text: '{{session("auth")}}',
+		})
+</script>	
 
 @endif
+
 <div class="page-wrapper">
 
 

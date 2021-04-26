@@ -48,6 +48,9 @@ class Kernel extends HttpKernel
         ],
         'user'=>[
             \App\Http\Middleware\user::class
+        ],
+        'checkauth'=>[
+            \App\Http\Middleware\checkauth::class
         ]
     ];
 

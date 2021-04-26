@@ -88,6 +88,7 @@
           </a>
         </li>
 
+
         <li>
           <a href="#" class="has-arrow"  aria-expanded="false">
           <!-- <i class="fas fa-th"></i> -->
@@ -99,7 +100,13 @@
             <li><a href="/admin/stores">Store List</a></li>
           </ul>
         </li>
-
+        <li >
+          <a href="/admin/logout"  aria-expanded="false">
+          <!-- <i class="fab fa-sign-out"></i> -->
+          <img src="{{URL::asset('img/menu-icon/6.svg')}}" alt="">
+            <span>Logout</span>
+          </a>
+        </li>
       </ul>
     
 </nav>

@@ -53,16 +53,28 @@
                              <textarea required name="description" id="summernote" cols="30" rows="10">{!!$products->description!!}</textarea>
                             </div>
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-4">
                                     <div class="form-group">
                                         <label for="exampleFormControlSelect1">Price</label>
                                         <input required type="text" class="form-control" value="{{$products->price}}" name="price">
                                     </div> 
                                 </div>
-                                <div class="col-6">
+                                <div class="col-4">
                                     <div class="form-group">
                                         <label for="exampleFormControlSelect1">Compared Price</label>
                                         <input required type="text" class="form-control" value="{{$products->compare_price}}" name="compare_price" id="">
+                                    </div> 
+                                </div>
+
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="exampleFormControlSelect1">Tag</label>
+                                        <select required name="tag" class="default_sel mb_30 w-100" style="display: none;">
+                                            
+                                                <option value="featured" {{($products->tag=='featured')?'selected':''}} >Featured Products</option>
+                                                <option value="hot" {{($products->tag=='hot')?'selected':''}}>Hot Products</option>
+                                           
+                                        </select>
                                     </div> 
                                 </div>
 

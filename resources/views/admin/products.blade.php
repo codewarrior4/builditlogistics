@@ -53,6 +53,7 @@
                                         <th scope="col">Name</th>
                                         <th scope="col">Image</th>
                                         <th scope="col">Category</th>
+                                        <th scope="col">Tag</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
@@ -63,6 +64,7 @@
                                         <td>{{$product->name}}</td>
                                         <td><img src="/uploads/{{$product->banner}}" width="70" height="70" alt=""></td>
                                         <td>{{$product->title}}</td>
+                                        <td>{{$product->tag}}</td>
                                         <td><a href="/admin/products/{{$product->pid}}" class="btn btn-outline-primary">View</a></td>
                                     </tr>
                                 @endforeach

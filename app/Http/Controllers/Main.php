@@ -50,8 +50,9 @@ class Main extends Controller
         $sliders =Sliders::all();
         $latest =Products::orderBy('pid','desc')->limit(5)->get();
         $random =Products::orderByRaw('RAND()')->limit(3)->get();
-        $featured = Products::orderByRaw('RAND()')->limit(3)->get();
-        return view('main.index',compact('sliders','latest','random','featured'));
+        $featured = Products::where(['tag'=>'featured'])->orderBy('pid','desc')->limit(5)->get();
+        $hots = Products::where(['tag'=>'hot'])->orderBy('pid','desc')->limit(5)->get();
+        return view('main.index',compact('sliders','latest','random','featured','hots'));
     }
 
     public function search(Request $request)

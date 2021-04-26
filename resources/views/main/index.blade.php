@@ -83,7 +83,7 @@
 
 					<div class="home-products-container text-center">
 						<div class="row">
-							<div class="col-md-6 mb-2">
+							<div class="col-md-4 mb-2">
 								<div class="home-products bg-white px-4 pb-2 pt-4">
 									<h3 class="section-sub-title mt-1 m-b-1">Featured Products</h3>
 
@@ -124,9 +124,50 @@
 									</div>
 								</div>
 							</div><!-- End .col-md-4 -->
+							<div class="col-md-4 mb-2">
+								<div class="home-products bg-white px-4 pb-2 pt-4">
+									<h3 class="section-sub-title mt-1 m-b-1">Hot Products</h3>
+
+									<div class="owl-carousel owl-theme nav-image-center nav-thin px-3 " data-owl-options="{
+										'dots': false,
+										'nav': true,
+										'responsive': {
+											'480': {
+												'items': 2
+											},
+											'768': {
+												'items': 1
+											}
+										}
+									}">
+									@foreach ($hots as $hot)
+										<div class="product-default">
+											<figure>
+												<a href="/products">
+													<img src="/uploads/{{$hot->banner}}" alt="product" width="300" height="300">
+												</a>
+											</figure>
+											<div class="product-details">
+												<div class="category-list">
+													<a href="/category/{{$hot->category}}" class="product-category">category</a>
+												</div>
+												<h3 class="product-title">
+													<a href="product/{{$hot->pid}}">{{$hot->pname}}</a>
+												</h3>
+												
+												<div class="price-box">
+													<span class="old-price">&#8358; {{number_format($hot->compare_price,2)}}</span>
+													<span class="product-price">&#8358; {{number_format($hot->price,2)}}</span>
+												</div><!-- End .price-box -->
+											</div><!-- End .product-details -->
+										</div>
+										@endforeach
+									</div>
+								</div>
+							</div><!-- End .col-md-4 -->
 
 
-							<div class="col-md-6 mb-2">
+							<div class="col-md-4 mb-2">
 								<div class="home-products bg-white px-4 pb-2 pt-4">
 									<h3 class="section-sub-title mt-1 m-b-1">New Arrivals</h3>
 

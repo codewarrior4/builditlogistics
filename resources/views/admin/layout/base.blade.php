@@ -41,10 +41,21 @@
     <!-- style CSS -->
     <link rel="stylesheet" href="{{URL::asset('css/style.css')}}" />
     <link rel="stylesheet" href="{{URL::asset('css/colors/default.css')}}" id="colorSkinCSS">
+	<script src="{{URL::asset('assets/js/sweetalert.js')}}"></script>
+
 </head>
 <body class="crm_body_bg">
     
+@if (session('auth'))
+<script>
+	Swal.fire({
+		icon: 'error',
+		title: 'Error',
+		text: '{{session("auth")}}',
+		})
+</script>	
 
+@endif
 
 <!-- main content part here -->
  

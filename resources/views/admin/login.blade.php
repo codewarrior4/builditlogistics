@@ -41,15 +41,27 @@
                                     <div class="modal-header">
                                         <h5 class="modal-title">Log in</h5>
                                     </div>
+                                    
                                     <div class="modal-body">
-                                        <form>
+                                        <form method="post" action="/admin/login">
                                             <div class="form-group">
-                                                <input type="email" class="form-control" placeholder="Enter your email">
-                                            </div>
+                                                <input type="email" name="email" class="form-control" placeholder="Enter your email">
+                                            </div>@csrf
                                             <div class="form-group">
-                                                <input type="password" class="form-control" placeholder="Password">
+                                                <input type="password" name="password" class="form-control" placeholder="Password">
                                             </div>
-                                            <a href="#" class="btn_1 full_width text-center">Log in</a>
+                                            <button type="submit" class="btn_1 full_width text-center">Log in</button>
+                                            <div class="row">
+                                                @if (session('msg'))
+                                                    <div class="col-12"><div class="alert alert-primary alert-dismissible fade show mt-3" role="alert">
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                        <span class="sr-only">Close</span>
+                                                    </button>
+                                                    <strong>{{session('msg')}}!</strong>
+                                                </div></div>
+                                                @endif
+                                            </div>
                                         </form>
                                     </div>
                                 </div>

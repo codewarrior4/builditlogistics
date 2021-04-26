@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class user
+class checkauth
 {
     /**
      * Handle an incoming request.
@@ -16,17 +16,11 @@ class user
      */
     public function handle(Request $request, Closure $next)
     {
-        if(session('user') == "")
-        {
-            session()->flash('msg','User Not  logged  in');
-            return response()->view('user/login');
-        }
-
         if(session('user') !="" && $request->path()=='user/login' || $request->path() =='user/register')
         {
-            // dd(session('user'));
-            session()->flash('msg','User already Signed in');
-            return redirect('/user/index');
+            // echo ("wa");
+            session()->flash('auth','User already Signed in');
+            return view('user.index');
         }
         return $next($request);
     }

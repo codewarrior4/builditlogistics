@@ -17,9 +17,16 @@ class admin
     public function handle(Request $request, Closure $next)
     {
         
-        if($request->path() == '/admin/products')
+        if(session('admin') == '')
         {
-            echo 'noaccess';
+            session()->flash('auth','Admin not logged  in');
+            return response()->view('admin/login');
+        }
+
+        if(session('admin') !="" && $request->path()=='admin/login' )
+        {
+            session()->flash('auth','Admin already Signed in');
+            return redirect('/admin/index');
         }
         return $next($request);
     }

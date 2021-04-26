@@ -1,3 +1,7 @@
+<?php
+    use Illuminate\Routing\UrlGenerator;
+?>
+
 @component('mail::message')
  Hello {{$user->firstname}}
     
@@ -6,7 +10,7 @@
     <p>Please Click on the link below to change your password.</p>
 
 
-<a class="button button-primary" href="http://127.0.0.1:8000/user/password/{{$user->remember_token}}">Change password</a>
+<a class="button button-primary" href="{{URL::to('/')}}/user/password/{{$user->remember_token}}">Change password</a>
 
 
 Thanks,<br>
