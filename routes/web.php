@@ -170,7 +170,7 @@ Route::get('/',[Main::class,'homepage']);
     Route::get('/wishlist',[wishlist::class,'wishList']);
     Route::get('/wishlist/{pid}/{quantity}/{price}',[Wishlist::class,'moveToCart']);
 
-    Route::view('/checkout','main.checkout');
+    Route::get('/checkout',[Main::class,'checkout']);
 
 
 

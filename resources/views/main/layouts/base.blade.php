@@ -64,6 +64,16 @@
 	<link rel="stylesheet" type="text/css" href="{{URL::asset('assets/vendor/fontawesome-free/css/all.min.css')}}">
 </head>
 <body oncontextmenu="return true">
+
+@if (session('success'))
+<script>
+	Swal.fire({
+		icon: 'success',
+		title: 'Done !',
+		text: '{{session("success")}}',
+		})
+</script>	
+@endif
 @if (session('product'))
 <script>
 	Swal.fire({
@@ -74,6 +84,15 @@
 </script>	
 @endif
 
+@if (session('product'))
+<script>
+	Swal.fire({
+		icon: 'success',
+		title: 'Done !',
+		text: '{{session("product")}}',
+		})
+</script>	
+@endif
 @if (session('auth'))
 <script>
 	Swal.fire({

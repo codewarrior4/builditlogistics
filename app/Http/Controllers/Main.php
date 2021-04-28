@@ -8,6 +8,8 @@ use App\Models\Categorys;
 use App\Models\SubCategorys;
 use App\Models\Sliders;
 use App\Models\Socials;
+use App\Models\Carts;
+use App\Models\Informations;
 use Illuminate\Support\Facades\DB;
 
 
@@ -64,4 +66,22 @@ class Main extends Controller
         return view('main.productsearch',compact('products'));
     }
 
+    public function checkout()
+    {
+        if(session('user') !="")
+        {
+             $carts = Carts::where(['userid'=>session('user')->id])
+                    ->join('products','products.pid','=','carts.pid')
+                    ->select('products.*','carts.quantity')
+                    ->get();
+               $information =Informations::where('userid','=',session('user')->id)->first();
+            // return $information;
+            return view('main.checkout',compact('carts','information'));
+        }
+        else
+        {
+            session()->flash('msg','You are not logged in');
+            return view('main.login');
+        }
+    }
 }

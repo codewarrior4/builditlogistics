@@ -3,6 +3,15 @@
     Checkout
 @endsection
 
+<?php
+	use App\Http\Controllers\Cart;;
+	$cart =Cart::cart();
+	$count =$cart['count'];
+	$sum =$cart['sum'];
+	$orderid=date('ymdhis');
+	
+
+?>
 @section('content')
 
 <main class="main">
@@ -30,47 +39,40 @@
 							<h3>Summary</h3>
 
 							<h4>
-								<a data-toggle="collapse" href="#order-cart-section" class="collapsed" role="button" aria-expanded="false" aria-controls="order-cart-section">2 products in Cart</a>
+								<a data-toggle="collapse" href="#order-cart-section" class="collapsed" role="button" aria-expanded="false" aria-controls="order-cart-section">{{count($carts)}} products in Cart</a>
 							</h4>
 
 							<div class="collapse" id="order-cart-section">
 								<table class="table table-mini-cart">
 									<tbody>
+										@foreach ($carts as $cart)
+											<tr>
+												<td class="product-col">
+													<figure class="product-image-container">
+														<a href="/product/{{$cart->pid}}" class="product-image">
+															<img src="/uploads/{{$cart->banner}}" alt="product">
+														</a>
+													</figure>
+													<div>
+														<h2 class="product-title">
+															<a href="/product/{{$cart->pid}}">{{$cart->pname}}</a>
+														</h2>
+
+														<span class="product-qty">Qty: {{$cart->quantity}}</span>
+													</div>
+												</td>
+												<td class="price-col">&#8358; {{number_format($cart->price * $cart->quantity,2)}}</td>
+											</tr>
+											
+										@endforeach
 										<tr>
-											<td class="product-col">
-												<figure class="product-image-container">
-													<a href="product.html" class="product-image">
-														<img src="assets/images/products/product-1.jpg" alt="product">
-													</a>
-												</figure>
-												<div>
-													<h2 class="product-title">
-														<a href="product.html">USB Flash</a>
-													</h2>
-
-													<span class="product-qty">Qty: 4</span>
-												</div>
-											</td>
-											<td class="price-col">$152.00</td>
-										</tr>
-
-										<tr>
-											<td class="product-col">
-												<figure class="product-image-container">
-													<a href="product.html" class="product-image">
-														<img src="assets/images/products/product-2.jpg" alt="product">
-													</a>
-												</figure>
-												<div>
-													<h2 class="product-title">
-														<a href="product.html">Inline Headset</a>
-													</h2>
-
-													<span class="product-qty">Qty: 4</span>
-												</div>
-											</td>
-											<td class="price-col">$192.00</td>
-										</tr>
+												<th>
+													Total
+												</th>
+												<td>
+													&#8358; {{number_format($sum,2)}} 
+												</td>
+											</tr>
 									</tbody>	
 								</table>
 							</div><!-- End #order-cart-section -->
@@ -78,128 +80,117 @@
 
 						<div class="checkout-info-box">
 							<h3 class="step-title">Ship To:
-								<a href="#" title="Edit" class="step-title-edit"><span class="sr-only">Edit</span><i class="icon-pencil"></i></a>
+								<a href="/user/billing" title="Edit" class="step-title-edit"><span class="sr-only">Edit</span><i class="icon-pencil"></i></a>
 							</h3>
 
+							@if ($information == '')
+								<a href="/user/billing" title="Add you Shipping details" class="step-title-edit"><span class="sr-only">Add you Shipping details</span><i class="icon-pencil"></i></a>
+							@else
 							<address>
-								Desmond Mason <br>
-								123 Street Name, City, USA <br>
-								Los Angeles, California 03100 <br>
-								United States <br>
-								(123) 456-7890
+								{{session('user')->name}} <br>
+								{{$information->saddress1}} <br>
+								{{$information->saddress2}} <br>
+								{{$information->scity}} <br>
+								{{$information->scountry}} <br>
+								{{$information->semail}} <br>
+								{{$information->sphone}} <br>
 							</address>
+							@endif
 						</div><!-- End .checkout-info-box -->
 
-						<div class="checkout-info-box">
-							<h3 class="step-title">Shipping Method: 
-								<a href="#" title="Edit" class="step-title-edit"><span class="sr-only">Edit</span><i class="icon-pencil"></i></a>
-							</h3>
-
-							<p>Flat Rate - Fixed</p>
-						</div><!-- End .checkout-info-box -->
 					</div><!-- End .col-lg-4 -->
 
 					<div class="col-lg-8 order-lg-first">
 						<div class="checkout-payment">
-							<h2 class="step-title">Payment Method:</h2>
+							<h2 class="step-title">Payment Address:</h2>
 
-							<h4>Check / Money order</h4>
 
-							<div class="form-group-custom-control">
+							<!-- <div class="form-group-custom-control">
 								<div class="custom-control custom-checkbox">
 									<input type="checkbox" class="custom-control-input" id="change-bill-address" value="1">
 									<label class="custom-control-label" for="change-bill-address">My billing and shipping address are the same</label>
-								</div><!-- End .custom-checkbox -->
-							</div><!-- End .form-group -->
+								</div>
+							</div> -->
 
-							<div id="checkout-shipping-address">
-								<address>
-									Desmond Mason <br>
-									123 Street Name, City, USA <br>
-									Los Angeles, California 03100 <br>
-									United States <br>
-									(123) 456-7890
-								</address>
-							</div><!-- End #checkout-shipping-address -->
+							@if ($information->baddress1 =='' || $information->bcity =='' || $information->bcountry =='' || $information->bphone =='' || $information->bemail =='' )
+								<p>Please Fill up your Billing Details</p>
+								<a href="/user/billing" class="btn btn-outline-primary">Fill Billing Details</a>
+							@else	
+								<div class="container">
+									
+										<table class="table table-borderless" width="100%">
+											<tr>
+												<th>Name</th>
+												<td>{{session('user')->firstname ." ".session('user')->lastname}}</td>
+											</tr>
+											<tr>
+												<th>Address</th>
+												<td>{{$information->baddress1}} <br>	
+													{{$information->baddress2}}</td>
+											</tr>
+											<tr>
+												<th>City</th>
+												<td>{{$information->bcity}} </td>
+											</tr>
+											<tr>
+												<th>Country</th>
+												<td>{{$information->bcountry}}</td>
+											</tr>
+											<tr>
+												<th>Email</th>
+												<td>{{$information->bemail}} </td>
+											</tr>
+											<tr>
+												<th>Phone</th>
+												<td> {{$information->bphone}}</td>
+											</tr>
+										</table>
+								</div>
+							
+							<div class="row">
+								<div class="col-6">
+									@if (session('msg'))
+										<div class="alert alert-primary alert-dismissible fade show" role="alert">
+											<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+												<span class="sr-only">Close</span>
+											</button>
+											<strong>{{session('error')}}</strong>
+										</div>
+									@endif
+								</div>
+								<div class="col-6">
+								<form method="POST" action="/pay" accept-charset="UTF-8" class="form-horizontal" role="form">
+								<div class="row" style="margin-bottom:40px;">
+									<div class="col-md-8 col-md-offset-2">
+										
+										<input type="hidden" name="email" value="{{session('user')->email}}">
+										<input type="hidden" name="orderID" value="{{$orderid}}">
+										<input type="hidden" name="amount" value="100"> 
+										<input type="hidden" name="quantity" value="1">
+										<input type="hidden" name="currency" value="NGN">
+										<input type="hidden" name="metadata" value="{{ json_encode($array = ['key_name' => 'value',]) }}" >
+										<input type="hidden" name="reference" value="{{ Paystack::genTranxRef() }}">
+										@csrf
+										<!-- <input type="hidden" name="_token" value="{{ csrf_token() }}"> -->
 
-							<div id="new-checkout-address" class="show">
-								<form action="#">
-									<div class="form-group required-field">
-										<label>First Name </label>
-										<input type="text" class="form-control" required>
-									</div><!-- End .form-group -->
+										<p>
+											<button class="btn btn-primary btn-lg btn-block" type="submit" value="Pay Now!">
+												<i class="fa fa-plus-circle fa-lg"></i> Pay  &#8358;{{number_format($sum,2)}}
+											</button>
+										</p>
+									</div>
+								</div>
+							</form>
+								</div>
+							</div>
+							@endif
+							
 
-									<div class="form-group required-field">
-										<label>Last Name </label>
-										<input type="text" class="form-control" required>
-									</div><!-- End .form-group -->
-
-									<div class="form-group">
-										<label>Company </label>
-										<input type="text" class="form-control">
-									</div><!-- End .form-group -->
-
-									<div class="form-group required-field">
-										<label>Street Address </label>
-										<input type="text" class="form-control" required>
-										<input type="text" class="form-control" required>
-									</div><!-- End .form-group -->
-
-									<div class="form-group required-field">
-										<label>City  </label>
-										<input type="text" class="form-control" required>
-									</div><!-- End .form-group -->
-
-									<div class="form-group">
-										<label>State/Province</label>
-										<div class="select-custom">
-											<select class="form-control">
-												<option value="CA">California</option>
-												<option value="TX">Texas</option>
-											</select>
-										</div><!-- End .select-custom -->
-									</div><!-- End .form-group -->
-
-									<div class="form-group required-field">
-										<label>Zip/Postal Code </label>
-										<input type="text" class="form-control" required>
-									</div><!-- End .form-group -->
-
-									<div class="form-group">
-										<label>Country</label>
-										<div class="select-custom">
-											<select class="form-control">
-												<option value="USA">United States</option>
-												<option value="Turkey">Turkey</option>
-												<option value="China">China</option>
-												<option value="Germany">Germany</option>
-											</select>
-										</div><!-- End .select-custom -->
-									</div><!-- End .form-group -->
-
-									<div class="form-group required-field">
-										<label>Phone Number </label>
-										<div class="form-control-tooltip">
-											<input type="tel" class="form-control" required>
-											<span class="input-tooltip" data-toggle="tooltip" title="For delivery questions." data-placement="right"><i class="icon-question-circle"></i></span>
-										</div><!-- End .form-control-tooltip -->
-									</div><!-- End .form-group -->
-
-									<div class="form-group-custom-control">
-										<div class="custom-control custom-checkbox">
-											<input type="checkbox" class="custom-control-input" id="address-save">
-											<label class="custom-control-label" for="address-save">Save in Address book</label>
-										</div><!-- End .custom-checkbox -->
-									</div><!-- End .form-group -->
-								</form>
-							</div><!-- End #new-checkout-address -->
-
-							<div class="clearfix">
-								<a href="#" class="btn btn-primary float-right">Place Order</a>
-							</div><!-- End .clearfix -->
+							
 						</div><!-- End .checkout-payment -->
 
-						<div class="checkout-discount">
+						<!-- <div class="checkout-discount">
 							<h4>
 								<a data-toggle="collapse" href="#checkout-discount-section" class="collapsed" role="button" aria-expanded="false" aria-controls="checkout-discount-section">Apply Discount Code</a>
 							</h4>
@@ -209,8 +200,8 @@
 										<input type="text" class="form-control form-control-sm" placeholder="Enter discount code"  required>
 										<button class="btn btn-sm btn-outline-secondary" type="submit">Apply Discount</button>
 								</form>
-							</div><!-- End .collapse -->
-						</div><!-- End .checkout-discount -->
+							</div>End .collapse
+						</div>End .checkout-discount -->
 					</div><!-- End .col-lg-8 -->
 				</div><!-- End .row -->
 			</div><!-- End .container -->
