@@ -21,9 +21,7 @@ use App\Http\Controllers\Wishlist;
 use App\Http\Controllers\Information;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\AdminMain;
-
-
-
+use App\Http\Controllers\Order;
 
 Route::group(['prefix'=>'/user'],function()
 {     
@@ -133,8 +131,9 @@ Route::group(['prefix'=>'/user'],function()
         //profile
         Route::view('/login','admin.login');
 
-        Route::view('/orders','admin.orders');
-        Route::view('/order/{id}','admin.orderdetails');
+        Route::get('/orders',[Order::class,'adminOrders']);
+        Route::get('/order/{paymentid}',[Order::class,'adminOrderdetails']);
+        Route::post('/order/update',[Order::class,'adminUpdate']);
 
    
 });

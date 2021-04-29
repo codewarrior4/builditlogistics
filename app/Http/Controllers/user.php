@@ -125,7 +125,7 @@ class user extends Controller
             'state'=>$request->state,
             'address'=>$request->address,
             'status'=>1,
-            'email'=>$request->email,
+            'email'=>strtolower($request->email),
             'date'=>now(),
             'password'=>Hash::make($request->password),
             'remember_token'=>$token,
@@ -178,7 +178,7 @@ class user extends Controller
 
     public function forgot (Request $request)
     {
-         $user = Users::where('email',$request->email)->get();
+         $user = Users::where('email',strtolower($request->email))->get();
             if(count($user) ==0)
             {
                 return redirect('user/forgot')->with('msg','This Email Doesn not exist');
@@ -200,7 +200,7 @@ class user extends Controller
 
     public function login (Request $request)
     {
-        $user= Users::where(['email'=>$request->email])->first();
+        $user= Users::where(['email'=>strtolower($request->email)])->first();
         
         // return $user;
         if(!$user || !(Hash::check($request->password,$user->password)))

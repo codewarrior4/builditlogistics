@@ -30,38 +30,27 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Customer name</th>
-                                        <th scope="col">Quantity</th>
-                                        <th scope="col">Status</th>
+                                        <th scope="col">Customer Email</th>
+                                        <th scope="col">Reference ID</th>
+                                        <th scope="col">Payment ID</th>
                                         <th scope="col">Price</th>
+                                        <th scope="col">Status</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mayowa</td>
-                                        <td>3</td>
-                                        <td>Pending</td>
-                                        <td>#4,000</td>
-                                        <td><a href="order/1" class="status_btn">View</a></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mayowa</td>
-                                        <td>3</td>
-                                        <td>Pending</td>
-                                        <td>#4,000</td>
-                                        <td><a href="order/1" class="status_btn">View</a></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mayowa</td>
-                                        <td>3</td>
-                                        <td>Pending</td>
-                                        <td>#4,000</td>
-                                        <td><a href="order/1" class="status_btn">View</a></td>
-                                    </tr>
+                                    @foreach ($payments as $count => $payment)
+                                        <tr>
+                                            <th scope="row">{{$count +1}}</th>
+                                            <td>{{$payment->email}}</td>
+                                            <td>{{$payment->reference}}</</td>
+                                            <td>{{$payment->paymentid}}</</td>
+                                            <td>&#8358; {{number_format($payment->amount,2)}}</</td>
+                                            <td><span class="badge badge-{{($payment->status =='false')?'danger':'success'}}">{{($payment->status =="false")?"Pending":"Seen"}}</span></td>
+                                            <td><a href="order/{{$payment->paymentid}}" class="status_btn">View</a></td>
+                                        </tr>
+                                    @endforeach
+                                   
                                 </tbody>
                             </table>
                         </div>

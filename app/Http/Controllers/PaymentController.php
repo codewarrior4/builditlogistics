@@ -36,6 +36,7 @@ class PaymentController extends Controller
         // dd($paymentData);
         $paymentData = Paystack::getPaymentData();
         // check status
+        // dd($paymentData);
         if($paymentData['status'] == true)
         {
             $email = $paymentData['data']['customer']['email'];
@@ -43,20 +44,16 @@ class PaymentController extends Controller
             $user= Users::where('email','=',$email)->first();
             $payment = new Payments;
         
-            // $payment->userid = $user->id;
-            // $payment->email = $email;
+            $payment->userid = $user->id;
+            $payment->email = $email;
             $payment->paymentid = $paymentData['data']['id'];
-            // $payment->amount = $paymentData['data']['amount']/100;
-            // $payment->time=$paymentData['data']['paidAt'];
-            // $payment->reference=$paymentData['data']['reference'];
-            
-            // $payment->save();
-            
+            $payment->amount = $paymentData['data']['amount']/100;
+            $payment->time=$paymentData['data']['paidAt'];
+            $payment->reference=$paymentData['data']['reference'];
+            $payment->save();
             // Payment details saved successfully
 
             // Move items from cart to order  
-            
-            
             $carts = Carts::where('userid','=',$user->id)->get();
             foreach($carts as $cart)
             {
