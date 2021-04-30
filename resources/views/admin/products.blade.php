@@ -61,7 +61,7 @@
                                 @foreach ($products as $count => $product)
                                     <tr>
                                         <th scope="row">{{$count+1}}</th>
-                                        <td>{{$product->name}}</td>
+                                        <td>{{$product->pname}}</td>
                                         <td><img src="/uploads/{{$product->banner}}" width="70" height="70" alt=""></td>
                                         <td>{{$product->title}}</td>
                                         <td>{{$product->tag}}</td>

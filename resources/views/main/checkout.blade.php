@@ -84,10 +84,10 @@
 							</h3>
 
 							@if ($information == '')
-								<a href="/user/billing" title="Add you Shipping details" class="step-title-edit"><span class="sr-only">Add you Shipping details</span><i class="icon-pencil"></i></a>
+								<a href="/user/billing" title="Add you Shipping details" class=" btn btn-outline-primary">Add you Shipping details</span</a>
 							@else
 							<address>
-								{{session('user')->name}} <br>
+							 {{session('user')->name}} <br>
 								{{$information->saddress1}} <br>
 								{{$information->saddress2}} <br>
 								{{$information->scity}} <br>
@@ -112,7 +112,7 @@
 								</div>
 							</div> -->
 
-							@if ($information->baddress1 =='' || $information->bcity =='' || $information->bcountry =='' || $information->bphone =='' || $information->bemail =='' )
+							@if ($information=='' )
 								<p>Please Fill up your Billing Details</p>
 								<a href="/user/billing" class="btn btn-outline-primary">Fill Billing Details</a>
 							@else	

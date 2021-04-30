@@ -30,8 +30,7 @@ Route::group(['prefix'=>'/user'],function()
         Route::get('/password/{token}',[user::class,'passview']);
         Route::get('/forget',function(){ return view('user.forget'); });
 
-        Route::view('/orders','user.orders');
-        Route::view('/order/{id}','user.orderdetails');
+
         Route::view('/wishlist','user.wishlist');
 
         Route::view('/login','user.login');
@@ -51,7 +50,8 @@ Route::group(['prefix'=>'/user'],function()
         Route::view('/index','user.index');
         Route::get('/logout',[user::class,'logout']);
         Route::post('/changepassword',[user::class,'changepassword']);
-   
+        Route::get('/orders',[Order::class,'userOrder']);
+        Route::get('/order/{paymentid}',[Order::class,'userOrderDetails']);
     });
 
 

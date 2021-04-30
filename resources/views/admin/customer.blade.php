@@ -84,7 +84,7 @@
                                     <div class="form-group">
                                     @csrf
                                         <label for="exampleFormControlSelect1">Status</label>
-                                        <select name="status" class="default_sel mb_30 w-100" style="display: none;" id="">
+                                        <select name="status" class="custom-select mb_30 w-100" style="display: none;" id="">
                                             <option value="1" {{($customer->status ==1)?'selected':''}}>Active</option>
                                             <option value="2" {{($customer->status ==2)?'selected':''}}>Suspended</option>
                                         </select>

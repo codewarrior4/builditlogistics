@@ -146,9 +146,9 @@
 							<li><a href="/blog">Blog</a></li>
 							<li><a href="/about">About Us</a></li>
 							<li><a href="/contact">Contact Us</a></li>
-							<li><a class="px-4" href="#">Special Offer!</a></li>
+							
 							@if (session('user'))
-								<li><a href="/user/index">Account</a></li>
+								<li><a href="/user/index" title="{{session('user')->firstname.' '.session('user')->lastname}}">Account <i style="text-transform:lowercase">Signed in as {{session('user')->firstname}}</i></a></li>
 								<li><a href="/cart">Cart</a></li>
 								<li><a href="/wishlist">wishlist</a></li>
 							@else

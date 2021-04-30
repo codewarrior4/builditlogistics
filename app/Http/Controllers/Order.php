@@ -58,4 +58,33 @@ class Order extends Controller
         session()->flash('msg','Order Status Updated');
         return back();
     }
+
+    public function userOrder()
+    {
+        $orders = Payments::where('userid','=',session('user')->id)->latest()->paginate(10);
+        return view('user.orders',compact('orders'));
+    }
+
+    public function userOrderDetails($paymentid)
+    {
+        $payments =Payments::where('paymentid','=',$paymentid)->first();
+        $payments->status ="true";
+        $payments->save();
+
+        $orders =Orders::where(['paymentid'=>$paymentid])
+            ->join('products','orders.pid','=','products.pid')
+            ->join('users','users.id','=','orders.userid')
+            // ->join('informations','informations.userid','=','users.id')
+            ->select('products.*','orders.*','users.id')
+            ->get();
+        $total =array();
+        foreach($orders as $order)
+        {
+            $totals =($order->price * $order->quantity);
+            array_push($total,$totals);
+        }
+        $sum=array_sum($total);
+
+        return view('user.orderdetails',compact('orders','sum'));
+    }
 }

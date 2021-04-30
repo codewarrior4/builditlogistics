@@ -86,7 +86,7 @@
 						</div>
 
 						@if (session('user'))
-							<a href="/user/index" class="header-icon pb-md-1  pl-1"><i class="icon-user-2"></i></a>
+							<a href="/user/index" title="{{session('user')->firstname.' '.session('user')->lastname}}" class="header-icon pb-md-1  pl-1"><i class="icon-user-2"></i></span></a>
 
 							<a href="/wishlist" class="header-icon pb-md-1"><i class="icon-wishlist-2"></i></a>
 
@@ -234,7 +234,6 @@
 							<li><a href="/blog">Blog</a></li>
 							<li><a href="/about">About Us</a></li>
 							<li><a href="/contact">Contact Us</a></li>
-							<li class="float-right m-0"><a class="px-4" href="#">Special Offer!</a></li>
 						</ul>
 					</nav>
 				</div><!-- End .container -->

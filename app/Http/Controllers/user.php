@@ -220,7 +220,7 @@ class user extends Controller
                 {
                     return redirect('user/login')->with('msg','Hello '.$user->firstname .' Your Account has been disabled . Kindly reach out to our customer care for activation');
                 }
-                return redirect('user/index')->with('msg','Welcome back '.$user->firstname);
+                return redirect('/');
             }
         }
         

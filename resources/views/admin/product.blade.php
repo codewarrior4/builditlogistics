@@ -43,23 +43,23 @@
                               <label for="exampleFormControlSelect2">Description</label>
                              <textarea required name="description" id="summernote" cols="30" rows="10"></textarea>
                             </div>
-                            <div class="row">
-                                <div class="col-4">
+                            
+                                <div class="col-12">
                                     <div class="form-group">
                                         <label for="exampleFormControlSelect1">Price</label>
                                         <input required type="text" class="form-control" name="price" id="">
                                     </div> 
                                 </div>
-                                <div class="col-4">
+                                <div class="col-12">
                                     <div class="form-group">
                                         <label for="exampleFormControlSelect1">Compared Price</label>
                                         <input required type="text" class="form-control" name="compare_price" id="">
                                     </div> 
                                 </div>
-                                <div class="col-4">
+                                <div class="col-12">
                                     <div class="form-group">
                                         <label for="exampleFormControlSelect1">Tag</label>
-                                        <select required name="tag" class="default_sel mb_30 w-100" style="display: none;">
+                                        <select required name="tag" class="custom-select mb_30 w-100" >
                                             
                                                 <option value="featured" >Featured Products</option>
                                                 <option value="hot" >Hot Products</option>
@@ -68,56 +68,54 @@
                                     </div> 
                                 </div>
 
-                            </div>
-                            <div class="row">
-                                <div class="col-4">
+                                <div class="col-12">
                                     <div class="form-group">
                                         <label for="my-input">Category</label>
-                                        <select required name="category" class="default_sel mb_30 w-100" style="display: none;">
+                                        <select required name="category" class="custom-select mb_30 w-100" >
                                         @foreach ($cat as $cats)
                                                 <option value="{{$cats->id}}" >{{$cats->title}}</option>
                                             @endforeach
                                         </select>
                                      </div>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-12">
                                     <div class="form-group">
                                         <label for="my-input">Sub Category</label>
-                                        <select required name="sub_category" class="default_sel mb_30 w-100" style="display: none;">
+                                        <select required name="sub_category" class="custom-select mb_30 w-100" >
                                             @foreach ($sub as $subs)
                                                 <option value="{{$subs->id}}" >{{$subs->name}}</option>
                                             @endforeach
                                            
                                         </select>
                                      </div>
-                                </div>
-                                <div class="col-4">
+                                
+                                <div class="col-12">
                                     <div class="form-group">
                                         <label for="my-input">Percentage %</label>
                                         <input required type="number" min="5" name="percentage" id="" class="form-control">
                                      </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-4">
+                           
+                                <div class="col-12">
                                     <div class="form-group">
                                         <label for="my-input">Image Extra 1</label>
                                         <input required type="file" name="image1" id="" class="form-control">
                                      </div>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-12">
                                     <div class="form-group">
                                         <label for="my-input">Image Extra 2</label>
                                         <input required type="file" name="image2" id="" class="form-control">
                                      </div>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-12">
                                     <div class="form-group">
                                         <label for="my-input">Image Extra 3</label>
                                         <input required type="file" name="image3" id="" class="form-control">
                                      </div>
                                 </div>
-                            </div>
+
                             <div class="form-group">
                                 <input type="submit" value="Submit" class="btn btn-outline-primary">
                             </div>

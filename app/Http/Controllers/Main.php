@@ -75,6 +75,12 @@ class Main extends Controller
                     ->select('products.*','carts.quantity')
                     ->get();
                $information =Informations::where('userid','=',session('user')->id)->first();
+              
+               if($information ==null)
+               {
+                   $information='';
+               }
+            //    dd($information);
             // return $information;
             return view('main.checkout',compact('carts','information'));
         }

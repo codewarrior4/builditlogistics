@@ -78,7 +78,14 @@
 						</div><!-- End .product-single-gallery -->
 
 						<div class="col-md-7 product-single-details">
-							<h1 class="product-title">{{$product->pname}}</h1>
+							<div class="row">
+								<div class="col-sm-6 col-md-4">
+									<h1 class="product-title" >{{$product->pname}}</h1>
+								</div>
+								<div class="col col-sm-6 col-md-4">
+									<a href="/wishlist/{{$product->pid}}/{{$product->price}}" class="add-wishlist" title="Add to Wishlist">Add to Wishlist</a>
+								</div>
+							</div>
 
 							<div class="ratings-container">
 								<b>( {{$product->views}} views )</b>
@@ -125,7 +132,6 @@
 									<a href="https://www.linkedin.com/shareArticle?mini=true&url={{url()->full()}}" class="social-icon social-linkedin fab fa-linkedin-in" target="_blank" title="Linkedin"></a>
 								</div><!-- End .social-icons -->
 
-								<a href="/wishlist/{{$product->pid}}/{{$product->price}}" class="add-wishlist" title="Add to Wishlist">Add to Wishlist</a>
 							</div><!-- End .product single-share -->
 						</div><!-- End .product-single-details -->
 					</div><!-- End .row -->

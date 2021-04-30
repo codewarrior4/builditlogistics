@@ -18,7 +18,8 @@
 			<div class="container mb-5">
 				<div class="row">
 					<div class="col-lg-9 order-lg-last dashboard-content">
-						<h2>Order Details</h2>
+						<p class="h2">Order Details </p> 
+                        <p class="h4">PaymentId - #{{$orders[0]->paymentid}}</p>
                        
                             <div class="QA_table ">
                                 Items
@@ -32,32 +33,22 @@
                                             <th scope="col">Unit</th>
                                             <th scope="col">Total</th>
                                         </tr>
+                                        
                                     </thead>
                                     <tbody>
+                                        @foreach ($orders as $count =>$order)
                                         <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mayowa</td>
-                                            <td>3</td>
-                                            <td>8.00</td>
-                                            <td>#4,000</td>
+                                            <th scope="row">{{$count +1}}</th>
+                                            <td>{{$order->pname}}</td>
+                                            <td>{{$order->quantity}}</td>
+                                            <td>&#8358; {{$order->price}}</td>
+                                            <td>&#8358; {{number_format($order->price * $order->quantity,2)}}</td>
                                         </tr>
+                                        @endforeach
+                                    
                                         <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mayowa</td>
-                                            <td>3</td>
-                                            <td>8.00</td>
-                                            <td>#4,000</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mayowa</td>
-                                            <td>3</td>
-                                            <td>8.00</td>
-                                            <td>#4,000</td>
-                                        </tr>
-                                        <tr>
-                                            <th colspan="2">Total Price #25,0000</th>
-                                            <th colspan="3">Status : Pending</th>
+                                            <th colspan="2">Total Price &#8358;{{number_format($sum,2)}}</th>
+                                            <th colspan="3">Status {{$orders[0]->status}}</th>
                                         </tr>
                                     </tbody>
                                 </table>

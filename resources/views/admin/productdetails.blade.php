@@ -52,92 +52,89 @@
                               <label for="exampleFormControlSelect2">Description</label>
                              <textarea required name="description" id="summernote" cols="30" rows="10">{!!$products->description!!}</textarea>
                             </div>
-                            <div class="row">
-                                <div class="col-4">
-                                    <div class="form-group">
-                                        <label for="exampleFormControlSelect1">Price</label>
-                                        <input required type="text" class="form-control" value="{{$products->price}}" name="price">
-                                    </div> 
-                                </div>
-                                <div class="col-4">
-                                    <div class="form-group">
-                                        <label for="exampleFormControlSelect1">Compared Price</label>
-                                        <input required type="text" class="form-control" value="{{$products->compare_price}}" name="compare_price" id="">
-                                    </div> 
-                                </div>
-
-                                <div class="col-4">
-                                    <div class="form-group">
-                                        <label for="exampleFormControlSelect1">Tag</label>
-                                        <select required name="tag" class="default_sel mb_30 w-100" style="display: none;">
-                                            
-                                                <option value="featured" {{($products->tag=='featured')?'selected':''}} >Featured Products</option>
-                                                <option value="hot" {{($products->tag=='hot')?'selected':''}}>Hot Products</option>
-                                           
-                                        </select>
-                                    </div> 
-                                </div>
-
+                           
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="exampleFormControlSelect1">Price</label>
+                                    <input required type="text" class="form-control" value="{{$products->price}}" name="price">
+                                </div> 
                             </div>
-                            <div class="row">
-                                <div class="col-4">
-                                    <div class="form-group">
-                                        <label for="my-input">Category</label>
-                                        <select required name="category" class="default_sel mb_30 w-100" style="display: none;">
-                                            @foreach ($cat as $cats)
-                                                @if($products->category == $cats->id)
-                                                 <option selected value="{{$products->category}}" >{{$products->title}}</option>
-                                                @else
-                                                <option value="{{$cats->id}}" >{{$cats->title}}</option>
-                                                @endif
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="exampleFormControlSelect1">Compared Price</label>
+                                    <input required type="text" class="form-control" value="{{$products->compare_price}}" name="compare_price" id="">
+                                </div> 
+                            </div>
 
-                                            @endforeach
-                                        </select>
-                                     </div>
-                                </div>
-                                <div class="col-4">
-                                    <div class="form-group">
-                                        <label for="my-input">Sub Category</label>
-                                        <select required name="sub_category" class="default_sel mb_30 w-100" style="display: none;">
-                                            @foreach ($sub as $subs)
-                                                @if($products->sub_category == $subs->id)
-                                                 <option selected value="{{$products->sub_category}}" >{{$products->name}}</option>
-                                                @else
-                                                <option value="{{$subs->id}}" >{{$subs->name}}</option>
-                                                @endif
-                                            @endforeach
-                                           
-                                        </select>
-                                     </div>
-                                </div>
-                                <div class="col-4">
-                                    <div class="form-group">
-                                        <label for="exampleFormControlSelect1">Percentage</label>
-                                        <input required type="number" min="5" class="form-control" value="{{$products->percentage}}" name="percentage" id="">
-                                    </div> 
-                                </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="exampleFormControlSelect1">Tag</label>
+                                    <select required name="tag" class="custom-select mb_30 w-100" style="display: none;">
+                                        
+                                            <option value="featured" {{($products->tag=='featured')?'selected':''}} >Featured Products</option>
+                                            <option value="hot" {{($products->tag=='hot')?'selected':''}}>Hot Products</option>
+                                        
+                                    </select>
+                                </div> 
+                            </div>
+
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="my-input">Category</label>
+                                    <select required name="category" class="custom-select mb_30 w-100" style="display: none;">
+                                        @foreach ($cat as $cats)
+                                            @if($products->category == $cats->id)
+                                                <option selected value="{{$products->category}}" >{{$products->title}}</option>
+                                            @else
+                                            <option value="{{$cats->id}}" >{{$cats->title}}</option>
+                                            @endif
+
+                                        @endforeach
+                                    </select>
+                                    </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="my-input">Sub Category</label>
+                                    <select required name="sub_category" class="custom-select mb_30 w-100" style="display: none;">
+                                        @foreach ($sub as $subs)
+                                            @if($products->sub_category == $subs->id)
+                                                <option selected value="{{$products->sub_category}}" >{{$products->name}}</option>
+                                            @else
+                                            <option value="{{$subs->id}}" >{{$subs->name}}</option>
+                                            @endif
+                                        @endforeach
+                                        
+                                    </select>
+                                    </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="exampleFormControlSelect1">Percentage</label>
+                                    <input required type="number" min="5" class="form-control" value="{{$products->percentage}}" name="percentage" id="">
+                                </div> 
                             </div>
                             <input type="hidden" name="pid" value="{{$products->pid}}">
-                            <div class="row">
-                                <div class="col-4">
-                                    <div class="form-group">
-                                        <label for="my-input">Image Extra 1</label>
-                                        <img src="/uploads/{{$products->image1}}" class="img img-responsive" width="400" height="250" alt="">
-                                     </div>
-                                </div>
-                                <div class="col-4">
-                                    <div class="form-group">
-                                        <label for="my-input">Image Extra 2</label>
-                                        <img src="/uploads/{{$products->image2}}" class="img img-responsive" width="400" height="250" alt="">
-                                     </div>
-                                </div>
-                                <div class="col-4">
-                                    <div class="form-group">
-                                        <label for="my-input">Image Extra 3</label>
-                                        <img src="/uploads/{{$products->image3}}" class="img img-responsive" width="400" height="250" alt="">
-                                     </div>
-                                </div>
+                           
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="my-input">Image Extra 1</label>
+                                    <img src="/uploads/{{$products->image1}}" class="img img-responsive" width="400" height="250" alt="">
+                                    </div>
                             </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="my-input">Image Extra 2</label>
+                                    <img src="/uploads/{{$products->image2}}" class="img img-responsive" width="400" height="250" alt="">
+                                    </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="my-input">Image Extra 3</label>
+                                    <img src="/uploads/{{$products->image3}}" class="img img-responsive" width="400" height="250" alt="">
+                                    </div>
+                            </div>
+                            
                             <div class="form-group">
                                 <input type="submit" value="Submit" class="btn btn-outline-primary">
                             </div>

@@ -46,7 +46,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="my-input">Category</label>
-                                <select required name="catid" class="default_sel mb_30 w-100" style="display: none;">
+                                <select required name="catid" class="custom-select mb_30 w-100" style="display: none;">
                                     @foreach ($subs as $sub)
                                         <option value="{{$sub->id}}">{{$sub->title}}</option>
                                         

@@ -25,37 +25,26 @@
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">TICKEt ID</th>
-                                            <th scope="col">Quantity</th>
+                                            <th scope="col">Payment D</th>
+                                            <th scope="col">Reference</th>
                                             <th scope="col">Status</th>
-                                            <th scope="col">Price</th>
+                                            <th scope="col">Amount (&#8358;)</th>
                                             <th scope="col">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach ($orders as $count=> $order)
+                                            <tr>
+                                                <th scope="row">{{$count +1}}</th>
+                                                <td>{{$order->paymentid}}</td>
+                                                <td>{{$order->reference}}</td>
+                                                <td>{{($order->status =="false")?"Pending":"Seen"}}</td>
+                                                <td>&#8358; {{number_format($order->amount,2)}}</td>
+                                                <td><a href="order/{{$order->paymentid}}" class="btn btn-primary btn-sm">View</a></td>
+                                            </tr>
+                                        @endforeach
                                         <tr>
-                                            <th scope="row">1</th>
-                                            <td>BIL9304853</td>
-                                            <td>3</td>
-                                            <td>Pending</td>
-                                            <td>#4,000</td>
-                                            <td><a href="order/1" class="btn btn-primary btn-sm">View</a></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>BIL9304853</td>
-                                            <td>3</td>
-                                            <td>Pending</td>
-                                            <td>#4,000</td>
-                                            <td><a href="order/1" class="btn btn-primary btn-sm">View</a></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>BIL9304853</td>
-                                            <td>3</td>
-                                            <td>Pending</td>
-                                            <td>#4,000</td>
-                                            <td><a href="order/1" class="btn btn-primary btn-sm">View</a></td>
+                                            <td colspan="6">{{$orders->links('pagination::bootstrap-4')}}</td>
                                         </tr>
                                     </tbody>
                                 </table>

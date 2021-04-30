@@ -147,7 +147,7 @@
                                                 <div class="form-group">
                                                     <label for="my-input">Status</label>
                                                    
-                                                    <select name="status" class="default_sel mb_30 w-100" style="display: none;">
+                                                    <select name="status" class="custom-select mb_30 w-100" style="display: none;">
 
                                                         <option data-display="Select">Select</option>
                                                         <option {{($orders[0]->status =='pending')?'selected':'' }} value="pending">Pending</option>
