@@ -44,21 +44,21 @@
         </form>
     </div>
     <hr>
-    <div class="container-fluid">
+    <div class="container">
         <div class="accordion accordion_custom mb_50" id="accordion_ex">
             @foreach ($faq as $faqs)
-            <div class="card border border-primary">
+            <div class="card border border-top-0 mb-4 border-primary">
                 <div class="card-header" id="headingOne">
                     <h2 class="mb-0">
                         <a href="#" class="btn" type="button" data-toggle="collapse"
-                            data-target="#collapseOne" aria-expanded="true"
+                            data-target="#collapse{{$faqs->id}}" aria-expanded="true"
                             aria-controls="collapseOne">
                             {{$faqs->question}}
                         </a>
                     </h2>
                 </div>
 
-                <div id="collapseOne" class="collapse " aria-labelledby="headingOne"
+                <div id="collapse{{$faqs->id}}" class="collapse " aria-labelledby="headingOne"
                     data-parent="#accordion_ex">
                     <div class="card-body">
                         <p>{{$faqs->answer}}</p>

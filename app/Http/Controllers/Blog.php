@@ -11,11 +11,7 @@ use Illuminate\Support\Facades\File;
 
 class Blog extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
         $blogs = Blogs::latest()->paginate(5);
@@ -24,13 +20,6 @@ class Blog extends Controller
 
     }
 
- 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $blog= new Blogs;
@@ -53,7 +42,8 @@ class Blog extends Controller
         return view('main.blog',compact('blogs'));
     }
 
-    public function blogdetails($id){
+    public function blogdetails($id)
+    {
         
         $blog = Blogs::find($id);
 
@@ -64,21 +54,13 @@ class Blog extends Controller
 
         return view('main.blogdetails',compact('blog','comments'));
     }
+
     public function show($id)
     {
         $blog = Blogs::find($id);
         return view('admin.blogdetails',compact('blog'));
     }
 
-   
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request)
     {
         $blog = Blogs::find($request->id);
@@ -93,12 +75,6 @@ class Blog extends Controller
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $blog = Blogs::find($id);

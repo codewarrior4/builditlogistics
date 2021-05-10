@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Mail;
 
 class Email extends Controller
 {
-    //
     public function index()
     {
         $customer = ["email"=>"mayowatope119@gmail.com","Name"=>"Adebayo"];

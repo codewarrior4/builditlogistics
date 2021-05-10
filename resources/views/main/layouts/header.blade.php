@@ -1,11 +1,14 @@
 <?php
 	use App\Http\Controllers\Main;
 	use App\Http\Controllers\Cart;
+	use App\Http\Controllers\Wishlist;
 	$details =Main::index();
 	$categories =  $details['categories'];
 	$socials = $details['socials'];
 
 	$cart =Cart::cart();
+	$wish =Wishlist::wish();
+	$wcount= $wish['count'];
 	$count =$cart['count'];
 	$sum =$cart['sum'];
 	
@@ -86,12 +89,42 @@
 						</div>
 
 						@if (session('user'))
-							<a href="/user/index" title="{{session('user')->firstname.' '.session('user')->lastname}}" class="header-icon pb-md-1  pl-1"><i class="icon-user-2"></i></span></a>
+							
+							<div class="dropdown cart-dropdown mr-3">
+								<a href="#" title="{{session('user')->firstname.' '.session('user')->lastname}}" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
+									<i class="fa fa-user-circle"></i>
+								</a>
 
-							<a href="/wishlist" class="header-icon pb-md-1"><i class="icon-wishlist-2"></i></a>
+								<div class="dropdown-menu">
+									<div class="dropdownmenu-wrapper">
+										<div class="dropdown-cart-header">
+											<span>{{session('user')->firstname.' '.session('user')->lastname}} </span>
+
+											<a href="/user/index" class="float-right">View Profile</a>
+										</div><!-- End .dropdown-cart-header -->
+
+
+										<div class="dropdown-cart-total">
+										<a href="/logout" class="float-left">Logout</a>
+
+										</div><!-- End .dropdown-cart-total -->
+
+										<div class="dropdown-cart-action">
+											<!-- <a href="/checkout" class="btn btn-dark btn-block">Checkout</a> -->
+										</div><!-- End .dropdown-cart-total -->
+									</div><!-- End .dropdownmenu-wrapper -->
+								</div><!-- End .dropdown-menu -->
+							</div>
+
+							<div class="dropdown cart-dropdown mr-2">
+								<a href="/wishlist" class="text-danger" aria-haspopup="true" aria-expanded="false" data-display="static">
+									<i class="fa fa-heart" style="font-size: 30px;"></i>
+								 	<span class="cart-count badge-circle">{{$wcount}}</span>
+								</a>
+							</div>
 
 							<!--  cart details -->
-							<div class="dropdown cart-dropdown">
+							<div class="dropdown cart-dropdown ml-2">
 								<a href="#" class="dropdown-toggle dropdown-arrow" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
 									<i class="icon-shopping-cart"></i>
 									<span class="cart-count badge-circle">{{$count}}</span>

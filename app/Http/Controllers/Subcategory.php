@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 class Subcategory extends Controller
 {
-    //
+    
     public function index()
     {
         $subs= Categorys::all();

@@ -1,3 +1,15 @@
+<?php
+    use Illuminate\Routing\UrlGenerator;
+	use App\Http\Controllers\Main;
+	use App\Http\Controllers\Cart;
+	$details =Main::index();
+	$categories =  $details['categories'];
+	$socials = $details['socials'];
+
+	$cart =Cart::cart();
+	$count =$cart['count'];
+	$sum =$cart['sum'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,8 +19,24 @@
 
 	<title>Build it Logistics - @yield('title')</title>
 
-	<meta name="keywords" content="Build IT Logistics" />
-	<meta name="description" content="Build IT Logistics">
+	<meta name="description" content="@yield('description')">
+
+        <meta name="keywords" content="home, accessories, home accessories, shipping,shipping services,homeitall, itall,homeall, allhome,Homeitall Logistics, mailroom , warehousing , best e-commerce service in Nigeria, logistics company in Nigeria, ecommerce delivery, ecommerce courier service ,local shipment, international shipment, same day delivery , logistics support, konga delivery, jumia delivery , delivery services, delivery service for ecommerce, ecommerce delivery in Nigeria , deal dey delivery, Nigeria logistics company,">
+        <link rel="pingback" href="xmlrpc.php">
+        <meta property="og:url" content="{{URL::to('/')}}">
+        <meta property="og:title" content="HomeItAll">
+        <meta property="og:description" content="@yield('description') ">
+        <meta property="og:site_name" content="HomeItAll">
+        <meta property="og:image" content="{{URL::to('/')}}@yield('image')">
+        <meta property="og:image:width" content="1500"/>
+        <meta property="og:image:height" content="249"/>
+        <meta itemprop="name" content="HomeItAll"/>
+        <meta itemprop="url" content="{{URL::to('/')}}"/>
+        <meta itemprop="description" content="home, accessories, home accessories, shipping,shipping services,homeitall, itall,homeall, allhome,Homeitall Logistics, mailroom , warehousing , best e-commerce service in Nigeria, logistics company in Nigeria, ecommerce delivery, ecommerce courier service ,local shipment, international shipment, same day delivery , logistics support, konga delivery, jumia delivery , delivery services, delivery service for ecommerce, ecommerce delivery in Nigeria , deal dey delivery, Nigeria logistics company,"/>
+        <meta name="twitter:title" content="HomeItAll"/>
+        <meta name="twitter:url" content="{{URL::to('/')}}"/>
+        <meta name="twitter:card" content="summary"/>
+
 	<meta name="author" content="Adebayo Mayowa">
 
 	<!-- Favicon -->
@@ -31,19 +59,6 @@
 
 
 </style>
-<?php
-	use App\Http\Controllers\Main;
-	use App\Http\Controllers\Cart;
-	$details =Main::index();
-	$categories =  $details['categories'];
-	$socials = $details['socials'];
-
-	$cart =Cart::cart();
-	$count =$cart['count'];
-	$sum =$cart['sum'];
-	
-
-?>
 	<script type="text/javascript">
 		WebFontConfig = {
 			google: { families: [ 'Open+Sans:300,400,600,700,800','Poppins:300,400,500,600,700,800' ] }

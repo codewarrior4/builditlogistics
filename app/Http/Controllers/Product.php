@@ -7,14 +7,11 @@ use App\Models\Products;
 use App\Models\Categorys;
 use App\Models\SubCategorys;
 use App\Models\Carts;
+use App\Models\Wishlists;
 use Illuminate\Support\Facades\DB;
 class Product extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $products = DB::table('products')
@@ -26,11 +23,6 @@ class Product extends Controller
         return view('admin.products',compact('products'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $cat= Categorys::all();
@@ -38,12 +30,7 @@ class Product extends Controller
         return view('admin.product',compact('cat','sub'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         $product = new Products;
@@ -52,6 +39,7 @@ class Product extends Controller
         $product->sub_category= $request->sub_category;
         $product->price= $request->price;
         $product->tag= $request->tag;
+        $product->status=1;
         $product->compare_price= $request->compare_price;
         $product->description= $request->description;
         $product->percentage= $request->percentage;
@@ -81,12 +69,6 @@ class Product extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $cat= Categorys::all();
@@ -128,10 +110,8 @@ class Product extends Controller
 
         return redirect()->to('admin/products/'.$request->pid)->with('msg','Product Details has been Updated',compact('products','cat','sub'));
 
-
     }
 
-   
     public function destroy($id)
     {
    
@@ -141,24 +121,36 @@ class Product extends Controller
         {
             $cart->delete();
         }
-        $product->delete();
-        $products = DB::table('products')
-        ->join('categorys','products.category','=','categorys.id')
-        ->join('subcategory','products.sub_category','=','subcategory.id')
-        ->select('products.*','categorys.title','categorys.id','subcategory.name')
-        ->get();
+        $wishlists = Wishlists::where(['pid'=>$id])->get();
+        foreach($wishlists as $wishlist)
+        {
+            $wishlist->delete();
+        }
+        $product->status =0;
+        $product->save();
+        
         session()->flash('msg','Product has been Deleted');
-        return view('admin.products',compact('products'));
+        return back();
+    }
+
+    public function activate($id)
+    {
+   
+        $product = Products::find($id);
+        $product->status =1;
+        $product->save();
+        session()->flash('msg','Product has been Activated');
+        return back();
     }
 
     public function singleproducts($id)
     {
-        $product = Products::where(['pid'=>$id])->get();
-        $count = count($product);
-        if($count <1)
+        $product = Products::where(['pid'=>$id])->first();
+        if($product =="" || $product->status ==0)
         {
             session()->flash('product','Product Does not exist');
-            $products= Products::orderBy('pid','desc')->paginate(15);
+            $products= Products::where('status','=',1)
+                        ->orderBy('pid','desc')->paginate(15);
             return view('main.products',compact('products'));
         }
         else
@@ -176,7 +168,8 @@ class Product extends Controller
     
     public function allproducts()
     {
-        $products= Products::orderBy('pid','desc')->paginate(15);
+        $products= Products::where('status','=',1)
+                   ->orderBy('pid','desc')->paginate(15);
         return view('main.products',compact('products'));
     }
 }

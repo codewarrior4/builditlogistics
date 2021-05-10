@@ -48,6 +48,7 @@ Route::group(['prefix'=>'/user'],function()
         Route::post('/billing',[Information::class,'billing']);
         Route::post('/shipping',[Information::class,'shipping']);
         Route::view('/index','user.index');
+        Route::view('/','user.index');
         Route::get('/logout',[user::class,'logout']);
         Route::post('/changepassword',[user::class,'changepassword']);
         Route::get('/orders',[Order::class,'userOrder']);
@@ -123,6 +124,7 @@ Route::group(['prefix'=>'/user'],function()
         Route::get('/products',[Product::class,'index']);
         Route::get('/products/{id}',[Product::class,'show']);
         Route::get('/products/delete/{id}',[Product::class,'destroy']);
+        Route::get('/products/activate/{id}',[Product::class,'activate']);
 
 
         //Subscribers
@@ -134,6 +136,8 @@ Route::group(['prefix'=>'/user'],function()
         Route::get('/orders',[Order::class,'adminOrders']);
         Route::get('/order/{paymentid}',[Order::class,'adminOrderdetails']);
         Route::post('/order/update',[Order::class,'adminUpdate']);
+        Route::post('/order/message',[Order::class,'sendMessage']);
+        Route::get('/ordermessage/delete/{id}',[Order::class,'deleteMessage']);
 
    
 });

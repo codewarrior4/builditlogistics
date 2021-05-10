@@ -88,7 +88,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                             <div class="col-sm-12 col-md-6">
                                 <div class="white_box mb_30">
@@ -134,7 +133,7 @@
 
                             </div>
                             <div class="col-sm-12 col-md-6">
-                            <div class="white_box mb_30">
+                                <div class="white_box mb_30">
                                     <div class="box_header ">
                                         <div class="main-title">
                                             <h3 class="mb-0" >Update Order Status</h3>
@@ -143,11 +142,11 @@
                                     <div class="card shadow shadow-lg">
                                        
                                         <div class="card-body">
-                                            <form action="/admin/order/update" method="post">
+                                            <form action="/admin/order/message" method="post">
                                                 <div class="form-group">
                                                     <label for="my-input">Status</label>
                                                    
-                                                    <select name="status" class="custom-select mb_30 w-100" style="display: none;">
+                                                    <select name="status" class="custom-select mb_30 w-100" >
 
                                                         <option data-display="Select">Select</option>
                                                         <option {{($orders[0]->status =='pending')?'selected':'' }} value="pending">Pending</option>
@@ -162,9 +161,90 @@
                                                    
                                                 </div>
                                                  <input type="submit" value="Update Detail" class="btn btn-outline-primary">
-                                        </form>
+                                            </form>
                                         </div>
                                         
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="white_box mb_30">
+                                    <div class="box_header ">
+                                        <div class="main-title">
+                                            <h3 class="mb-0" >Send Customer Message</h3>
+                                        </div>
+                                    </div>
+                                    <div class="card shadow shadow-lg">
+                                       
+                                        <div class="card-body">
+                                            <form action="/admin/order/message" method="post">
+                                                <div class="form-group">
+                                                  <label for="Subject">Subject</label>
+                                                  <input type="text" class="form-control" name="subject" id="Subject" aria-describedby="helpId" placeholder="">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="my-textarea">Message</label>
+                                                    <textarea id="my-textarea" class="form-control" name="message" rows="3"></textarea>
+                                                </div> 
+                                                    @csrf
+                                                    <input type="hidden" name="paymentid" value="{{$orders[0]->paymentid}}">
+                                                    <input type="hidden" name="toemail" value="{{$user->email}}">
+                                                    <input type="hidden" name="userid" value="{{$user->id}}">
+                                                
+                                                 <input type="submit" value="Send Message" class="btn btn-outline-primary">
+                                            </form>
+                                        </div>
+                                        
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="white_box mb_30">
+                                    <div class="box_header ">
+                                        <div class="main-title">
+                                            <h3 class="mb-0" > Messages sent</h3>
+                                        </div>
+                                    </div>
+                                    <div class="card shadow shadow-lg">
+                                       
+                                        <div class="card-body">
+                                            <div class="accordion accordion_custom mb_50" id="accordion_ex">
+                                                @if (count($messages)==0)
+                                                    <div class="card shadwo shadow-lg">
+                                                        <div class="card-header">
+                                                            No messages Yet
+                                                        </div>
+                                                    </div>
+                                                @else
+                                                <p class="font-weight-bold pb-4">(Tap on the subject to view message details)</p>
+                                                    @foreach ($messages as $message)
+                                                        <div class="card border border-top-0 mb-4 border-primary">
+                                                            <div class="card-header" id="headingOne">
+                                                                <h2 class="mb-0">
+                                                                    <a href="#" class="btn" type="button" data-toggle="collapse"
+                                                                        data-target="#collapse{{$message->id}}" aria-expanded="true"
+                                                                        aria-controls="collapseOne">
+                                                                        {{$message->subject}}
+                                                                    </a>
+                                                                </h2>
+                                                            </div>
+
+                                                            <div id="collapse{{$message->id}}" class="collapse " aria-labelledby="headingOne"
+                                                                data-parent="#accordion_ex">
+                                                                <div class="card-body">
+                                                                    <p>{{$message->message}}</p>
+                                                                    <a href="/admin/ordermessage/delete/{{$message->id}}" class="btn btn-outline-danger">Delete Message</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                @endif
+                                                <div class="row d-flex align-items-center space-between">
+                                                <div class="col-6"> Total Message {{count($messages)}}</div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

@@ -70,14 +70,13 @@
 
 										<ul class="links link-parts row mb-0">
 											<div class="link-part col-sm-6">
-												<li><a href="about.html">About Us</a></li>
+												<li><a href="/about">About Us</a></li>
 												<li><a href="/contact">Contact Us</a></li>
-												<li><a href="my-account.html">My Account</a></li>
+												<li><a href="/user/">My Account</a></li>
 											</div>
 											<div class="link-part col-sm-6">
-												<li><a href="#">Orders History</a></li>
-												<li><a href="#">Advanced Search</a></li>
-												<li><a href="#" class="login-link">Login</a></li>
+												<li><a href="/faq">FAQ</a></li>
+												<li><a href="/user/login" class="login-link">Login</a></li>
 											</div>
 										</ul>
 									</div><!-- End .widget -->
@@ -89,9 +88,9 @@
 
 										<ul class="links link-parts row mb-0">
 											<div class="link-part col-xl-6">
-												<li><a href="#">Super Fast WordPress Theme</a></li>
-												<li><a href="#">1st Fully working Ajax Theme</a></li>
-												<li><a href="#">33 Unique Shop Layouts</a></li>
+												<li><a href="#">HomeItAll is a market place complete </a></li>
+												<li><a href="#">where you can get the accessories to </a></li>
+												<li><a href="#">your home and make your home comfortable</a></li>
 											</div>
 											<div class="link-part col-xl-6">
 												<li><a href="#">Powerful Admin Panel</a></li>

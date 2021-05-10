@@ -2,7 +2,21 @@
 @section('title')
     Cart
 @endsection
+@section('description')
+HomeItAll is a market place where you can get the accessories to complete your home and make your home comfortable
+@endsection
+@section('image')
+/assets/images/logo-black.png
+@endsection
+<?php
+	use App\Http\Controllers\Cart;;
+	$cart =Cart::cart();
+	$count =$cart['count'];
+	$sum =$cart['sum'];
+	$orderid=date('ymdhis');
+	
 
+?>
 @section('content')
 @if (session('success'))
 <script>
@@ -123,83 +137,47 @@
 					</div><!-- End .col-lg-8 -->
 
 					<div class="col-lg-4">
-						<div class="cart-summary">
+						<div class="order-summary">
 							<h3>Summary</h3>
 
 							<h4>
-								<a data-toggle="collapse" href="#total-estimate-section" class="collapsed" role="button" aria-expanded="false" aria-controls="total-estimate-section">Estimate Shipping and Tax</a>
+								<a data-toggle="collapse" href="#order-cart-section" class="collapsed" role="button" aria-expanded="false" aria-controls="order-cart-section">{{count($carts)}} products in Cart</a>
 							</h4>
 
-							<div class="collapse" id="total-estimate-section">
-								<form action="#">
-									<div class="form-group form-group-sm">
-										<label>Country</label>
-										<div class="select-custom">
-											<select class="form-control form-control-sm">
-												<option value="USA">United States</option>
-												<option value="Turkey">Turkey</option>
-												<option value="China">China</option>
-												<option value="Germany">Germany</option>
-											</select>
-										</div><!-- End .select-custom -->
-									</div><!-- End .form-group -->
+							<div class="collapse" id="order-cart-section">
+								<table class="table table-mini-cart">
+									<tbody>
+										@foreach ($carts as $cart)
+											<tr>
+												<td class="product-col">
+													<figure class="product-image-container">
+														<a href="/product/{{$cart->pid}}" class="product-image">
+															<img src="/uploads/{{$cart->banner}}" alt="product">
+														</a>
+													</figure>
+													<div>
+														<h2 class="product-title">
+															<a href="/product/{{$cart->pid}}">{{$cart->pname}}</a>
+														</h2>
 
-									<div class="form-group form-group-sm">
-										<label>State/Province</label>
-										<div class="select-custom">
-											<select class="form-control form-control-sm">
-												<option value="CA">California</option>
-												<option value="TX">Texas</option>
-											</select>
-										</div><!-- End .select-custom -->
-									</div><!-- End .form-group -->
-
-									<div class="form-group form-group-sm">
-										<label>Zip/Postal Code</label>
-										<input type="text" class="form-control form-control-sm">
-									</div><!-- End .form-group -->
-
-									<div class="form-group form-group-custom-control">
-										<label>Flat Way</label>
-										<div class="custom-control custom-checkbox">
-											<input type="checkbox" class="custom-control-input" id="flat-rate">
-											<label class="custom-control-label" for="flat-rate">Fixed $5.00</label>
-										</div><!-- End .custom-checkbox -->
-									</div><!-- End .form-group -->
-
-									<div class="form-group form-group-custom-control">
-										<label>Best Rate</label>
-										<div class="custom-control custom-checkbox">
-											<input type="checkbox" class="custom-control-input" id="best-rate">
-											<label class="custom-control-label" for="best-rate">Table Rate $15.00</label>
-										</div><!-- End .custom-checkbox -->
-									</div><!-- End .form-group -->
-								</form>
-							</div><!-- End #total-estimate-section -->
-
-							<table class="table table-totals">
-								<tbody>
-									<tr>
-										<td>Subtotal</td>
-										<td>$17.90</td>
-									</tr>
-
-									<tr>
-										<td>Tax</td>
-										<td>$0.00</td>
-									</tr>
-								</tbody>
-								<tfoot>
-									<tr>
-										<td>Order Total</td>
-										<td>$17.90</td>
-									</tr>
-								</tfoot>
-							</table>
-
-							<div class="checkout-methods">
-								<a href="/checkout" class="btn btn-block btn-sm btn-primary">Go to Checkout</a>
-							</div><!-- End .checkout-methods -->
+														<span class="product-qty">Qty: {{$cart->quantity}}</span>
+													</div>
+												</td>
+												<td class="price-col">&#8358; {{number_format($cart->price * $cart->quantity,2)}}</td>
+											</tr>
+											
+										@endforeach
+										<tr>
+												<th>
+													Total
+												</th>
+												<td>
+													&#8358; {{number_format($sum,2)}} 
+												</td>
+											</tr>
+									</tbody>	
+								</table>
+							</div><!-- End #order-cart-section -->
 						</div><!-- End .cart-summary -->
 					</div><!-- End .col-lg-4 -->
 				</div><!-- End .row -->

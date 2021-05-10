@@ -7,12 +7,14 @@ use App\Models\Orders;
 use App\Models\Payments;
 use App\Models\Users;
 use App\Models\Informations;
+use App\Models\Ordermessages;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendMailForOrder;
 
 class Order extends Controller
 {
-    //
-
+   
     public function adminOrders()
     {
         $payments = Payments::latest()->get();
@@ -37,11 +39,12 @@ class Order extends Controller
             $totals =($order->price * $order->quantity);
             array_push($total,$totals);
         }
+        $messages =Ordermessages::where(['orderid'=>$paymentid])->latest()->get();
         $sum=array_sum($total);
         $userid =$orders[0]['id'];
         $user =Users::find($userid);
         $information =Informations::where('userid','=',$userid)->first();
-        return view('admin.orderdetails',compact('orders','user','information','sum'));
+        return view('admin.orderdetails',compact('orders','user','information','sum','messages'));
     }
 
     public function adminUpdate(Request $request)
@@ -77,6 +80,7 @@ class Order extends Controller
             // ->join('informations','informations.userid','=','users.id')
             ->select('products.*','orders.*','users.id')
             ->get();
+        $messages =Ordermessages::where(['orderid'=>$paymentid])->latest()->get();
         $total =array();
         foreach($orders as $order)
         {
@@ -85,6 +89,30 @@ class Order extends Controller
         }
         $sum=array_sum($total);
 
-        return view('user.orderdetails',compact('orders','sum'));
+        return view('user.orderdetails',compact('orders','sum','messages'));
     }
+
+    public function sendMessage(Request $request)
+    {
+        $orderMessage = new Ordermessages;
+        $orderMessage->subject =$request->subject;
+        $orderMessage->message =$request->message;
+        $orderMessage->email =$request->toemail;
+        $orderMessage->userid =$request->userid;
+        $orderMessage->orderid =$request->paymentid;
+        $orderMessage->status ='sent';
+        $orderMessage->save();
+
+        session()->flash('msg','Message Sent to customer');
+        return back();
+    }
+
+    public function deleteMessage($id)
+    {
+        $orderMessage = Ordermessages::find($id);
+        $orderMessage->delete();
+        session()->flash('msg',"Message Has been deleted");
+        return back();
+    }
+
 }

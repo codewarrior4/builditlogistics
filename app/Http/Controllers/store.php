@@ -17,8 +17,6 @@ class store extends Controller
         return view('admin.store');
     }
 
-
-
     public function store(Request $request)
     {
         $stores = new Stores;
@@ -33,17 +31,13 @@ class store extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show()
     {
         $stores = Stores::all();
         return view('admin.stores',compact('stores'));
     }
+    
     public function stores()
     {
         $stores = Stores::all();

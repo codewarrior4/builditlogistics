@@ -13,7 +13,6 @@ class Tacs extends Controller
         return view('admin.tac',compact('tac'));
     }
 
-
     public function store(Request $request)
     {
         $tac = TAC::find($request->id);

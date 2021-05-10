@@ -24,4 +24,6 @@ class AdminMain extends Controller
         session()->forget('admin');
         return view('admin/login');
     }
+
+ 
 }

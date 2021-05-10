@@ -2,9 +2,14 @@
 @section('title')
     Wishlist
 @endsection
-
+@section('description')
+HomeItAll is a market place where you can get the accessories to complete your home and make your home comfortable
+@endsection
+@section('image')
+/assets/images/logo-black.png
+@endsection
 @section('content')
-@if (session('success'))
+@if(session('success'))
 <script>
 	Swal.fire({
 		icon: 'success',
@@ -14,7 +19,7 @@
 </script>	
 
 @endif
-@if (session('info'))
+@if(session('info'))
 <script>
 	Swal.fire({
 		icon: 'info',
@@ -24,7 +29,7 @@
 </script>	
 
 @endif
-@if (session('error'))
+@if(session('error'))
 <script>
 	Swal.fire({
 		icon: 'error',

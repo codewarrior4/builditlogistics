@@ -6,34 +6,20 @@ use Illuminate\Http\Request;
 use App\Models\Faqs;
 class Faq extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function faq()
     {
         $faqs= Faqs::latest()->paginate(10);
         return view('main.faq',['faqs'=>$faqs]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+ 
     public function create()
     {
         $faq= Faqs::latest()->paginate(10);
         return view('admin.faq',['faq'=>$faq]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $faq = new Faqs;
@@ -47,14 +33,6 @@ class Faq extends Controller
         return view('admin.faq',['faq'=>$faq]);
     }
 
-
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //

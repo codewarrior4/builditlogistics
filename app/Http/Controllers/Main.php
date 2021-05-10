@@ -16,20 +16,18 @@ use Illuminate\Support\Facades\DB;
 
 class Main extends Controller
 {
-    
     static function index()
     {
         $categories =Categorys::all();
         $socials =Socials::get()->first();
-        return compact('categories','socials');
-        
+        return compact('categories','socials');  
     }
 
     public function category($id)
     {
         $cat =Categorys::find($id);
-         $catname= $cat->title;
-        $products = Products::where(['category'=>$id])->paginate(15);
+        $catname= $cat->title;
+        $products = Products::where(['category'=>$id])->where('status','=',1)->paginate(15);
         $categories =Categorys::all();
         $subs =SubCategorys::where(['catid'=>$id])->get();
         return view('main.category',compact('products','subs','catname'));
@@ -41,6 +39,7 @@ class Main extends Controller
          $products = DB::table('products')->where(['sub_category'=>$id])
                         ->join('categorys','products.category','=','categorys.id')
                         ->join('subcategory','products.sub_category','=','subcategory.id')
+                        ->where('status','=',1)
                         ->select('products.*','categorys.title','categorys.id','subcategory.name')
                         ->paginate(15);
             return view('main.categorysub',compact('products'));
@@ -50,10 +49,12 @@ class Main extends Controller
     public function homePage()
     {
         $sliders =Sliders::all();
-        $latest =Products::orderBy('pid','desc')->limit(5)->get();
-        $random =Products::orderByRaw('RAND()')->limit(3)->get();
-        $featured = Products::where(['tag'=>'featured'])->orderBy('pid','desc')->limit(5)->get();
-        $hots = Products::where(['tag'=>'hot'])->orderBy('pid','desc')->limit(5)->get();
+        $latest =Products::orderBy('pid','desc')->where('status','=',1)->limit(5)->get();
+        $random =Products::orderByRaw('RAND()')->where('status','=',1)->limit(3)->get();
+        $featured = Products::where(['tag'=>'featured'])
+                    ->where('status','=',1)
+                    ->orderBy('pid','desc')->limit(5)->get();
+        $hots = Products::where(['tag'=>'hot'])->where('status','=',1)->orderBy('pid','desc')->limit(5)->get();
         return view('main.index',compact('sliders','latest','random','featured','hots'));
     }
 
@@ -62,6 +63,7 @@ class Main extends Controller
         $text =$request->text;
         $products =Products::where('category','=',$request->catid)
                     ->where('pname','LIKE','%'. $text.'%')
+                    ->where('status','=',1)
                     ->get();
         return view('main.productsearch',compact('products'));
     }

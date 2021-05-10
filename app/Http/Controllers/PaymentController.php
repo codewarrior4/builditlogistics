@@ -16,7 +16,6 @@ use Paystack;
 
 class PaymentController extends Controller
 {
-    //
     public function redirectToGateway()
     {
         try{
@@ -67,12 +66,13 @@ class PaymentController extends Controller
                 $cart->delete();
             }
             session()->flash('success','Your order is now complete');
-            $sliders =Sliders::all();
-            $latest =Products::orderBy('pid','desc')->limit(5)->get();
-            $random =Products::orderByRaw('RAND()')->limit(3)->get();
-            $featured = Products::where(['tag'=>'featured'])->orderBy('pid','desc')->limit(5)->get();
-            $hots = Products::where(['tag'=>'hot'])->orderBy('pid','desc')->limit(5)->get();
-            return view('main.index',compact('sliders','latest','random','featured','hots'));
+            // $sliders =Sliders::all();
+            // $latest =Products::orderBy('pid','desc')->limit(5)->get();
+            // $random =Products::orderByRaw('RAND()')->limit(3)->get();
+            // $featured = Products::where(['tag'=>'featured'])->orderBy('pid','desc')->limit(5)->get();
+            // $hots = Products::where(['tag'=>'hot'])->orderBy('pid','desc')->limit(5)->get();
+            // return view('main.index',compact('sliders','latest','random','featured','hots'));
+            return view('user.index');
 
 
             

@@ -1,3 +1,13 @@
+<?php 
+    use App\Models\Users;
+    use App\Models\Products;
+    use App\Models\Orders;
+    
+    $users = Users::all();
+    $products =Products::all();
+    $orders = Orders::all();
+?>
+
 @extends('admin.layout.base')
 @section('title')
     Home
@@ -28,25 +38,25 @@
                                 <div class="col-12">
                                     <div class="quick_activity_wrap">
                                         <div class="single_quick_activity">
-                                            <h4>Total Income</h4>
-                                            <h3>$ <span class="counter">5,79,000</span> </h3>
-                                            <p>Saved 25%</p>
+                                            <h4>Total Customers</h4>
+                                            <h3> <span class="counter">{{number_format(count($users))}}</span> </h3>
+                                            <!-- <p>Saved 25%</p> -->
                                         </div>
                                         <div class="single_quick_activity">
-                                            <h4>Total Expences</h4>
-                                            <h3>$ <span class="counter">79,000</span> </h3>
-                                            <p>Saved 25%</p>
+                                            <h4>Total Orders</h4>
+                                            <h3><span class="counter">{{number_format(count($orders))}}</span> </h3>
+                                            <!-- <p>Saved 25%</p> -->
                                         </div>
                                         <div class="single_quick_activity">
-                                            <h4>Cash on Hand</h4>
-                                            <h3>$ <span class="counter">92,000</span> </h3>
-                                            <p>Saved 25%</p>
+                                            <h4>Total products</h4>
+                                            <h3> <span class="counter">{{number_format(count($products))}}</span> </h3>
+                                            <!-- <p>Saved 25%</p> -->
                                         </div>
-                                        <div class="single_quick_activity">
+                                        <!-- <div class="single_quick_activity">
                                             <h4>Net Profit Margin</h4>
                                             <h3>$ <span class="counter">1,79,000</span> </h3>
                                             <p>Saved 65%</p>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>

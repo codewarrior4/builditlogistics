@@ -8,8 +8,6 @@ use Illuminate\Http\Request;
 
 class Cart extends Controller
 {
-    //
-
     public function addtocart($pid,$quantity,$price)
     {
         if(session('user') !="")
@@ -104,8 +102,6 @@ class Cart extends Controller
     {
         if(session('user') !="")
         {
- 
-            
             $wishlist=Wishlists::where(['pid'=>$pid])->get();
             if(count($wishlist)>=1)
             {

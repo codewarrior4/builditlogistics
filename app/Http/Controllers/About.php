@@ -6,18 +6,12 @@ use Illuminate\Http\Request;
 use App\Models\Aboutus;
 class About extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
         $about = Aboutus::all()->first();
         return view('admin.about',compact('about'));
     }
-
-    
 
     public function store(Request $request)
     {

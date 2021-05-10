@@ -1,7 +1,12 @@
 @extends('main.layouts.base')
 
 @section('title') Home page @endsection
-
+@section('description')
+HomeItAll is a market place where you can get the accessories to complete your home and make your home comfortable
+@endsection
+@section('image')
+/assets/images/logo-black.png
+@endsection
 @section('content')
 @if (session('success'))
 <script>
@@ -9,7 +14,7 @@
 		icon: 'success',
 		title: 'Done',
 		text: '{{session("success")}}',
-		footer: '<a href="/cart">View Cart</a>'
+		// footer: '<a href="/cart">View Cart</a>'
 		})
 </script>	
 

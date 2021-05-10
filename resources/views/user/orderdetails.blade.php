@@ -19,7 +19,7 @@
 				<div class="row">
 					<div class="col-lg-9 order-lg-last dashboard-content">
 						<p class="h2">Order Details </p> 
-                        <p class="h4">PaymentId - #{{$orders[0]->paymentid}}</p>
+                        <p class="h4">Payment Id - #{{$orders[0]->paymentid}}</p>
                        
                             <div class="QA_table ">
                                 Items
@@ -48,13 +48,50 @@
                                     
                                         <tr>
                                             <th colspan="2">Total Price &#8358;{{number_format($sum,2)}}</th>
-                                            <th colspan="3">Status {{$orders[0]->status}}</th>
+                                            <th colspan="3">Status <span class="badge badge-pill badge-primary">{{$orders[0]->status}}</span></th>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
 
-                           
+                           <hr>
+						<p class="h2">Messages </p> 
+                        <div class="container-fluid">
+                            <div class="accordion accordion_custom mb_50" id="accordion_ex">
+                                @if (count($messages)==0)
+                                    <div class="card shadwo shadow-lg">
+                                        <div class="card-header">
+                                            No messages Yet
+                                        </div>
+                                    </div>
+                                @else
+                                <p class="font-weight-bold pb-4">(Tap on the subject to view message details)</p>
+                                    @foreach ($messages as $message)
+                                        <div class="card border border-top-0 mb-4 border-primary">
+                                            <div class="card-header" id="headingOne">
+                                                <h2 class="mb-0">
+                                                    <a href="#" class="btn" type="button" data-toggle="collapse"
+                                                        data-target="#collapse{{$message->id}}" aria-expanded="true"
+                                                        aria-controls="collapseOne">
+                                                        {{$message->subject}}
+                                                    </a>
+                                                </h2>
+                                            </div>
+
+                                            <div id="collapse{{$message->id}}" class="collapse " aria-labelledby="headingOne"
+                                                data-parent="#accordion_ex">
+                                                <div class="card-body">
+                                                    <p>{{$message->message}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                @endif
+                                <div class="row d-flex align-items-center space-between">
+                                <div class="col-6"> Total Message {{count($messages)}}</div>
+                                </div>
+                            </div>
+                        </div>
                        
                     </div><!-- End .col-lg-9 -->
 

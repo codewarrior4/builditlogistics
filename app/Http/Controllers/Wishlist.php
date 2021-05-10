@@ -8,7 +8,6 @@ use App\Models\Carts;
 
 class Wishlist extends Controller
 {
-    //
     public function wishList()
     {
         if(session('user') !="")
@@ -25,6 +24,7 @@ class Wishlist extends Controller
             return redirect('/user/login')->with('msg','You have to be logged in to Access this page');
         } 
     }
+
     public function moveToCart($pid,$price,$quantity)
     {
         if(session('user') !="")
@@ -56,6 +56,21 @@ class Wishlist extends Controller
         else
         {
             return redirect('/user/login')->with('msg','You have to be logged in to Access this page');
+        }
+    }
+    
+    static function wish()
+    {
+        if(session('user') !="")
+        {
+            $wishlists= Wishlists::where(['userid'=>session('user')->id])->get();
+            $count=count($wishlists);
+            return compact('count');
+        }
+        else
+        {
+            $count=0;   
+            return compact('count');
         }
     }
 }

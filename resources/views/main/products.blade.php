@@ -2,7 +2,12 @@
 @section('title')
     Products
 @endsection
-
+@section('description')
+HomeItAll is a market place where you can get the accessories to complete your home and make your home comfortable
+@endsection
+@section('image')
+/assets/images/logo-black.png
+@endsection
 @section('content')
 <main class="main">
 			<div class="container container-not-boxed">

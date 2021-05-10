@@ -54,6 +54,7 @@
                                         <th scope="col">Image</th>
                                         <th scope="col">Category</th>
                                         <th scope="col">Tag</th>
+                                        <th scope="col">Status</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
@@ -65,9 +66,14 @@
                                         <td><img src="/uploads/{{$product->banner}}" width="70" height="70" alt=""></td>
                                         <td>{{$product->title}}</td>
                                         <td>{{$product->tag}}</td>
+                                        @if ($product->status==1)
+                                        <td><a href="/admin/products/delete/{{$product->pid}}" class="btn btn-success text-white" title="Tap to delete">Active</a></td>
+                                        @else
+                                        <td><a href="/admin/products/activate/{{$product->pid}}" class="btn btn-danger text-white" title="Tap to activate">Deleted</a></td>
+                                        @endif
                                         <td><a href="/admin/products/{{$product->pid}}" class="btn btn-outline-primary">View</a></td>
                                     </tr>
-                                @endforeach
+                                @endforeachthunder
                                     
                                    
                                 </tbody>

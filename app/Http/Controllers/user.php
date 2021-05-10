@@ -19,14 +19,13 @@ class user extends Controller
         return view('user.register');
     }
 
- 
-
     public function customers()
     {
         $customers = Users::latest()->get();
         
         return view('admin.customers',compact('customers'));
     }
+
     public function customer($id)
     {
         $customer = Users::find($id);
@@ -76,6 +75,7 @@ class user extends Controller
             return back();
         }
     }
+
     public function userpassword(Request $request)
     {
         if($request->new == $request->cnew)
@@ -106,7 +106,6 @@ class user extends Controller
         }
         
     }
-
 
     public function store(Request $request)
     {
@@ -157,7 +156,6 @@ class user extends Controller
 
     public function resendverification()
     {
-        
         if(session('user')=='')
         {
             return redirect('/user/login')->with('msg','User not logged in');
@@ -191,8 +189,8 @@ class user extends Controller
        
     }
 
-    public function logout(){
-        
+    public function logout()
+    {
             session()->pull('user');
             session()->forget('user');
             return redirect('user/login');
@@ -201,7 +199,6 @@ class user extends Controller
     public function login (Request $request)
     {
         $user= Users::where(['email'=>strtolower($request->email)])->first();
-        
         // return $user;
         if(!$user || !(Hash::check($request->password,$user->password)))
         {
