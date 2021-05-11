@@ -105,7 +105,7 @@
 
 
 										<div class="dropdown-cart-total">
-										<a href="/logout" class="float-left">Logout</a>
+										<a href="/user/logout" class="float-left">Logout</a>
 
 										</div><!-- End .dropdown-cart-total -->
 

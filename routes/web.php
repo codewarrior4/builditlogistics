@@ -49,6 +49,7 @@ Route::group(['prefix'=>'/user'],function()
         Route::post('/shipping',[Information::class,'shipping']);
         Route::view('/index','user.index');
         Route::view('/','user.index');
+        Route::view('/change','user.password');
         Route::get('/logout',[user::class,'logout']);
         Route::post('/changepassword',[user::class,'changepassword']);
         Route::get('/orders',[Order::class,'userOrder']);

@@ -94,17 +94,20 @@ class Order extends Controller
 
     public function sendMessage(Request $request)
     {
-        $orderMessage = new Ordermessages;
-        $orderMessage->subject =$request->subject;
-        $orderMessage->message =$request->message;
-        $orderMessage->email =$request->toemail;
-        $orderMessage->userid =$request->userid;
-        $orderMessage->orderid =$request->paymentid;
-        $orderMessage->status ='sent';
-        $orderMessage->save();
+        // dd($request->input());
+        $details = Ordermessages::create([
+            'subject' => $request->subject,
+            'message' => $request->message,
+            'email' => $request->toemail,
+            'userid' => $request->userid,
+            'orderid' => $request->paymentid,
+            'status' => 'sent',
+        ]);
 
+        Mail::to($request->toemail)->send(new SendMailForOrder($details));
         session()->flash('msg','Message Sent to customer');
         return back();
+        
     }
 
     public function deleteMessage($id)

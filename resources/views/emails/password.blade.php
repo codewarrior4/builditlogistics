@@ -1,13 +1,14 @@
 <?php
     use Illuminate\Routing\UrlGenerator;
+    $message ='<h3>Welcome to our BuildItCity </h3> <br>
+    <p>You requested to change your password</p>
+    <p>Please Click on the link below to change your password.</p>';
 ?>
 
 @component('mail::message')
  Hello {{$user->firstname}}
     
-    <h4>Welcome to our BuildItCity </h4> <br>
-    <p>You requested to change your password</p>
-    <p>Please Click on the link below to change your password.</p>
+   {!! $message !!}
 
 
 <a class="button button-primary" href="{{URL::to('/')}}/user/password/{{$user->remember_token}}">Change password</a>

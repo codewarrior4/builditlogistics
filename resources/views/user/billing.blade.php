@@ -26,6 +26,20 @@
 					</div>
 				@endif
 				<div class="row">
+				
+					<aside class="sidebar col-lg-3">
+						<div class="widget widget-dashboard">
+							<h3 class="widget-title">My Account</h3>
+
+							<ul class="list">
+								<li ><a href="index">Account Dashboard</a></li>
+								<li class="active"><a href="billing">Billing And Shipping</a></li> 
+								<li><a href="orders">My Orders</a></li>
+								<li><a href="/user/change">Change Password</a></li>
+								<li><a href="/user/logout">Logout</a></li>
+							</ul>
+						</div><!-- End .widget -->
+					</aside><!-- End .col-lg-3 -->
 					<div class="col-lg-9 order-lg-last dashboard-content">
 						<h2>Billing  Information</h2>
                         <hr>
@@ -162,18 +176,6 @@
 						</form>
 					</div><!-- End .col-lg-9 -->
 
-					<aside class="sidebar col-lg-3">
-						<div class="widget widget-dashboard">
-							<h3 class="widget-title">My Account</h3>
-
-							<ul class="list">
-								<li ><a href="index">Account Dashboard</a></li>
-								<li class="active"><a href="billing">Billing And Shipping</a></li> 
-								<li><a href="orders">My Orders</a></li>
-								<li><a href="/user/logout">Logout</a></li>
-							</ul>
-						</div><!-- End .widget -->
-					</aside><!-- End .col-lg-3 -->
 				</div><!-- End .row -->
 			</div><!-- End .container -->
 		</main><!-- End .main -->

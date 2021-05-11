@@ -10,15 +10,15 @@ use Illuminate\Queue\SerializesModels;
 class SendMailForOrder extends Mailable
 {
     use Queueable, SerializesModels;
-
+    public $details;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($details)
     {
-        //
+        $this->details = $details;
     }
 
     /**
@@ -28,6 +28,8 @@ class SendMailForOrder extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        
+        return $this->markdown('emails.order')
+            ->subject('HomeItAll - New Message on order');
     }
 }
