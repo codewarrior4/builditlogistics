@@ -25,7 +25,7 @@ class Wishlist extends Controller
         } 
     }
 
-    public function moveToCart($pid,$price,$quantity)
+    public function moveToCart($pid,$quantity,$price)
     {
         if(session('user') !="")
         {
@@ -41,7 +41,6 @@ class Wishlist extends Controller
             {
                 $wishlist = Wishlists::where(['userid'=>session('user')->id,'pid'=>$pid])->first();
                 $wishlist->delete();
-
                 $carts = new Carts;
                 $carts->pid =$pid;
                 $carts->price =$price;

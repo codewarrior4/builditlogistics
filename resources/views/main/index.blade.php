@@ -84,6 +84,7 @@ HomeItAll is a market place where you can get the accessories to complete your h
 						</div>
 						@endforeach
 						
+						
 					</div>
 
 					<div class="home-products-container text-center">

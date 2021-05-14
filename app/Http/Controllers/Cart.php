@@ -111,8 +111,10 @@ class Cart extends Controller
             else
             {
                 $carts = Carts::where(['userid'=>session('user')->id,'pid'=>$pid])->first();
-                $carts->delete();
-
+                if($carts)
+                {
+                  $carts->delete();  
+                }
                 $wishlists = new Wishlists;
                 $wishlists->pid =$pid;
                 $wishlists->price =$price;
@@ -177,7 +179,9 @@ class Cart extends Controller
                 $totals =($cart->price * $cart->quantity);
                 array_push($total,$totals);
             }
+            // dd($total);
             $sum=array_sum($total);
+            // dd($sum);
             return compact('count','sum');
         }
         else

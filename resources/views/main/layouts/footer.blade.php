@@ -92,10 +92,6 @@
 												<li><a href="#">where you can get the accessories to </a></li>
 												<li><a href="#">your home and make your home comfortable</a></li>
 											</div>
-											<div class="link-part col-xl-6">
-												<li><a href="#">Powerful Admin Panel</a></li>
-												<li><a href="#">Mobile &amp; Retina Optimized</a></li>
-											</div>
 										</ul>
 									</div><!-- End .widget -->
 								</div><!-- End .col-sm-6 -->
@@ -107,7 +103,7 @@
 
 			<div class="footer-bottom">
 				<div class="container d-flex justify-content-between align-items-center flex-wrap">
-					<p class="footer-copyright py-3 pr-4 mb-0">© Build IT Logistics. <?= date("Y") ?>. All Rights Reserved</p>
+					<p class="footer-copyright py-3 pr-4 mb-0">© HomeItAll. <?= date("Y") ?>. All Rights Reserved</p>
 
 					<img src="{{URL::asset('assets/images/payments.png')}}" alt="payment methods" class="footer-payments py-3">
 				</div><!-- End .container -->
