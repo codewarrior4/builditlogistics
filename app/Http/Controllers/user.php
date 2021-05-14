@@ -130,7 +130,7 @@ class user extends Controller
             'remember_token'=>$token,
         ]);
         
-            dd($user);
+           
            $request->session()->put('user',$user);
             Mail::to($user->email)->send(new VerifyMail($user));
             return view('user.verify');
