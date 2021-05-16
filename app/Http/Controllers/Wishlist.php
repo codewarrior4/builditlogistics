@@ -40,7 +40,10 @@ class Wishlist extends Controller
             else
             {
                 $wishlist = Wishlists::where(['userid'=>session('user')->id,'pid'=>$pid])->first();
-                $wishlist->delete();
+                if($wishlist)
+                {
+                    $wishlist->delete();
+                }
                 $carts = new Carts;
                 $carts->pid =$pid;
                 $carts->price =$price;

@@ -109,20 +109,26 @@ HomeItAll is a market place where you can get the accessories to complete your h
 
 								<tfoot>
 									<tr>
-										<td colspan="4" class="clearfix">
-											<div class="float-left">
-												<a href="/products" class="btn btn-outline-secondary">Continue Shopping</a>
-											</div><!-- End .float-left -->
+										<td colspan="6" class="clearfix">
+											<div class="row">
+												<div class="col">
+													<a href="/products" class="btn btn-outline-secondary">Continue Shopping</a>
+												</div>
 
-											<div class="float-right">
-												<a href="/cart/clear" class="btn btn-outline-secondary btn-clear-cart">Clear Shopping Cart</a>
-											</div><!-- End .float-right -->
+												<div class="col">
+													<a href="/cart/clear" class="btn btn-outline-secondary btn-clear-cart">Clear Shopping Cart</a>
+												</div>
+												<div class="col">
+													<a href="/checkout" class="btn btn-outline-secondary btn-clear-cart">Proceed to Checkout</a>
+												</div>
+											</div>
 										</td>
 									</tr>
+									
 								</tfoot>
 							</table>
 						</div><!-- End .cart-table-container -->
-
+						
 						<div class="cart-discount">
 							<h4>Apply Discount Code</h4>
 							<form action="#">
