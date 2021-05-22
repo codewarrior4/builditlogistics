@@ -40,7 +40,7 @@
 	<meta name="author" content="Adebayo Mayowa">
 
 	<!-- Favicon -->
-	<link rel="icon" type="image/x-icon" href="{{URL::asset('assets/images/logo-black.png')}}">
+	<link rel="icon" type="image/x-icon" href="{{URL::asset('assets/images/logo.jpg')}}">
 	<script src="{{URL::asset('assets/js/jquery.min.js')}}"></script>
 	<script src="{{URL::asset('assets/js/sweetalert.js')}}"></script>
 	<style>
