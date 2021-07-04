@@ -127,7 +127,6 @@ Route::group(['prefix'=>'/user'],function()
         Route::get('/products/delete/{id}',[Product::class,'destroy']);
         Route::get('/products/activate/{id}',[Product::class,'activate']);
 
-
         //Subscribers
         Route::get('/subscribers',[Subscriber::class,'index']);
 
@@ -142,10 +141,18 @@ Route::group(['prefix'=>'/user'],function()
 
    
 });
+Route::group(['middleware'=>'admin'] ,function(){
+    Route::post('/pay', [PaymentController::class,'redirectToGateway']);
+    Route::get('/payment/callback',  [PaymentController::class,'handleGatewayCallback']);
+    Route::view('/pay','main.pay');
+});
 
 Route::get('/',[Main::class,'homepage']);
 
     Route::get('/email',[Email::class,'index']);
+    // Route::view('/track','main.track');
+    // Route::post('/track',[Main::class,'track']); 
+    Route::post('/contact',[Main::class,'contact']); 
     Route::get('/category/{id}',[Main::class,'category']);
     Route::post('/search',[Main::class,'search']);
     Route::get('/category/sub/{id}',[Main::class,'subcategory']);
@@ -178,8 +185,5 @@ Route::get('/',[Main::class,'homepage']);
 
 
 
-Route::post('/subscriber',[Subscriber::class,'store'])->name('password');
+Route::post('/subscriber',[Subscriber::class,'store']);
 
-Route::post('/pay', [PaymentController::class,'redirectToGateway']);
-Route::get('/payment/callback',  [PaymentController::class,'handleGatewayCallback']);
-Route::view('/pay','main.pay');

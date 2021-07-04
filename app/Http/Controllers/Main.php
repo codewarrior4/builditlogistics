@@ -9,8 +9,10 @@ use App\Models\SubCategorys;
 use App\Models\Sliders;
 use App\Models\Socials;
 use App\Models\Carts;
+use App\Models\Orders;
 use App\Models\Informations;
 use Illuminate\Support\Facades\DB;
+use App\Mail\contact;
 
 
 
@@ -92,4 +94,37 @@ class Main extends Controller
             return view('main.login');
         }
     }
+
+    public function track(Request $request)
+    {
+        $paymentid = $request->orderid;
+        $orders =Orders::where(['paymentid'=>$paymentid])
+            ->join('products','orders.pid','=','products.pid')
+            ->join('users','users.id','=','orders.userid')
+            ->select('products.*','orders.*','users.id')
+            ->get();
+        if($orders){
+           $total =array();
+            foreach($orders as $order)
+            {
+                $totals =($order->price * $order->quantity);
+                array_push($total,$totals);
+            }
+            $sum=array_sum($total);  
+            
+            return view('main.track',compact('orders','sum'));
+        }
+        else{
+            session()->flash('msg','Product with ticket ID Not Found');
+            return view('main.track');
+        }
+       
+
+    }
+    public function contact(Request $request){
+       $details = $request->input();
+        Mail::to('info@homeitall.net')->send(new contact($details));
+        session()->flash('success','Message has been sent to admin');
+        return back();
+    }   
 }

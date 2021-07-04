@@ -9,6 +9,16 @@ HomeItAll is a market place where you can get the accessories to complete your h
 /assets/images/logo-black.png
 @endsection
 @section('content')
+@if (session('success'))
+<script>
+	Swal.fire({
+		icon: 'success',
+		title: 'Done',
+		text: '{{session("success")}}',
+		})
+</script>	
+
+@endif
 <main class="main">
 			<nav aria-label="breadcrumb" class="breadcrumb-nav">
 				<div class="container">
@@ -20,31 +30,34 @@ HomeItAll is a market place where you can get the accessories to complete your h
 			</nav>
 
 			<div class="container mb-8">
-				<div id="map"></div><!-- End #map -->
+				<div class="col-12">
+				<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15826.80272043958!2d3.8852149!3d7.3874002!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xc68d243d1ecdb32b!2sHomeitall!5e0!3m2!1sen!2sus!4v1624346512644!5m2!1sen!2sus" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+				</div>
 
-				<div class="row">
+				<div class="row mt-5">
 					<div class="col-md-8">
 						<h2 class="light-title">Write <strong>Us</strong></h2>
 
-						<form action="#">
+						<form action="contact" method="post">
+							@csrf
 							<div class="form-group required-field">
 								<label for="contact-name">Name</label>
-								<input type="text" class="form-control" id="contact-name" name="contact-name" required>
+								<input type="text" class="form-control" id="contact-name" name="name" required>
 							</div><!-- End .form-group -->
 
 							<div class="form-group required-field">
 								<label for="contact-email">Email</label>
-								<input type="email" class="form-control" id="contact-email" name="contact-email" required>
+								<input type="email" class="form-control" id="contact-email" name="email" required>
 							</div><!-- End .form-group -->
 
 							<div class="form-group">
 								<label for="contact-phone">Phone Number</label>
-								<input type="tel" class="form-control" id="contact-phone" name="contact-phone">
+								<input type="tel" class="form-control" id="contact-phone" name="phone">
 							</div><!-- End .form-group -->
 
 							<div class="form-group required-field">
 								<label for="contact-message">What’s on your mind?</label>
-								<textarea cols="30" rows="1" id="contact-message" class="form-control" name="contact-message" required></textarea>
+								<textarea cols="30" rows="1" id="contact-message" class="form-control" name="message" required></textarea>
 							</div><!-- End .form-group -->
 
 							<div class="form-footer">
@@ -59,23 +72,11 @@ HomeItAll is a market place where you can get the accessories to complete your h
 						<div class="contact-info">
 							<div>
 								<i class="icon-phone"></i>
-								<p><a href="tel:">0201 203 2032</a></p>
-								<p><a href="tel:">0201 203 2032</a></p>
-							</div>
-							<div>
-								<i class="icon-mobile"></i>
-								<p><a href="tel:">201-123-3922</a></p>
-								<p><a href="tel:">302-123-3928</a></p>
+								<p><a href="tel:+2347068261415">(234)7068261415</a></p>
 							</div>
 							<div>
 								<i class="icon-mail-alt"></i>
-								<p><a href="mailto:#">porto@gmail.com</a></p>
-								<p><a href="mailto:#">porto@portotemplate.com</a></p>
-							</div>
-							<div>
-								<i class="icon-skype"></i>
-								<p>porto_skype</p>
-								<p>porto_template</p>
+								<p><a href="mailto:info@homeitall.net">info@homeitall.net</a></p>
 							</div>
 						</div><!-- End .contact-info -->
 					</div><!-- End .col-md-4 -->

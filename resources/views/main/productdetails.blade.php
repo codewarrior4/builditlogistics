@@ -49,12 +49,18 @@
 									<div class="product-item">
 										<img class="product-single-image" src="/uploads/{{$product->image1}}" data-zoom-image="/uploads/{{$product->image1}}"/>
 									</div>
-									<div class="product-item">
-										<img class="product-single-image" src="/uploads/{{$product->image3}}" data-zoom-image="/uploads/{{$product->image3}}"/>
-									</div>
-									<div class="product-item">
-										<img class="product-single-image" src="/uploads/{{$product->image2}}" data-zoom-image="/uploads/{{$product->image2}}"/>
-									</div>
+									@if ($product->image2 !='')
+										<div class="product-item">
+											<img class="product-single-image" src="/uploads/{{$product->image3}}" data-zoom-image="/uploads/{{$product->image3}}"/>
+										</div>								
+									@endif
+									
+									@if ($product->image3 !='')
+										<div class="product-item">
+											<img class="product-single-image" src="/uploads/{{$product->image2}}" data-zoom-image="/uploads/{{$product->image2}}"/>
+										</div>	
+									@endif
+									
 								</div>
 								<!-- End .product-single-carousel -->
 								<span class="prod-full-screen">
@@ -68,12 +74,17 @@
 								<div class="owl-dot">
 									<img src="/uploads/{{$product->image1}}"/>
 								</div>
-								<div class="owl-dot">
-									<img src="/uploads/{{$product->image3}}"/>
-								</div>
-								<div class="owl-dot">
-									<img src="/uploads/{{$product->image2}}"/>
-								</div>
+								@if ($product->image2 !='')
+									<div class="owl-dot">
+										<img src="/uploads/{{$product->image2}}"/>
+									</div>
+								@endif
+								@if ($product->image3 !='')
+									<div class="owl-dot">
+										<img src="/uploads/{{$product->image3}}"/>
+									</div>
+								@endif
+								
 							</div>
 						</div><!-- End .product-single-gallery -->
 

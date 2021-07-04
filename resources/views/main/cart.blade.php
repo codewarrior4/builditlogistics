@@ -173,12 +173,20 @@ HomeItAll is a market place where you can get the accessories to complete your h
 											</tr>
 											
 										@endforeach
-										<tr>
+											<tr>
+												<th>
+													Shipping Fee
+												</th>
+												<td>
+													&#8358; 1,000.00 
+												</td>
+											</tr>
+											<tr>
 												<th>
 													Total
 												</th>
 												<td>
-													&#8358; {{number_format($sum,2)}} 
+													&#8358; {{number_format($sum+1000,2) }} 
 												</td>
 											</tr>
 									</tbody>	

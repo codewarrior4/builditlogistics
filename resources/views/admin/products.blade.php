@@ -73,7 +73,7 @@
                                         @endif
                                         <td><a href="/admin/products/{{$product->pid}}" class="btn btn-outline-primary">View</a></td>
                                     </tr>
-                                @endforeachthunder
+                                @endforeach
                                     
                                    
                                 </tbody>

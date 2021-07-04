@@ -49,7 +49,7 @@ HomeItAll is a market place where you can get the accessories to complete your h
 
 							<div class="info-box-content pt-1">
 								<h4>FREE SHIPPING &amp; RETURN</h4>
-								<p class="text-body">Free shipping on all orders over $99</p>
+								<p class="text-body">Free shipping on all orders over &#8358; 5,000</p>
 							</div><!-- End .info-box-content -->
 						</div><!-- End .info-box -->
 
@@ -58,7 +58,7 @@ HomeItAll is a market place where you can get the accessories to complete your h
 
 							<div class="info-box-content">
 								<h4>MONEY BACK GUARANTEE</h4>
-								<p class="text-body">100% money back guarantee</p>
+								<p class="text-body">100% money back guarantee on damaged goods returned</p>
 							</div><!-- End .info-box-content -->
 						</div><!-- End .info-box -->
 
@@ -67,7 +67,7 @@ HomeItAll is a market place where you can get the accessories to complete your h
 
 							<div class="info-box-content">
 								<h4>ONLINE SUPPORT 24/7</h4>
-								<p class="text-body">Lorem ipsum dolor sit amet.</p>
+								<p class="text-body">Use the whatsApp link to have a chat with our 24hr support agent.</p>
 							</div><!-- End .info-box-content -->
 						</div><!-- End .info-box -->
 					</div><!-- End .info-boxes-slider -->
@@ -344,39 +344,36 @@ HomeItAll is a market place where you can get the accessories to complete your h
 					<div class="feature-boxes-container row mt-6 mb-1">
 						<div class="col-md-4">
 							<div class="feature-box px-sm-5 px-md-4 mx-sm-5 mx-md-3 feature-box-simple text-center">
-								<i class="icon-earphones-alt"></i>
+								<i class="icon-shipped"></i>
 
 								<div class="feature-box-content">
-									<h3 class="mb-0 pb-1">Customer Support</h3>
-									<h5 class="m-b-3">Need Assistance?</h5>
+									<h3 class="mb-0 pb-1">Free Shipping</h3>
 
-									<p>We really care about you and your website as much as you do. Purchasing Porto or any other theme from us you get 100% free support.</p>
+									<p>Homeitall will deliver all your orders for free when you purchase items worth more than 5000naira at a go.We appreciate your patronage; we want to make it worth your while and put a smile on your face.</p>
 								</div><!-- End .feature-box-content -->
 							</div><!-- End .feature-box -->
 						</div><!-- End .col-md-4 -->
 
 						<div class="col-md-4">
 							<div class="feature-box px-sm-5 px-md-4 mx-sm-5 mx-md-3 feature-box-simple text-center">
-								<i class="icon-credit-card"></i>
+								<i class="icon-us-dollar"></i>
 
 								<div class="feature-box-content">
-									<h3 class="mb-0 pb-1">Secured Payment</h3>
-									<h5 class="m-b-3">Safe &amp; Fast</h5>
+									<h3 class="mb-0 pb-1">100% Money Back Guarantee</h3>
 
-									<p>With Porto you can customize the layout, colors and styles within only a few minutes. Start creating an amazing website right now!</p>
+									<p>There is a 100% money back guarantee when a damaged product is delivered to you within 24hours.Please immediately contact info@homeitall.net with proof of damage</p>
 								</div><!-- End .feature-box-content -->
 							</div><!-- End .feature-box -->
 						</div><!-- End .col-md-4 -->
 
 						<div class="col-md-4">
 							<div class="feature-box px-sm-5 px-md-4 mx-sm-5 mx-md-3 feature-box-simple text-center">
-								<i class="icon-action-undo"></i>
+								<i class="icon-online-support"></i>
 
 								<div class="feature-box-content">
-									<h3 class="mb-0 pb-1">Returns</h3>
-									<h5 class="m-b-3">Easy &amp; Free</h5>
+									<h3 class="mb-0 pb-1">Online Support 24/7</h3>
 
-									<p>Porto has very powerful admin features to help customer to build their own shop in minutes without any special skills in web development.</p>
+									<p>Please click the WhatsApp link to have a chat with our 24hr support agent or contact info@homeitall.net.</p>
 								</div><!-- End .feature-box-content -->
 							</div><!-- End .feature-box -->
 						</div><!-- End .col-md-4 -->

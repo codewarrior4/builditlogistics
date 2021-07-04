@@ -78,6 +78,42 @@
 	<link rel="stylesheet" href="{{URL::asset('assets/css/style.min.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{URL::asset('assets/vendor/fontawesome-free/css/all.min.css')}}">
 </head>
+<script>
+    var url = 'https://wati-integration-service.clare.ai/ShopifyWidget/shopifyWidget.js?56490';
+    var s = document.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = url;
+    var options = {
+  "enabled":true,
+  "chatButtonSetting":{
+      "backgroundColor":"#000000",
+      "ctaText":"",
+      "borderRadius":"25",
+      "marginLeft":"0",
+      "marginBottom":"35",
+      "marginRight":"35",
+      "position":"right"
+  },
+  "brandSetting":{
+      "brandName":"HomeItAll",
+      "brandSubTitle":"Typically replies within a day",
+      "brandImg":"https://builditlogstics.emgss.net/assets/images/logo.jpg",
+      "welcomeText":"Hi, there!\nHow can we help you?",
+      "messageText":"",
+      "backgroundColor":"#35413f",
+      "ctaText":"Send us a Message",
+      "borderRadius":"25",
+      "autoShow":false,
+      "phoneNumber":"2347068361415"
+  }
+};
+    s.onload = function() {
+        CreateWhatsappChatWidget(options);
+    };
+    var x = document.getElementsByTagName('script')[0];
+    x.parentNode.insertBefore(s, x);
+</script>
 <body oncontextmenu="return true">
 
 @if (session('success'))
@@ -166,6 +202,7 @@
 								<li><a href="/user/index" title="{{session('user')->firstname.' '.session('user')->lastname}}">Account <i style="text-transform:lowercase">Signed in as {{session('user')->firstname}}</i></a></li>
 								<li><a href="/cart">Cart</a></li>
 								<li><a href="/wishlist">wishlist</a></li>
+								<li><a href="/user/logout">Log out</a></li>
 							@else
 								<li><a href="/user/login">Login</a></li>
 								<li><a href="/user/register">Register</a></li>

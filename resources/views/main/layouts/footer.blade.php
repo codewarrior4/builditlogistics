@@ -14,13 +14,13 @@
 								<h4 class="widget-title">Contact Info</h4>
 								<ul class="contact-info mb-2">
 									<li>
-										<span class="contact-info-label">Address:</span>1234 Street Name, City, England
+										<span class="contact-info-label">Address:</span>1st Floor co-operative building, <br>Lebanon street <br>Dugbe, Ibadan <br> Nigeria.
 									</li>
 									<li>
-										<span class="contact-info-label">Phone:</span><a href="tel:">(123) 456-7890</a>
+										<span class="contact-info-label">Phone:</span><a href="tel:+2347068261415">(234)7068261415</a>
 									</li>
 									<li>
-										<span class="contact-info-label">Email:</span> <a href="mailto:mail@example.com">mail@example.com</a>
+										<span class="contact-info-label">Email:</span> <a href="mailto:mail@homeitall.net">mail@homeitall.net</a>
 									</li>
 									<li>
 										<span class="contact-info-label">Working Days/Hours:</span>

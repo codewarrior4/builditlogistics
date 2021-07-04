@@ -49,12 +49,23 @@ class Product extends Controller
         $image1 = "image1".date('Y-m-d-H-i-s').'.'.$request->image1->extension();
         $request->image1->move(public_path('uploads'),$image1);
         $product->image1 = $image1;
-        $image2 = "image2".date('Y-m-d-H-i-s').'.'.$request->image2->extension();
-        $request->image2->move(public_path('uploads'),$image2);
-        $product->image2 = $image2;
-        $image3 = "image3".date('Y-m-d-H-i-s').'.'.$request->image3->extension();
-        $request->image3->move(public_path('uploads'),$image3);
-        $product->image3 = $image3;
+
+        if($request->image2 ==''){
+            $image2='';
+        }else{
+            $image2 = "image2".date('Y-m-d-H-i-s').'.'.$request->image2->extension();
+            $request->image2->move(public_path('uploads'),$image2);
+            $product->image2 = $image2;
+        }
+
+        if($request->image3 ==''){
+            $image3 ='';
+        }else{
+            $image3 = "image3".date('Y-m-d-H-i-s').'.'.$request->image3->extension();
+            $request->image3->move(public_path('uploads'),$image3);
+            $product->image3 = $image3;
+        }
+        
         $product->views =0;
         $product->date = now();
         $product->save();

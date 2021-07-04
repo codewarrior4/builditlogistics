@@ -106,13 +106,13 @@
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="my-input">Image Extra 2</label>
-                                        <input required type="file" name="image2" id="" class="form-control">
+                                        <input type="file" name="image2" id="" class="form-control">
                                      </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="my-input">Image Extra 3</label>
-                                        <input required type="file" name="image3" id="" class="form-control">
+                                        <input type="file" name="image3" id="" class="form-control">
                                      </div>
                                 </div>
 

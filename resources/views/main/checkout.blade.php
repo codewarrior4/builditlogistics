@@ -66,16 +66,24 @@ HomeItAll is a market place where you can get the accessories to complete your h
 														<span class="product-qty">Qty: {{$cart->quantity}}</span>
 													</div>
 												</td>
-												<td class="price-col">&#8358; {{number_format($cart->price * $cart->quantity,2)}}</td>
+												<td class="price-col">&#8358; {{number_format(($cart->price * $cart->quantity)+1000,2)}}</td>
 											</tr>
 											
 										@endforeach
-										<tr>
+											<tr>
+												<th>
+													Shipping Fee
+												</th>
+												<td>
+													&#8358; 1,000.00 
+												</td>
+											</tr>
+											<tr>
 												<th>
 													Total
 												</th>
 												<td>
-													&#8358; {{number_format($sum,2)}} 
+													&#8358; {{number_format($sum+1000,2) }} 
 												</td>
 											</tr>
 									</tbody>	
@@ -181,7 +189,7 @@ HomeItAll is a market place where you can get the accessories to complete your h
 
 										<p>
 											<button class="btn btn-primary btn-lg btn-block" type="submit" value="Pay Now!">
-												<i class="fa fa-plus-circle fa-lg"></i> Pay  &#8358;{{number_format($sum,2)}}
+												<i class="fa fa-plus-circle fa-lg"></i> Pay  &#8358;{{number_format($sum+1000,2)}}
 											</button>
 										</p>
 									</div>

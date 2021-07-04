@@ -125,13 +125,22 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label for="my-input">Image Extra 2</label>
-                                    <img src="/uploads/{{$products->image2}}" class="img img-responsive" width="400" height="250" alt="">
-                                    </div>
+                                    @if ($products->image2 =="")
+                                        <p class="lead">No Image found</p>
+                                    @else
+                                        <img src="/uploads/{{$products->image2}}" class="img img-responsive" width="400" height="250" alt="">
+                                    @endif
+
+                                </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
                                     <label for="my-input">Image Extra 3</label>
-                                    <img src="/uploads/{{$products->image3}}" class="img img-responsive" width="400" height="250" alt="">
+                                        @if ($products->image3 =="")
+                                            <p class="lead">No Image found</p>
+                                        @else
+                                            <img src="/uploads/{{$products->image3}}" class="img img-responsive" width="400" height="250" alt="">
+                                        @endif
                                     </div>
                             </div>
                             

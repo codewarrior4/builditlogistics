@@ -85,7 +85,7 @@
 
 						<div class="header-contact d-none d-lg-flex align-items-center ml-auto pl-1 mr-lg-5 pr-xl-2">
 							<i class="icon-phone-2"></i>
-							<h6 class="pt-1">Call us now<a href="tel:+123 5678 890" class="text-dark font1">+123 5678 890</a></h6>
+							<h6 class="pt-1">Call us now<a href="tel:+2347068261415" class="text-dark font1">+(234)7068261415</a></h6>
 						</div>
 
 						@if (session('user'))
