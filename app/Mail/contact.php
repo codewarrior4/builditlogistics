@@ -9,9 +9,9 @@ use Illuminate\Queue\SerializesModels;
 
 class contact extends Mailable
 {
-    public $details;
+    
     use Queueable, SerializesModels;
-
+    public $details;
     /**
      * Create a new message instance.
      *
@@ -19,7 +19,7 @@ class contact extends Mailable
      */
     public function __construct($details)
     {
-        //
+        
         $this->details = $details;
     }
 

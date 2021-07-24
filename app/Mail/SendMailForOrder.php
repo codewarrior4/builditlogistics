@@ -28,7 +28,6 @@ class SendMailForOrder extends Mailable
      */
     public function build()
     {
-        
         return $this->markdown('emails.order')
             ->subject('HomeItAll - New Message on order');
     }

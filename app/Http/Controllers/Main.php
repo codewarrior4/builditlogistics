@@ -12,6 +12,7 @@ use App\Models\Carts;
 use App\Models\Orders;
 use App\Models\Informations;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use App\Mail\contact;
 
 
@@ -122,7 +123,7 @@ class Main extends Controller
 
     }
     public function contact(Request $request){
-       $details = $request->input();
+        $details = $request->input();
         Mail::to('info@homeitall.net')->send(new contact($details));
         session()->flash('success','Message has been sent to admin');
         return back();

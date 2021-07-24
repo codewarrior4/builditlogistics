@@ -26,7 +26,6 @@ class Order extends Controller
         $payments =Payments::where('paymentid','=',$paymentid)->first();
         $payments->status ="true";
         $payments->save();
-
         $orders =Orders::where(['paymentid'=>$paymentid])
             ->join('products','orders.pid','=','products.pid')
             ->join('users','users.id','=','orders.userid')
@@ -56,7 +55,6 @@ class Order extends Controller
             DB::table('orders')
                     ->where('paymentid',$order->paymentid)
                     ->update(['status'=>$request->status]);
-         
         }
         session()->flash('msg','Order Status Updated');
         return back();
@@ -77,7 +75,6 @@ class Order extends Controller
         $orders =Orders::where(['paymentid'=>$paymentid])
             ->join('products','orders.pid','=','products.pid')
             ->join('users','users.id','=','orders.userid')
-            // ->join('informations','informations.userid','=','users.id')
             ->select('products.*','orders.*','users.id')
             ->get();
         $messages =Ordermessages::where(['orderid'=>$paymentid])->latest()->get();
@@ -103,11 +100,9 @@ class Order extends Controller
             'orderid' => $request->paymentid,
             'status' => 'sent',
         ]);
-
         Mail::to($request->toemail)->send(new SendMailForOrder($details));
         session()->flash('msg','Message Sent to customer');
         return back();
-        
     }
 
     public function deleteMessage($id)

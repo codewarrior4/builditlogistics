@@ -19,7 +19,7 @@
 			<div class="header-top">
 				<div class="container">
 					<div class="header-left d-none d-sm-block">
-						<p class="top-message text-uppercase">FREE Returns. Standard Shipping Orders &#8358;999+</p>
+						<p class="top-message text-uppercase">FREE Returns. Standard Shipping Orders &#8358;5000+</p>
 					</div><!-- End .header-left -->
 
 					<div class="header-right header-dropdowns ml-0 ml-sm-auto w-sm-100">
@@ -58,7 +58,7 @@
 							<i class="icon-menu"></i>
 						</button>
 						<a href="/" class="logo">
-							<img src="{{URL::asset('assets/images/logo.png')}}" alt="HomeITall Logo">
+							<img src="{{URL::asset('assets/images/homeitall.png')}}" alt="HomeITall Logo">
 						</a>
 					</div><!-- End .header-left -->
 
@@ -138,47 +138,7 @@
 											<a href="/cart" class="float-right">View Cart</a>
 										</div><!-- End .dropdown-cart-header -->
 
-										{{-- <div class="dropdown-cart-products">
-											<div class="product">
-												<div class="product-details">
-													<h4 class="product-title">
-														<a href="product.html">Woman Ring</a>
-													</h4>
-
-													<span class="cart-product-info">
-														<span class="cart-product-qty">1</span>
-														x $99.00
-													</span>
-												</div><!-- End .product-details -->
-
-												<figure class="product-image-container">
-													<a href="product.html" class="product-image">
-														<img src="{{URL::asset('assets/images/products/cart/product-1.jpg')}}" alt="product" width="80" height="80">
-													</a>
-													<a href="#" class="btn-remove icon-cancel" title="Remove Product"></a>
-												</figure>
-											</div><!-- End .product -->
-
-											<div class="product">
-												<div class="product-details">
-													<h4 class="product-title">
-														<a href="product.html">Woman Necklace</a>
-													</h4>
-
-													<span class="cart-product-info">
-														<span class="cart-product-qty">1</span>
-														x $35.00
-													</span>
-												</div><!-- End .product-details -->
-
-												<figure class="product-image-container">
-													<a href="product.html" class="product-image">
-														<img src="{{URL::asset('assets/images/products/cart/product-2.jpg')}}" alt="product" width="80" height="80">
-													</a>
-													<a href="#" class="btn-remove icon-cancel" title="Remove Product"></a>
-												</figure>
-											</div><!-- End .product -->
-										</div>End .cart-product --}}
+										
 
 										<div class="dropdown-cart-total">
 											<span>Total</span>
@@ -193,8 +153,8 @@
 								</div><!-- End .dropdown-menu -->
 							</div><!-- End .dropdown -->
 						@else
-						<a href="/user/login" class="header-icon pb-md-1  pl-1"><span class="pl-4 font-weight-bold" style="color:#777">Login</span></a>
-						<a href="/user/register" class="header-icon pb-md-1  pl-1"><span class="pl-4 font-weight-bold"  style="color:#777">Signup</span></a>
+						<a href="/user/login" class="header-icon pb-md-1  pl-1"><span class="pl-4 font-weight-bold" style="color:red;font-weight:bold">Login</span></a>
+						<a href="/user/register" class="header-icon pb-md-1  pl-1"><span class="pl-4 font-weight-bold"  style="color:red;font-weight:bold">Signup</span></a>
 						@endif
                         <!-- end cart details -->
 					</div><!-- End .header-right -->
@@ -242,7 +202,7 @@
 			}">
 				<div class="container">
 					<a href="/" class="logo logo-light mr-3 pr-xl-3 d-none">
-						<img src="{{URL::asset('assets/images/logo.png')}}" alt="HomeITall Logo">
+						<img src="{{URL::asset('assets/images/homeitall.png')}}" alt="HomeITall Logo">
 					</a>
 					<nav class="main-nav w-lg-max bg-primary">
 						<ul class="menu">

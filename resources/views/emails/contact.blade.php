@@ -4,26 +4,25 @@
 ?>
 
 @component('mail::message')
- New Message on contact from {{$details->email}}
+ New Message on contact from {{$details['email']}}
 
-    <table rules="all" style="border-color: #666;" cellpadding="10">
         <tr style='background: #eee;'>
             <td><strong>Name:</strong> </td>
-            <td>{{$details->name}}</td>
+            <td>{{$details['name']}}</td>
         </tr>
-        <tr>
+        <tr style='background: #eee;'>
             <td><strong>Email:</strong> </td>
-            <td>{{$details->email}}</td>
+            <td>{{$details['email']}}</td>
         </tr>
-        <tr>
+        <tr style='background: #eee;'>
             <td><strong>Phone:</strong> </td>
-            <td>{{$details->phone}}</td>
+            <td>{{$details['phone']}}</td>
         </tr>
-        <tr>
+        <tr style='background: #eee;'>
             <td><strong>Message:</strong> </td>
-            <td>{{$details->message}}</td>
+            <td>{{$details['message']}}</td>
         </tr>
-    </table>
+  
 
 
 

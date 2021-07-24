@@ -141,10 +141,23 @@ Route::group(['prefix'=>'/user'],function()
 
    
 });
-Route::group(['middleware'=>'admin'] ,function(){
+Route::group(['middleware'=>'user'] ,function(){
     Route::post('/pay', [PaymentController::class,'redirectToGateway']);
     Route::get('/payment/callback',  [PaymentController::class,'handleGatewayCallback']);
     Route::view('/pay','main.pay');
+    Route::get('/cart/{pid}/{quantity}/{price}',[Cart::class,'addtocart']);
+    Route::post('/cart',[Cart::class,'addCart']);
+    Route::get('/cart',[Cart::class,'cartList']);
+    Route::get('/cart/delete/{id}',[Cart::class,'remove']);
+    Route::get('/cart/clear',[Cart::class,'clearCart']);
+    Route::get('/wishlist/{pid}/{price}',[Cart::class,'moveToWishlist']);
+    Route::post('/cart/update',[Cart::class,'update']);
+
+    Route::get('/wishlist',[wishlist::class,'wishList']);
+    Route::get('/wishlist/{pid}/{quantity}/{price}',[Wishlist::class,'moveToCart']);
+
+    Route::get('/checkout',[Main::class,'checkout']);
+
 });
 
 Route::get('/',[Main::class,'homepage']);
@@ -170,18 +183,6 @@ Route::get('/',[Main::class,'homepage']);
     Route::get('/faq',[Faq::class,'faq']);
     Route::get('/stores',[store::class,'stores']);
     Route::post('/blog/comment',[Blog::class,'comment']);
-    Route::get('/cart/{pid}/{quantity}/{price}',[Cart::class,'addtocart']);
-    Route::post('/cart',[Cart::class,'addCart']);
-    Route::get('/cart',[Cart::class,'cartList']);
-    Route::get('/cart/delete/{id}',[Cart::class,'remove']);
-    Route::get('/cart/clear',[Cart::class,'clearCart']);
-    Route::get('/wishlist/{pid}/{price}',[Cart::class,'moveToWishlist']);
-    Route::post('/cart/update',[Cart::class,'update']);
-
-    Route::get('/wishlist',[wishlist::class,'wishList']);
-    Route::get('/wishlist/{pid}/{quantity}/{price}',[Wishlist::class,'moveToCart']);
-
-    Route::get('/checkout',[Main::class,'checkout']);
 
 
 

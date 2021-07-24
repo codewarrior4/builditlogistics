@@ -97,7 +97,7 @@ HomeItAll is a market place where you can get the accessories to complete your h
 							</h3>
 
 							@if ($information == '')
-								<a href="/user/billing" title="Add you Shipping details" class=" btn btn-outline-primary">Add you Shipping details</span</a>
+								<!-- <a href="/user/billing" title="Add you Shipping details" class=" btn btn-outline-primary">Add you Shipping details</span</a> -->
 							@else
 							<address>
 							 {{session('user')->name}} <br>
