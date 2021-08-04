@@ -16,6 +16,10 @@ width: 100% !important;
 }
 }
 
+h4{
+    color: black;
+    font-size: 24px;
+}
 @media only screen and (max-width: 500px) {
 .button {
 width: 100% !important;

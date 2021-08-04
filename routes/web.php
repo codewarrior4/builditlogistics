@@ -37,11 +37,11 @@ Route::group(['prefix'=>'/user'],function()
         Route::post('/login',[user::class,'login']);
         Route::get('/register',[user::class,'index']);
         Route::post('/register',[user::class,'store']);
+        Route::get('/verify/{token}',[user::class,'verify']);
     Route::group(['middleware'=>'user'],function() 
     {
       
         Route::post('/update',[user::class,'update']);
-        Route::get('/verify/{token}',[user::class,'verify']);
         Route::get('/reverify',[user::class,'resendverification']);
         Route::post('/userpassword',[user::class,'userpassword']);
         Route::get('/billing',[Information::class,'index']);

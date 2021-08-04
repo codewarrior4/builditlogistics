@@ -1,30 +1,14 @@
 <?php
     use Illuminate\Routing\UrlGenerator;
-    
+
 ?>
-
 @component('mail::message')
- New Message on contact from {{$details['email']}}
-
-        <tr style='background: #eee;'>
-            <td><strong>Name:</strong> </td>
-            <td>{{$details['name']}}</td>
-        </tr>
-        <tr style='background: #eee;'>
-            <td><strong>Email:</strong> </td>
-            <td>{{$details['email']}}</td>
-        </tr>
-        <tr style='background: #eee;'>
-            <td><strong>Phone:</strong> </td>
-            <td>{{$details['phone']}}</td>
-        </tr>
-        <tr style='background: #eee;'>
-            <td><strong>Message:</strong> </td>
-            <td>{{$details['message']}}</td>
-        </tr>
-  
-
-
+    <p style="font-size: 30px;">Welcome to HOMEITALL</p>  <br>
+    <p style="font-size: 26px;">New Message on contact from {{$details['email']}} </p>
+    <p style="font-size: 20px;">Name: {{$details['name']}}    </p>  
+    <p style="font-size: 20px;">Email: {{$details['email']}}  </p>  
+    <p style="font-size: 20px;">Phone: {{$details['phone']}}  </p>  
+    <p style="font-size: 20px;">Message: {{$details['message']}} </p> 
 
 Thanks,<br>
 {{ config('app.name') }}

@@ -4,10 +4,9 @@
 ?>
 
 @component('mail::message')
- New Message on Order #{{$details->orderid}}
-
-{{$details->message}}
-
+<p style="font-size: 26px;color:black;">Welcome to HOMEITALL</p>  <br>
+<p style="font-size: 20px;">New Message on Order #{{$details->orderid}} </p>
+<p style="font-size: 18px;">{{$details->message}}</p>
 
 <a class="button button-primary" href="{{URL::to('/')}}/user/order/{{$details->orderid}}">View More on our website</a>
 

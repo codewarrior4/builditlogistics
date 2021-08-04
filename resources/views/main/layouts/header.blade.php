@@ -58,7 +58,7 @@
 							<i class="icon-menu"></i>
 						</button>
 						<a href="/" class="logo">
-							<img src="{{URL::asset('assets/images/homeitall.png')}}" alt="HomeITall Logo">
+							<img src="{{URL::asset('assets/images/logo.png')}}" alt="HomeITall Logo">
 						</a>
 					</div><!-- End .header-left -->
 
@@ -202,7 +202,7 @@
 			}">
 				<div class="container">
 					<a href="/" class="logo logo-light mr-3 pr-xl-3 d-none">
-						<img src="{{URL::asset('assets/images/homeitall.png')}}" alt="HomeITall Logo">
+						<img src="{{URL::asset('assets/images/logo.png')}}" alt="HomeITall Logo">
 					</a>
 					<nav class="main-nav w-lg-max bg-primary">
 						<ul class="menu">

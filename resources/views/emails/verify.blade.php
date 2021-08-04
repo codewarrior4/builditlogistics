@@ -1,17 +1,25 @@
 <?php
     use Illuminate\Routing\UrlGenerator;
-    $message ='    <h4>Welcome to our BuildItCity </h4> <br>
-    <p>You can shop get the best available products at our website</p>
-    <p>Please Click on the link below to verify your account.</p>';
+
 ?>
 
 @component('mail::message')
- Hello {{session('user')->firstname}}
+    @component('mail::h3') 
+    Welcome to HOMEITALL 
+    @endcomponent
+    @component('mail::p') 
+    Hello {{session('mailer')->firstname}} 
+    @endcomponent
+    @component('mail::p') 
+    You can shop get the best available products at our website 
+    @endcomponent
+    @component('mail::p') 
+    Please Click on the link below to verify your account.
+    @endcomponent 
+   
 
-{!! $message !!}
-
-
-<a  class="button button-primary" href="{{URL::to('/')}}/user/verify/{{session('user')->remember_token}}">Verify Email</a>
+<br>
+<a  class="button button-primary" href="{{URL::to('/')}}/user/verify/{{session('mailer')->remember_token}}">Verify Email</a>
 
 
 Thanks,<br>

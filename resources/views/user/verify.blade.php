@@ -17,10 +17,10 @@
 
 			<div class="container pb-5">
 				<div class="heading mb-4">
-					<h2 class="title">Hello {{(session('user'))->firstname}}</h2>
+					<h2 class="title">Hello {{(session('mailer'))->firstname}}</h2>
 					<h4 class="title">Verify Your Account</h4>
 
-					<p>An email has been sent to your email address <a class="font-weight-bold" target="_blank" href="mailto:{{(session('user'))->email}}">{{(session('user')->email)}}</a>. Check the spam filter if you do not see any mail</p>
+					<p>An email has been sent to your email address <a class="font-weight-bold" target="_blank" href="mailto:{{(session('mailer'))->email}}">{{(session('mailer')->email)}}</a>. Check the spam filter if you do not see any mail</p>
 				</div><!-- End .heading -->
 
 				<form action="#">
