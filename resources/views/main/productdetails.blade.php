@@ -94,7 +94,7 @@
 									<h1 class="product-title" >{{$product->pname}}</h1>
 								</div>
 								<div class="col col-sm-6 col-md-4">
-									<a href="/wishlist/{{$product->pid}}/{{$product->price}}" class="add-wishlist" title="Add to Wishlist">Add to Wishlist</a>
+									<a href="/cart-to-wishlist/{{$product->pid}}/{{$product->price}}" class="add-wishlist" title="Add to Wishlist">Add to Wishlist</a>
 								</div>
 							</div>
 

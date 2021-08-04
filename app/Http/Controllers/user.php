@@ -140,12 +140,16 @@ class user extends Controller
     {
         $token = $request->token;
         $user = Users::firstWhere('remember_token',$token);
+        // echo $user;
         if($user)
         {       
             $user->verified=1;
             $user->save();
+            $request->session()->put('user',$user);
+            if(session('mailer')){
+                session()->pull('mailer');
+            }
             return redirect('/user/index')->with('msg','Account Validation Successful');
-
         }
         else
         {
@@ -156,13 +160,13 @@ class user extends Controller
 
     public function resendverification()
     {
-        if(session('user')=='')
+        if(session('mailer')=='')
         {
             return redirect('/user/login')->with('msg','User not logged in');
         };
-        if(session('user'))
+        if(session('mailer'))
         {
-            $user= session('user');
+            $user= session('mailer');
             Mail::to($user->email)->send(new VerifyMail($user));
             return view('user.verify');
         }
@@ -205,9 +209,9 @@ class user extends Controller
             return redirect('user/login')->with('msg','Username or Password not found ');
         }
         else{
-            $request->session('user')->put('user',$user);
-            if(session('user')->verified ==0)
+            if($user->verified ==0)
             {
+                $request->session()->put('mailer',$user);
                 Mail::to($user->email)->send(new VerifyMail($user));
                 return view('user.verify');
             }
@@ -217,7 +221,12 @@ class user extends Controller
                 {
                     return redirect('user/login')->with('msg','Hello '.$user->firstname .' Your Account has been disabled . Kindly reach out to our customer care for activation');
                 }
-                return redirect('/user/');
+                else
+                {
+                   $request->session('user')->put('user',$user);
+                    return redirect('/user'); 
+                }
+                
             }
         }
         

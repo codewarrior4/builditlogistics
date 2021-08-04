@@ -12,7 +12,7 @@ class Cart extends Controller
     {
         if(session('user') !="")
         {
-            $check = Carts::where(['pid'=>$pid])->get();
+            $check = Carts::where(['pid'=>$pid,'userid'=>session('user')->id])->get();
             if(count($check) ==0)
             {
                 $cart = new Carts;
@@ -41,7 +41,7 @@ class Cart extends Controller
     {
         if(session('user') !="")
         {
-            $check = Carts::where(['pid'=>$request->pid])->get();
+            $check = Carts::where(['pid'=>$request->pid,'userid'=>session('user')->id])->get();
             if(count($check) ==0)
             {
                 $cart = new Carts;
@@ -98,11 +98,11 @@ class Cart extends Controller
         } 
     }
 
-    public function moveToWishlist($pid,$price)
+    public function moveToWish($pid,$price)
     {
         if(session('user') !="")
         {
-            $wishlist=Wishlists::where(['pid'=>$pid])->get();
+            $wishlist=Wishlists::where(['pid'=>$pid,'userid'=>session('user')->id])->get();
             if(count($wishlist)>=1)
             {
                 session()->flash('error','Product Item Already Exist In wishlist');
@@ -167,7 +167,7 @@ class Cart extends Controller
         } 
     }
 
-     static function cart()
+    static function cart()
     {
         if(session('user') !="")
         {

@@ -6,7 +6,7 @@
 HomeItAll is a market place where you can get the accessories to complete your home and make your home comfortable
 @endsection
 @section('image')
-/assets/images/logo-black.png
+/assets/images/logo.png
 @endsection
 @section('content')
 @if(session('success'))
@@ -70,7 +70,7 @@ HomeItAll is a market place where you can get the accessories to complete your h
 													<img src="/uploads/{{$wishlist->banner}}" alt="product">
 												</a>
 											</figure>
-											<h2 class="product-title">
+											<h2 class="product-title pl-5" >
 												<a href="/product/{{$wishlist->pid}}">{{$wishlist->pname}}</a>
 											</h2>
 										</td>
@@ -80,7 +80,7 @@ HomeItAll is a market place where you can get the accessories to complete your h
 										<td colspan="4" class="clearfix">
 											<div class="float-left">
 												<a href="/wishlist/{{$wishlist->pid}}/1/{{$wishlist->price}}" title="Move to Cart" class="btn-move pr-4">Move to Cart</a>
-												<a href="/wishlist/delete" title="Remove product" class="btn-remove pl-2">Remove</a>
+												<a href="/wishlist/delete/{{$wishlist->pid}}" title="Remove product" class="btn-remove pl-2">Remove</a>
 											</div><!-- End .float-right -->
 										</td>
 									</tr>

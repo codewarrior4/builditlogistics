@@ -60,6 +60,21 @@ class Wishlist extends Controller
             return redirect('/user/login')->with('msg','You have to be logged in to Access this page');
         }
     }
+
+    public function remove($pid)
+    {
+        if(session('user') !="")
+        {
+            $wishlist = Wishlists::where(['userid'=>session('user')->id,'pid'=>$pid])->first();
+            $wishlist->delete();
+            session()->flash('success','Product Item has been removed');
+            return back();
+        }
+        else
+        {
+            return redirect('/user/login')->with('msg','You have to be logged in to Access this page');
+        } 
+    }
     
     static function wish()
     {

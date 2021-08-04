@@ -6,7 +6,7 @@
 HomeItAll is a market place where you can get the accessories to complete your home and make your home comfortable
 @endsection
 @section('image')
-/assets/images/logo-black.png
+/assets/images/logo.png
 @endsection
 <?php
 	use App\Http\Controllers\Cart;;
@@ -98,8 +98,8 @@ HomeItAll is a market place where you can get the accessories to complete your h
 												@csrf
 											<td>&#8358;{{number_format($cart->price * $cart->quantity,2)}}</td>
 											<td><div class="float-left">
-												<a title="Move to Product Wishlist" href="/wishlist/{{$cart->pid}}/{{$cart->price}}" class="btn-move"><i class="fa fa-heart"></i></a>
-												<button type="submit" title="Edit product" style="background: transparent !important; " class="btn btn-move"><span class="sr-only">Edit</span><i class="fa fa-edit"></i></button>
+												<a title="Move to Product Wishlist" href="/cart-to-wishlist/{{$cart->pid}}/{{$cart->price}}" class="btn-move"><i class="fa fa-heart"></i></a>
+												<button type="submit" title="Edit product" style="background: transparent !important; " class="btn btn-move"><span class="sr-only">Edit</span><span class="badge badge-pill badge-primary">Update</span></button>
 												</form>
 												<a href="/cart/delete/{{$cart->pid}}" title="Remove product" class="btn btn-remove"><span class="fa fa-trash"></span></a>
 											</div></td>
