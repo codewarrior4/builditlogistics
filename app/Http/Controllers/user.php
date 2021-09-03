@@ -215,19 +215,16 @@ class user extends Controller
                 Mail::to($user->email)->send(new VerifyMail($user));
                 return view('user.verify');
             }
+            elseif($user->verified ==2)
+            {
+                return redirect('user/login')->with('msg','Hello '.$user->firstname .' Your Account has been disabled . Kindly reach out to our customer care for activation');
+            }
             else
             {
-                if(session('user')->status ==2)
-                {
-                    return redirect('user/login')->with('msg','Hello '.$user->firstname .' Your Account has been disabled . Kindly reach out to our customer care for activation');
-                }
-                else
-                {
-                   $request->session('user')->put('user',$user);
-                    return redirect('/user'); 
-                }
-                
+                $request->session('user')->put('user',$user);
+                return redirect('/user'); 
             }
+             
         }
         
     }

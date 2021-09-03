@@ -2,7 +2,7 @@
     use Illuminate\Routing\UrlGenerator;
 
 ?>
-
+[slot]: {{asset('/assets/images/logo.png')}} "Logo"
 @component('mail::message')
     @component('mail::h3') 
     Welcome to HOMEITALL 

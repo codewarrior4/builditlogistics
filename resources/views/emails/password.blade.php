@@ -1,7 +1,7 @@
 <?php
     use Illuminate\Routing\UrlGenerator;
 ?>
-
+[slot]: {{asset('/assets/images/logo.png')}} "Logo"
 @component('mail::message')
  Hello {{$user->firstname}}
     @component('mail::h3') 

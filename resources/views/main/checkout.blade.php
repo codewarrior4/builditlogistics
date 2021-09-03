@@ -179,7 +179,7 @@ HomeItAll is a market place where you can get the accessories to complete your h
 										
 										<input type="hidden" name="email" value="{{session('user')->email}}">
 										<input type="hidden" name="orderID" value="{{$orderid}}">
-										<input type="hidden" name="amount" value="100"> 
+										<input type="hidden" name="amount" value="{{($sum+1000) *100 }} "> 
 										<input type="hidden" name="quantity" value="1">
 										<input type="hidden" name="currency" value="NGN">
 										<input type="hidden" name="metadata" value="{{ json_encode($array = ['key_name' => 'value',]) }}" >
